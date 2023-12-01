@@ -1,1 +1,24 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: "iran-yekan";
+    src: url("./assets/fonts/iranyekanwebregularfanum.woff2");
+}
+
+* {
+    box-sizing: border-box;
+    font-family: 'iran-yekan';
+}
+
+body, html {
+    margin: 0;
+}
+
+.default-background {
+    background-color: #e0ffff;
+}
+html, body { height: 100%; }
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

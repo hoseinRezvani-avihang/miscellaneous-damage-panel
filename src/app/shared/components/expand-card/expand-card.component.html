@@ -1,0 +1,7 @@
+<ng-container *ngIf="!status">
+  <ng-content select="[button]"></ng-content>
+</ng-container>
+
+<ng-container *ngIf="status">
+  <ng-content select="[content]"></ng-content>
+</ng-container>

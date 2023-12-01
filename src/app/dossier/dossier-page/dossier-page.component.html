@@ -1,0 +1,23 @@
+<div class="wrapper">
+  <br />
+  <br />
+  <br />
+  <div class="row">
+    <div class="col-9 mx-auto">
+      <app-expand-card #card [status]="dossierCardStatus" class="mx-auto">
+        <button
+          class="btn btn-outline-primary w-25 mx-auto d-block"
+          button
+          (click)="toggle()"
+          *ngIf="!card.status"
+        >
+          ثبت پرونده
+        </button>
+        <div class="content position-relative" content *ngIf="card.status">
+            <app-dossier></app-dossier>
+            <mat-icon class="position-absolute top-0 start-0" (click)="toggle()">close</mat-icon>
+        </div>
+      </app-expand-card>
+    </div>
+  </div>
+</div>
