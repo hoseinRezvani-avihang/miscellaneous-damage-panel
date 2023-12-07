@@ -1,1 +1,21 @@
-<p>select-partner works!</p>
+<div class="border rounded p-2">
+  <app-divider>
+    <div class="px-3 d-flex">
+      <span class="text-nowrap">مرکز ارائه دهنده خدمت</span>
+      <span *ngIf="!editing">
+        <mat-icon (click)="editing = true">edit</mat-icon>
+      </span>
+    </div>
+  </app-divider>
+  <app-search-partner
+    *ngIf="editing"
+    (selectPartner)="onSelectPartner($event)"
+    [partner]="partnerInfo | async"
+  ></app-search-partner>
+  <ng-container *ngIf="partnerInfo | async as partner">
+    <app-partner-info
+      *ngIf="!editing"
+      [partner]="partner.partner"
+    ></app-partner-info>
+  </ng-container>
+</div>

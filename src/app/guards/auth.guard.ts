@@ -1,7 +1,6 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../auth/services/auth.service';
-import { query } from '@angular/animations';
 
 export const authGuard: CanActivateFn = (route, state) => {
 
@@ -13,7 +12,7 @@ export const authGuard: CanActivateFn = (route, state) => {
     authService.token.next(token);
   }
 
-  if (!isAuth) {
+  if (!isAuth && !state.url.includes("auth")) {
     router.navigate(['auth'], {queryParams: {token}});
     return false;
   }

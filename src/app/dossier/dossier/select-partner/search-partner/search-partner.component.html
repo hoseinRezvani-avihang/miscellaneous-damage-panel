@@ -1,0 +1,34 @@
+<form [formGroup]="partnerForm">
+  <mat-radio-group color="primary" [formControl]="partnerTypeControl">
+    <mat-radio-button
+      *ngFor="let partner of parnterTypes"
+      [value]="partner.symbol"
+      >{{ partner.name }}</mat-radio-button
+    >
+  </mat-radio-group>
+  <div class="d-flex gap-2">
+    <div class="col-7">
+      <app-quick-search-partner
+        [partnerType]="partnerTypeControl.value"
+        [partner]="partner?.partner ?? null"
+        (onSelectPartner)="onSelectPartner($event)"
+      ></app-quick-search-partner>
+    </div>
+    <div class="col-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>تاریخ ارائه خدمت</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="serviceDate"/>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="col-auto center">
+      <button (click)="selectPartnerDone()" class="btn btn-outline-primary">
+        انتخاب
+      </button>
+    </div>
+  </div>
+</form>

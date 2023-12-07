@@ -8,6 +8,9 @@ import { SelectMemberComponent } from './dossier/select-member/select-member.com
 import { SelectPartnerComponent } from './dossier/select-partner/select-partner.component';
 import { SelectCpartyComponent } from './dossier/select-cparty/select-cparty.component';
 import { SelectServiceComponent } from './dossier/select-service/select-service.component';
+import { SearchPartnerComponent } from './dossier/select-partner/search-partner/search-partner.component';
+import { PartnerInfoComponent } from './dossier/select-partner/partner-info/partner-info.component';
+import { QuickSearchPartnerComponent } from './dossier/select-partner/search-partner/quick-search-partner/quick-search-partner.component';
 
 
 
@@ -19,7 +22,10 @@ import { SelectServiceComponent } from './dossier/select-service/select-service.
     SelectMemberComponent,
     SelectPartnerComponent,
     SelectCpartyComponent,
-    SelectServiceComponent
+    SelectServiceComponent,
+    SearchPartnerComponent,
+    PartnerInfoComponent,
+    QuickSearchPartnerComponent
   ],
   imports: [
     CommonModule, 

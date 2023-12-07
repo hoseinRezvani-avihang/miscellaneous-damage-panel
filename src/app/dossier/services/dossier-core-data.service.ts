@@ -1,55 +1,84 @@
 import { Injectable } from '@angular/core';
 import { CitizenResult } from '../models/citizen.models';
 import { BehaviorSubject } from 'rxjs';
+import { DossierStep } from '../models/dossier-core.models';
+import { ObjectUtil } from 'src/app/shared/utils/object-util';
+import { SelectPartner } from '../models/partner.models';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DossierCoreDataService {
 
-  citizenInfo = new BehaviorSubject<CitizenResult | null>(null);
-
-  constructor() { }
+  constructor() {}
 
   // ============= save dossier navigation ===========
 
-  private dossierSteps = [
+  private dossierSteps: DossierStep[] = [
     {
-      name: "selectMember", 
+      name: 'selectMember',
       isActive: true,
-    }, 
+      exist: true,
+    },
     {
-      name: "selectPartner", 
+      name: 'saveDossier',
       isActive: false,
-    }, 
-    {
-      name: "selectCparty", 
-      isActive: false,
-    }, 
-    {
-      name: "selectService", 
-      isActive: false,
-    },   
+      exist: true,
+      subStep: [
+        {
+          name: 'selectPartner',
+          isActive: false,
+          exist: true,
+        },
+        {
+          name: 'selectCparty',
+          isActive: false,
+          exist: true,
+        },
+        {
+          name: 'selectService',
+          isActive: false,
+          exist: true,
+        },
+      ],
+    },
   ];
 
   $dossierSteps = new BehaviorSubject<any>(this.dossierSteps);
-  
+
   next() {
-      let activeStepIndex = this.dossierSteps.map(step => step.isActive).lastIndexOf(true);
-      if (this.dossierSteps[activeStepIndex + 1]) {
-        this.dossierSteps[activeStepIndex + 1].isActive = true;
-        this.$dossierSteps.next(this.dossierSteps);
+    let steps = ObjectUtil.flatten(this.dossierSteps, 'subStep');
+    let activeStepIndex = steps.map((step) => step.isActive).lastIndexOf(true);
+    if (steps[activeStepIndex + 1]) {
+      steps[activeStepIndex + 1].isActive = true;
+      if (steps[activeStepIndex + 1].subStep && steps[activeStepIndex + 2]) {
+        steps[activeStepIndex + 2].isActive = true;
       }
+      this.$dossierSteps.next(this.dossierSteps);
+    }
   }
 
   isActive(stepName: string) {
-    return this.dossierSteps.find(step => step.name === stepName)?.isActive;
+    let steps = ObjectUtil.flatten(this.dossierSteps, 'subStep');
+    return steps.find((step) => step.name === stepName)?.isActive;
   }
-  // ================== select member ================
+  // ================== member info ================
 
-    setCitizenInfo(citizenInfo: CitizenResult) {
-      this.citizenInfo.next(citizenInfo);
-    }
+  citizenInfo = new BehaviorSubject<CitizenResult | null>(null);
+  
+  setCitizenInfo(citizenInfo: CitizenResult) {
+    this.citizenInfo.next(citizenInfo);
+  }
+  
+
+
+  // ================== parnter info ================
+
+  partnerInfo = new BehaviorSubject<SelectPartner>({} as SelectPartner);
+
+  setPartnerInfo(selectPartner: SelectPartner) {
+    this.partnerInfo.next(selectPartner);
+  }
 
   // =================================================
   // =================================================

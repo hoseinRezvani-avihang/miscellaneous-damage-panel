@@ -1,17 +1,40 @@
 <div class="border shadow p-4 rounded bg-white position-relative">
-    <app-select-member *ngIf="isActive('selectMember')"></app-select-member>
+  <app-select-member *ngIf="isActive('selectMember')"></app-select-member>
+  <ng-container *ngIf="isActive('saveDossier')">
     <app-expand-card [status]="true">
-        <div class="border col-10 mx-auto rounded" content>
-            <p *ngIf="memberInfo | async as member">{{ member | json }}</p>
-            <app-expand-card #serviceCard>
-                <button *ngIf="!serviceCard.status" class="btn btn-outline-info" button (click)="serviceCard.status = !serviceCard.status">ثبت خسارت</button>
-                <div *ngIf="serviceCard.status" class="border col-11 mx-auto border-primary position-relative p-4" content>
-                    <mat-icon class="position-absolute top-0 start-0" (click)="serviceCard.status = false">close</mat-icon>
-                    <app-select-partner *ngIf="isActive('selectPartner')"></app-select-partner>
-                    <app-select-cparty *ngIf="isActive('selectCparty')"></app-select-cparty>
-                    <app-select-service *ngIf="isActive('selectService')"></app-select-service>
-                </div>
-            </app-expand-card>
-        </div>
+      <div class="border col-12 mx-auto rounded" content>
+        <p *ngIf="memberInfo | async as member">{{ member | json }}</p>
+        <app-expand-card #serviceCard>
+          <button
+            *ngIf="!serviceCard.status"
+            class="btn btn-outline-info"
+            button
+            (click)="serviceCard.status = !serviceCard.status"
+          >
+            ثبت خسارت
+          </button>
+          <div
+            *ngIf="serviceCard.status"
+            class="border col-11 mx-auto border-primary position-relative p-4 d-flex flex-column gap-3"
+            content
+          >
+            <mat-icon
+              class="position-absolute top-0 start-0"
+              (click)="serviceCard.status = false"
+              >close</mat-icon
+            >
+            <app-select-partner
+              *ngIf="isActive('selectPartner')"
+            ></app-select-partner>
+            <app-select-cparty
+              *ngIf="isActive('selectCparty')"
+            ></app-select-cparty>
+            <app-select-service
+              *ngIf="isActive('selectService')"
+            ></app-select-service>
+          </div>
+        </app-expand-card>
+      </div>
     </app-expand-card>
+  </ng-container>
 </div>

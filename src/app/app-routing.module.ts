@@ -8,7 +8,10 @@ import { DossierPageComponent } from './dossier/dossier-page/dossier-page.compon
 const routes: Routes = [
   {
     path: "auth", 
-    component: AuthComponent
+    component: AuthComponent,
+    canActivate: [
+      authGuard
+    ]
   }, 
   {
     path: "dossier", 
@@ -20,7 +23,11 @@ const routes: Routes = [
   {
     path: "", 
     pathMatch: "full", 
-    redirectTo: "/dossier"
+    component: DossierPageComponent, 
+    canActivate: [
+      authGuard
+    ]
+    
   }
 ];
 

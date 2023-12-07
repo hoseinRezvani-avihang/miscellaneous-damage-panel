@@ -5,9 +5,18 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatRadioModule} from '@angular/material/radio';
+import { NgPersianDatepickerModule } from 'ng-persian-datepicker';
+import { InputTextModule } from 'primeng/inputtext';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+import { IranYekanDirective } from './directives/iran-yekan.directive';
+import { DividerComponent } from './components/divider/divider.component';
+import {MatDividerModule} from '@angular/material/divider';
 
 @NgModule({
-  declarations: [ExpandCardComponent],
+  declarations: [ExpandCardComponent, IranYekanDirective, DividerComponent],
   imports: [
     CommonModule,
     MatInputModule,
@@ -15,6 +24,13 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     FormsModule,
     ReactiveFormsModule,
     MatProgressSpinnerModule,
+    MatAutocompleteModule, 
+    MatRadioModule,
+    NgPersianDatepickerModule,
+    InputTextModule, 
+    MatDatepickerModule, 
+    MatNativeDateModule,
+    MatDividerModule
   ],
   exports: [
     ExpandCardComponent,
@@ -23,6 +39,15 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     FormsModule,
     ReactiveFormsModule,
     MatProgressSpinnerModule,
+    MatAutocompleteModule,
+    MatRadioModule,
+    NgPersianDatepickerModule
+    ,InputTextModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    IranYekanDirective,
+    DividerComponent,
+    MatDividerModule
   ],
 })
 export class SharedModule {}
