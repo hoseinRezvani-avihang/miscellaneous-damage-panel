@@ -14,9 +14,10 @@ import {MatNativeDateModule} from '@angular/material/core';
 import { IranYekanDirective } from './directives/iran-yekan.directive';
 import { DividerComponent } from './components/divider/divider.component';
 import {MatDividerModule} from '@angular/material/divider';
+import { ShamsiPipe } from './pipes/shamsi.pipe';
 
 @NgModule({
-  declarations: [ExpandCardComponent, IranYekanDirective, DividerComponent],
+  declarations: [ExpandCardComponent, IranYekanDirective, DividerComponent, ShamsiPipe],
   imports: [
     CommonModule,
     MatInputModule,
@@ -47,7 +48,8 @@ import {MatDividerModule} from '@angular/material/divider';
     MatNativeDateModule,
     IranYekanDirective,
     DividerComponent,
-    MatDividerModule
+    MatDividerModule,
+    ShamsiPipe
   ],
 })
 export class SharedModule {}

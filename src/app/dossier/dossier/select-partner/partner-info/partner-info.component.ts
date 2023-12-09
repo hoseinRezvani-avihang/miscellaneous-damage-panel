@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { PartnerSearchResult } from 'src/app/dossier/models/partner.models';
+import { PartnerInfoUI, SelectPartner } from 'src/app/dossier/models/partner.models';
 
 @Component({
   selector: 'app-partner-info',
@@ -8,6 +8,6 @@ import { PartnerSearchResult } from 'src/app/dossier/models/partner.models';
 })
 export class PartnerInfoComponent {
 
-  @Input() partner!: PartnerSearchResult;
+  @Input() partner!: PartnerInfoUI;
 
 }

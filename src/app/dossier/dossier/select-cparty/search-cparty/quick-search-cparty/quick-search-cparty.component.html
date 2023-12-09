@@ -1,0 +1,31 @@
+<div class="example-form">
+    <mat-form-field class="example-full-width" appearance="outline" class="w-100">
+      <mat-label>جستجوی همکار</mat-label>
+      <input
+        type="text"
+        matInput
+        [formControl]="cpartySearchControl"
+        [matAutocomplete]="auto"
+      />
+      <mat-icon matPrefix>search</mat-icon>
+      <mat-autocomplete #auto="matAutocomplete">
+        <ng-container *ngIf="!($searhMessage | async) as searhMessage">
+          <mat-option
+            *ngFor="let cparty of $options | async"
+            [value]="cparty"
+            (click)="onSelectCparty(cparty)"
+            iranYekan
+          >
+            {{ cparty.fullName }}
+          </mat-option>
+        </ng-container>
+        <mat-option
+          *ngIf="$searhMessage | async as searhMessage"
+          (click)="null"
+          iranYekan
+        >
+          {{ searhMessage }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+</div>

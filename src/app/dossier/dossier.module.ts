@@ -11,6 +11,10 @@ import { SelectServiceComponent } from './dossier/select-service/select-service.
 import { SearchPartnerComponent } from './dossier/select-partner/search-partner/search-partner.component';
 import { PartnerInfoComponent } from './dossier/select-partner/partner-info/partner-info.component';
 import { QuickSearchPartnerComponent } from './dossier/select-partner/search-partner/quick-search-partner/quick-search-partner.component';
+import { MemberInfoComponent } from './dossier/select-member/member-info/member-info.component';
+import { CpartyInfoComponent } from './dossier/select-cparty/cparty-info/cparty-info.component';
+import { SearchCpartyComponent } from './dossier/select-cparty/search-cparty/search-cparty.component';
+import { QuickSearchCpartyComponent } from './dossier/select-cparty/search-cparty/quick-search-cparty/quick-search-cparty.component';
 
 
 
@@ -25,7 +29,11 @@ import { QuickSearchPartnerComponent } from './dossier/select-partner/search-par
     SelectServiceComponent,
     SearchPartnerComponent,
     PartnerInfoComponent,
-    QuickSearchPartnerComponent
+    QuickSearchPartnerComponent,
+    MemberInfoComponent,
+    CpartyInfoComponent,
+    SearchCpartyComponent,
+    QuickSearchCpartyComponent
   ],
   imports: [
     CommonModule, 

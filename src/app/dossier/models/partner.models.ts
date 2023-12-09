@@ -43,6 +43,12 @@ export class PartnerType {
   static getTypeSymbols = this.getTypes.map(
     (partner: PartnerType) => partner.symbol
   );
+
+  static getParnterNameBYSymbol(symbol: PartnerTypeEnum): PartnerType {
+    return PartnerType.getTypes.find((parnter: PartnerType) => {
+      return parnter.symbol === symbol;
+    }) as PartnerType;
+  }
 }
 
 export interface SearchPartnerInput {
@@ -66,7 +72,57 @@ export interface PartnerSearchResult {
 }
 
 export interface SelectPartner {
-  partner: PartnerSearchResult, 
+  partner: PartnerInfo, 
   partnerType: PartnerTypeEnum,
+  serviceDate: Date,
+}
+
+export interface PartnerInfoResult {
+  partnerInfo: PartnerInfo
+  cPartiesInfo: CPartiesInfo[]
+}
+
+export interface PartnerInfo {
+  isReal: boolean
+  image: any
+  address: string
+  nationalNumber: string
+  partnerName: string
+  typeName: string
+  fullName: string
+  typeId: number
+  id: string
+  ownerShipType: string
+  hasContract: boolean
+  delivererType: PartnerTypeEnum
+}
+
+export interface CPartiesInfo {
+  image: any
+  fullName: string
+  types: Type[]
+  id: string
+  partnerId: string
+  certificates: Certificate[]
+}
+
+export interface Type {
+  name: string
+  id: number
+}
+
+export interface Certificate {
+  licenseTypeId: number
+  licenseTypeName: string
+  noMedicalSystem: string
+}
+
+export interface PartnerInfoUI {
+  partnerName: string,
+  image: string | null,
+  address: string,
+  nationalNumber: string,
+  hasContract: boolean,
+  delivererType: string,
   serviceDate: Date,
 }

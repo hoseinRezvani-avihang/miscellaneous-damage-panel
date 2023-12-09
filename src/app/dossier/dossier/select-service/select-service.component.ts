@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { DossierCoreDataService } from '../../services/dossier-core-data.service';
+import { PartnerType, PartnerTypeEnum } from '../../models/partner.models';
 
 @Component({
   selector: 'app-select-service',
@@ -7,4 +9,13 @@ import { Component } from '@angular/core';
 })
 export class SelectServiceComponent {
 
+  parnterInfo = this.dossierService.partnerInfo.asObservable();
+
+  constructor(
+    private dossierService: DossierCoreDataService
+  ) {};
+
+  getName(symbol: PartnerTypeEnum) {
+    return PartnerType.getParnterNameBYSymbol(symbol).name
+  }
 }

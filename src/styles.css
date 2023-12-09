@@ -15,7 +15,6 @@ body, html {
 .default-background {
     background-color: #e0ffff;
 }
-html, body { height: 100%; }
 
 .center {
     display: flex;
@@ -23,5 +22,5 @@ html, body { height: 100%; }
     align-items: center;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+body { font-family: Roboto, "Helvetica Neue", sans-serif; }

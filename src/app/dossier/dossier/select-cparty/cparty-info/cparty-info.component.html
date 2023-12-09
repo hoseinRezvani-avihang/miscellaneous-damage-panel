@@ -1,0 +1,15 @@
+<div class="cparty-info d-flex">
+  <div class="col-1"></div>
+  <div class="flex-grow-1">
+    <div class="d-flex">
+      <div class="flex-grow-1">
+        <div><span>نام و نام خانوادگی پزشک: </span><span>{{ cparty.fullName }}</span></div>
+        <div><span>شماره نظام پزشکی: </span><span>{{ cparty.noMedicalSystem ?? 'نامشخص' }}</span></div>
+        <div><span>آدرس: </span><span>{{ cparty.address ?? 'نامشخص' }}</span></div>
+      </div>
+      <div class="flex-grow-1">
+        <div><span>تاریخ تجویز خدمت: </span><span>{{ cparty.serviceDate | shamsi }}</span></div>
+      </div>
+    </div>
+  </div>
+</div>

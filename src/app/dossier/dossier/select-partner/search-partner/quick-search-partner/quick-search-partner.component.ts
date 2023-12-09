@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { PartnerSearchResult, PartnerType, SearchPartnerInput } from 'src/app/dossier/models/partner.models';
+import { PartnerInfo, PartnerSearchResult, PartnerType, SearchPartnerInput } from 'src/app/dossier/models/partner.models';
 import { ParnterService } from '../../services/parnter.service';
 import { debounceTime, distinctUntilChanged, tap, switchMap, EMPTY, catchError, of, BehaviorSubject } from 'rxjs';
 
@@ -14,7 +14,7 @@ export class QuickSearchPartnerComponent implements OnInit {
   @Input() control = new FormControl<string>("", Validators.required);
   @Input() partnerType: string = PartnerType.CLINIC.symbol;
   @Input() hasContract = false;
-  @Input() partner!: PartnerSearchResult | null;
+  @Input() partner!: PartnerInfo | null;
 
   @Output() onSelectPartner = new EventEmitter<PartnerSearchResult>();
 
@@ -41,14 +41,14 @@ export class QuickSearchPartnerComponent implements OnInit {
       debounceTime(300),
       distinctUntilChanged(), 
       tap((value: any) => {
-        // this.options = [];
         this.searhMessage.next("در حال جستجو ...");
       }), 
       switchMap((value: string) => {
         if (this.control.valid) {
           return this.searchParnter(value)
         }
-        return of([]);
+        this.searhMessage.next(null);
+        return EMPTY;
       }), 
       catchError((err) => {
         this.searhMessage = err.error.resMessage;

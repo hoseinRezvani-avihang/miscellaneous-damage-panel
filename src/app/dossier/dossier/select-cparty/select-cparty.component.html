@@ -1,1 +1,14 @@
-<p>select-cparty works!</p>
+<div class="p-2">
+  <app-divider>
+    <div class="d-flex px-3">
+      <span class="text-nowrap"> پزشک ارائه دهنده خدمت </span>
+      <span>
+        <mat-icon *ngIf="!editting" (click)="editting = true"> edit </mat-icon>
+      </span>
+    </div>
+  </app-divider>
+  <app-search-cparty [cpartyInfo]="$cpartyInfo | async" *ngIf="editting" (selectCparty)="selectCparty($event)"></app-search-cparty>
+  <ng-container *ngIf="!editting">
+    <app-cparty-info *ngIf="cparty" [cparty]="cparty"></app-cparty-info>
+  </ng-container>
+</div>

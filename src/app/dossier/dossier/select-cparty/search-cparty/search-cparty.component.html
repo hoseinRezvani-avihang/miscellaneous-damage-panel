@@ -1,0 +1,28 @@
+<form [formGroup]="cpartyForm" (ngSubmit)="addCparty()">
+  <div class="d-flex gap-2">
+    <div class="col-7">
+      <app-quick-search-cparty
+        [cpartySearchControl]="cpartySearchControl"
+        (selectCparty)="onSelectCparty($event)"
+      ></app-quick-search-cparty>
+    </div>
+    <div class="col-3">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>تاریخ تجویز خدمت</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          formControlName="serviceDate"
+        />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="col-auto center">
+      <button class="btn btn-outline-primary" type="submit">انتخاب</button>
+    </div>
+  </div>
+</form>

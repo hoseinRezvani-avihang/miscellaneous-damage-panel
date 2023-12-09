@@ -15,7 +15,7 @@ export class SelectMemberComponent {
 
   selectMember(memberResult: CitizenResult) {
     this.dossierCoreService.setCitizenInfo(memberResult);
-    this.dossierCoreService.next();
+    this.dossierCoreService.passStep("selectMember");
   }
 
 }

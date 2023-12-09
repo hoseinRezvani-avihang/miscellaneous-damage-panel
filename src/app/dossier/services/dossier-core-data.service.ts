@@ -3,7 +3,8 @@ import { CitizenResult } from '../models/citizen.models';
 import { BehaviorSubject } from 'rxjs';
 import { DossierStep } from '../models/dossier-core.models';
 import { ObjectUtil } from 'src/app/shared/utils/object-util';
-import { SelectPartner } from '../models/partner.models';
+import { PartnerInfo, SelectPartner } from '../models/partner.models';
+import { CpartyInfo } from '../models/cparty.models';
 
 @Injectable({
   providedIn: 'root',
@@ -46,9 +47,11 @@ export class DossierCoreDataService {
 
   $dossierSteps = new BehaviorSubject<any>(this.dossierSteps);
 
-  next() {
+  passStep(stepName: string) {
     let steps = ObjectUtil.flatten(this.dossierSteps, 'subStep');
-    let activeStepIndex = steps.map((step) => step.isActive).lastIndexOf(true);
+    let activeStepIndex = steps.findIndex((step: DossierStep) => {
+      return step.name === stepName;
+    });
     if (steps[activeStepIndex + 1]) {
       steps[activeStepIndex + 1].isActive = true;
       if (steps[activeStepIndex + 1].subStep && steps[activeStepIndex + 2]) {
@@ -73,11 +76,19 @@ export class DossierCoreDataService {
 
 
   // ================== parnter info ================
-
-  partnerInfo = new BehaviorSubject<SelectPartner>({} as SelectPartner);
-
-  setPartnerInfo(selectPartner: SelectPartner) {
+  
+  partnerInfo = new BehaviorSubject<SelectPartner | null>(null);
+  
+  setPartnerInfo(selectPartner: SelectPartner | null) {
     this.partnerInfo.next(selectPartner);
+  }
+  
+  // ================== cparty info ================
+
+  cpartyInfo = new BehaviorSubject<CpartyInfo | null>(null);
+
+  setCpartyInfo(cpartyInfo: CpartyInfo | null) {
+    this.cpartyInfo.next(cpartyInfo);
   }
 
   // =================================================

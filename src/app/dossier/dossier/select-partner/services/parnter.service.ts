@@ -14,4 +14,8 @@ export class ParnterService {
   searchParnter(input: SearchPartnerInput) {
     return this.httpDossierService.searchParnter(input);
   }
+
+  fetchMemberInfo(partnerId: string) {
+    return this.httpDossierService.fetchPartnerInfo(partnerId);
+  }
 }

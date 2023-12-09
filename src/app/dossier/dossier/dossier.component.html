@@ -2,12 +2,14 @@
   <app-select-member *ngIf="isActive('selectMember')"></app-select-member>
   <ng-container *ngIf="isActive('saveDossier')">
     <app-expand-card [status]="true">
-      <div class="border col-12 mx-auto rounded" content>
-        <p *ngIf="memberInfo | async as member">{{ member | json }}</p>
+      <div class="border d-flex flex-column gap-3 mx-auto rounded p-3" content>
+        <div class="border rounded" *ngIf="memberInfo | async as member">
+          <app-member-info [memberInfo]="member"></app-member-info>
+        </div>
         <app-expand-card #serviceCard>
           <button
             *ngIf="!serviceCard.status"
-            class="btn btn-outline-info"
+            class="btn btn-outline-primary d-block mx-auto"
             button
             (click)="serviceCard.status = !serviceCard.status"
           >
@@ -15,7 +17,7 @@
           </button>
           <div
             *ngIf="serviceCard.status"
-            class="border col-11 mx-auto border-primary position-relative p-4 d-flex flex-column gap-3"
+            class="border rounded position-relative p-4 d-flex flex-column gap-3"
             content
           >
             <mat-icon
@@ -29,6 +31,9 @@
             <app-select-cparty
               *ngIf="isActive('selectCparty')"
             ></app-select-cparty>
+            <div class="p-2" *ngIf="isActive('selectService')">
+              <app-divider></app-divider>
+            </div>
             <app-select-service
               *ngIf="isActive('selectService')"
             ></app-select-service>

@@ -1,1 +1,3 @@
-<p>select-service works!</p>
+<ng-container *ngIf="parnterInfo | async as parnter">
+  <p class="text-center">{{ getName(parnter.partnerType) }}</p>
+</ng-container>
