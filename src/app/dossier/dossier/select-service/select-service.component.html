@@ -1,3 +1,18 @@
 <ng-container *ngIf="parnterInfo | async as parnter">
   <p class="text-center">{{ getName(parnter.partnerType) }}</p>
 </ng-container>
+
+<app-expand-card #card>
+  <button
+    *ngIf="!card.status"
+    class="btn btn-outline-primary d-block"
+    button
+    (click)="card.status = !card.status"
+  >
+    ثبت خسارت
+  </button>
+  <app-add-outpatient-service
+    *ngIf="card.status"
+    content
+  ></app-add-outpatient-service>
+</app-expand-card>

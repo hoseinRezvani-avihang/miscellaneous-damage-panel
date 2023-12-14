@@ -1,34 +1,28 @@
 <div class="partner-info d-flex">
   <div class="member-image col-1"></div>
-  <div class="flex-grow-1">
-    <div class="d-flex">
-      <div class="flex-grow-1">
-        <div>
-          <span>نام مرکز ارائه دهنده: </span
-          ><span>{{ partner.partnerName }}</span>
-        </div>
-        <div>
-          <span>شماره ملی: </span
-          ><span>{{ partner.nationalNumber }}</span>
-        </div>
-        <div>
-          <span>آدرس: </span><span>{{ partner.address }}</span>
-        </div>
-      </div>
-      <div class="flex-grow-1">
-        <div>
-          <span>قرارداد: </span
-          ><span>{{ partner.hasContract ? "دارد" : "ندارد" }}</span>
-        </div>
-        <div>
-          <span>نوع مرکز ارائه دهنده: </span
-          ><span>{{ partner.delivererType }}</span>
-        </div>
-        <div>
-          <span>تاریخ ارائه خدمت: </span
-          ><span>{{ partner.serviceDate | shamsi }}</span>
-        </div>
-      </div>
+  <div class="col">
+    <div>
+      <span>نام مرکز ارائه دهنده: </span><span>{{ partner.partnerName }}</span>
+    </div>
+    <div>
+      <span>شماره ملی: </span><span>{{ partner.nationalNumber }}</span>
+    </div>
+    <div>
+      <span>آدرس: </span><span>{{ partner.address }}</span>
+    </div>
+  </div>
+  <div class="col">
+    <div>
+      <span>قرارداد: </span
+      ><span>{{ partner.hasContract ? "دارد" : "ندارد" }}</span>
+    </div>
+    <div>
+      <span>نوع مرکز ارائه دهنده: </span
+      ><span>{{ partner.delivererType }}</span>
+    </div>
+    <div>
+      <span>تاریخ ارائه خدمت: </span
+      ><span>{{ partner.serviceDate | shamsi }}</span>
     </div>
   </div>
 </div>

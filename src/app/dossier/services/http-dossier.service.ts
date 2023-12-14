@@ -9,6 +9,11 @@ import {
   SearchPartnerInput,
 } from '../models/partner.models';
 import { CPartyResult } from '../models/cparty.models';
+import {
+  SearchServiceInput,
+  SearchServiceResult,
+} from '../models/service.models';
+import { OMRInput, OmrResult } from '../models/dossier-core.models';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +28,10 @@ export class HttpDossierService {
     this.staticPath + '/v1/services/partner/search/quick/fetch/list';
   fetchPartnerInfoUrl = this.staticPath + '/v1/services/partner/info/fetch/id';
 
-  searchCpartyUrl = this.staticPath + "/v1/services/cparty/search/fetch/list";
+  searchCpartyUrl = this.staticPath + '/v1/services/cparty/search/fetch/list';
+  searchServiceUrl = this.staticPath + '/v1/services/service/search/fetch/list';
+
+  fetchOMRUrl = this.staticPath + "/v1/services/service/inquiry/omr/fetch";
 
   constructor(private http: HttpClient) {}
 
@@ -49,19 +57,41 @@ export class HttpDossierService {
 
   fetchPartnerInfo(partnerId: string): Observable<PartnerInfoResult> {
     let input = { partnerId };
-    return this.http.post<Result<PartnerInfoResult>>(this.fetchPartnerInfoUrl, input).pipe(
-      map((result: Result<PartnerInfoResult>) => {
-        return result.info;
-      })
-    );
+    return this.http
+      .post<Result<PartnerInfoResult>>(this.fetchPartnerInfoUrl, input)
+      .pipe(
+        map((result: Result<PartnerInfoResult>) => {
+          return result.info;
+        })
+      );
   }
 
   searchCparty(noMedicalSystem: string): Observable<CPartyResult[]> {
     let input = { noMedicalSystem };
-    return this.http.post<Result<CPartyResult[]>>(this.searchCpartyUrl, input).pipe(
-      map((result: Result<CPartyResult[]>) => {
+    return this.http
+      .post<Result<CPartyResult[]>>(this.searchCpartyUrl, input)
+      .pipe(
+        map((result: Result<CPartyResult[]>) => {
+          return result.info;
+        })
+      );
+  }
+
+  searchService(input: SearchServiceInput): Observable<SearchServiceResult[]> {
+    return this.http
+      .post<Result<SearchServiceResult[]>>(this.searchServiceUrl, input)
+      .pipe(
+        map((result: Result<SearchServiceResult[]>) => {
+          return result.info;
+        })
+      );
+  }
+
+  fetchOMR(input: OMRInput): Observable<OmrResult> {
+    return this.http.post<Result<OmrResult>>(this.fetchOMRUrl, input).pipe(
+      map((result: Result<OmrResult>) => {
         return result.info;
       })
-    )
+    );
   }
 }

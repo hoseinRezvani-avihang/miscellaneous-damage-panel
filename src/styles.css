@@ -10,10 +10,14 @@
 
 body, html {
     margin: 0;
+    background-color: #e0ffff;
+    width: 100vw;
+    height: 100vh;
 }
 
 .default-background {
     background-color: #e0ffff;
+    height: 100vh;
 }
 
 .center {
@@ -24,3 +28,10 @@ body, html {
 
 
 body { font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.close-icon {
+    top: 10px;
+    left: 10px;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

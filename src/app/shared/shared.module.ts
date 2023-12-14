@@ -15,6 +15,8 @@ import { IranYekanDirective } from './directives/iran-yekan.directive';
 import { DividerComponent } from './components/divider/divider.component';
 import {MatDividerModule} from '@angular/material/divider';
 import { ShamsiPipe } from './pipes/shamsi.pipe';
+import {MatSelectModule} from '@angular/material/select';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [ExpandCardComponent, IranYekanDirective, DividerComponent, ShamsiPipe],
@@ -31,7 +33,9 @@ import { ShamsiPipe } from './pipes/shamsi.pipe';
     InputTextModule, 
     MatDatepickerModule, 
     MatNativeDateModule,
-    MatDividerModule
+    MatDividerModule,
+    MatSelectModule,
+    MatCheckboxModule
   ],
   exports: [
     ExpandCardComponent,
@@ -49,7 +53,9 @@ import { ShamsiPipe } from './pipes/shamsi.pipe';
     IranYekanDirective,
     DividerComponent,
     MatDividerModule,
-    ShamsiPipe
+    ShamsiPipe,
+    MatSelectModule,
+    MatCheckboxModule
   ],
 })
 export class SharedModule {}

@@ -1,0 +1,58 @@
+<div class="border rounded shadow">
+
+    <form>
+      <div class="d-flex gap-2">
+        <div class="col-6">
+          <app-search-service></app-search-service>
+        </div>
+        <div>
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>کارشناس مسئول</mat-label>
+            <mat-select> </mat-select>
+          </mat-form-field>
+        </div>
+    
+        <div>
+          <mat-checkbox color="primary">خدمت مرتبط با بیماری</mat-checkbox>
+        </div>
+      </div>
+      <div class="d-flex gap-2">
+        <div>
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>تعداد</mat-label>
+            <input type="number" matInput />
+          </mat-form-field>
+        </div>
+    
+        <div>
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>نحوه مصرف</mat-label>
+            <mat-select> </mat-select>
+          </mat-form-field>
+        </div>
+    
+        <div>
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>تعداد در نوبت</mat-label>
+            <input type="number" matInput />
+          </mat-form-field>
+        </div>
+    
+        <div>
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>مبلغ پرداخت شده توسط بیمار</mat-label>
+            <input step="1000" type="number" matInput />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="d-flex">
+        <div class="col-7">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>توضیحات</mat-label>
+            <textarea matInput></textarea>
+          </mat-form-field>
+        </div>
+        <div class="col-auto"></div>
+      </div>
+    </form>
+</div>

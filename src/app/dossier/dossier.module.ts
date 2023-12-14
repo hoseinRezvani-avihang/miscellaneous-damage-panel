@@ -15,6 +15,8 @@ import { MemberInfoComponent } from './dossier/select-member/member-info/member-
 import { CpartyInfoComponent } from './dossier/select-cparty/cparty-info/cparty-info.component';
 import { SearchCpartyComponent } from './dossier/select-cparty/search-cparty/search-cparty.component';
 import { QuickSearchCpartyComponent } from './dossier/select-cparty/search-cparty/quick-search-cparty/quick-search-cparty.component';
+import { SearchServiceComponent } from './dossier/select-service/search-service/search-service.component';
+import { AddOutpatientServiceComponent } from './dossier/select-service/add-outpatient-service/add-outpatient-service.component';
 
 
 
@@ -37,7 +39,9 @@ import { QuickSearchCpartyComponent } from './dossier/select-cparty/search-cpart
   ],
   imports: [
     CommonModule, 
-    SharedModule
+    SharedModule, 
+    SearchServiceComponent,
+    AddOutpatientServiceComponent
   ]
 })
 export class DossierModule { }

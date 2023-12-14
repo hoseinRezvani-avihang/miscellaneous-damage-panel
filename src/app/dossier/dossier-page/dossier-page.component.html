@@ -15,7 +15,7 @@
         </button>
         <div class="content position-relative" content *ngIf="card.status">
             <app-dossier></app-dossier>
-            <mat-icon class="position-absolute top-0 start-0" (click)="toggle()">close</mat-icon>
+            <mat-icon class="position-absolute close-icon" (click)="toggle()">close</mat-icon>
         </div>
       </app-expand-card>
     </div>
