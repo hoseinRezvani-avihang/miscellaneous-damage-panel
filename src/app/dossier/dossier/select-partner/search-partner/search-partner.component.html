@@ -10,7 +10,7 @@
     <div class="col-7">
       <app-quick-search-partner
         [partnerType]="partnerTypeControl.value"
-        [partner]="partner?.partner ?? null"
+        [partner]="partner?.partner?.partnerInfo ?? null"
         [control]="partnerSearchControl"
         (onSelectPartner)="onSelectPartner($event)"
       ></app-quick-search-partner>

@@ -1,12 +1,14 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { DossierCoreDataService } from '../services/dossier-core-data.service';
+import { DossierSubsService } from './select-service/services/dossier-subs.service';
 
 @Component({
   selector: 'app-dossier',
   templateUrl: './dossier.component.html',
   styleUrls: ['./dossier.component.css'], 
   providers: [
-    DossierCoreDataService
+    DossierCoreDataService, 
+    DossierSubsService
   ], 
   changeDetection: ChangeDetectionStrategy.OnPush
 })

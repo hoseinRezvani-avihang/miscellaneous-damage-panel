@@ -1,1 +1,31 @@
-<p>quick-search-service works!</p>
+<div class="example-form">
+  <mat-form-field class="example-full-width" appearance="outline" class="w-100">
+    <mat-label>{{ title }}</mat-label>
+    <input
+      type="text"
+      matInput
+      [formControl]="control"
+      [matAutocomplete]="auto"
+    />
+    <mat-icon matPrefix>search</mat-icon>
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="null">
+      <ng-container *ngIf="!($searhMessage | async) as searhMessage">
+        <mat-option
+          *ngFor="let service of $options | async"
+          (click)="onSelectService(service)"
+          iranYekan
+        >
+          {{ service.fullName }}
+        </mat-option>
+      </ng-container>
+      <mat-option
+        *ngIf="$searhMessage | async as searhMessage"
+        (click)="(null)"
+        [disabled]="true"
+        iranYekan
+      >
+        {{ searhMessage }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</div>

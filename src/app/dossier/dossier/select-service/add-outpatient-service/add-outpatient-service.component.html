@@ -1,58 +1,91 @@
-<div class="border rounded shadow">
+<div class="border rounded shadow p-3">
+  <form [formGroup]="form" (ngSubmit)="addService()">
+    <div class="d-flex gap-3">
+      <div class="col-6">
+        <app-search-service
+          (selectService)="onSelectService($event)"
+        ></app-search-service>
+      </div>
 
-    <form>
-      <div class="d-flex gap-2">
-        <div class="col-6">
-          <app-search-service></app-search-service>
+      <div>
+        <mat-checkbox formControlName="ISGlobal" color="primary" iranYekan
+          >جستجوی کد IRC</mat-checkbox
+        >
+      </div>
+    </div>
+    <div class="d-flex gap-3">
+      <div>
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label iranYekan>تعداد</mat-label>
+          <input formControlName="cnt" type="number" matInput />
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label iranYekan>نحوه مصرف</mat-label>
+          <mat-select formControlName="consumption"> </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>تعداد در نوبت</mat-label>
+          <input formControlName="queueCount" type="number" matInput />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="d-flex gap-3">
+      <div>
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>مبلغ پرداخت شده توسط بیمار</mat-label>
+          <input
+            formControlName="claimAmount"
+            step="1000"
+            type="number"
+            matInput
+          />
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label iranYekan>کارشناس مسئول</mat-label>
+          <mat-select formControlName="cpartyId">
+            <mat-option
+              iranYekan
+              *ngFor="let cparty of config.cparties"
+              [value]="cparty.id"
+              >{{ cparty.name }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="center">
+        <mat-checkbox
+          formControlName="isMarkMatchService"
+          color="primary"
+          iranYekan
+          >خدمت مرتبط با بیماری</mat-checkbox
+        >
+      </div>
+    </div>
+    <div class="d-flex justify-content-between">
+      <div class="col-7">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>توضیحات</mat-label>
+          <textarea formControlName="description" matInput></textarea>
+        </mat-form-field>
+      </div>
+      <div class="col-auto d-flex gap-2 center">
+        <div>
+          <button class="btn btn-outline-primary" type="button" (click)="close()">بستن</button>
         </div>
         <div>
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>کارشناس مسئول</mat-label>
-            <mat-select> </mat-select>
-          </mat-form-field>
-        </div>
-    
-        <div>
-          <mat-checkbox color="primary">خدمت مرتبط با بیماری</mat-checkbox>
+          <button class="btn btn-primary" type="submit">افزودن</button>
         </div>
       </div>
-      <div class="d-flex gap-2">
-        <div>
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>تعداد</mat-label>
-            <input type="number" matInput />
-          </mat-form-field>
-        </div>
-    
-        <div>
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>نحوه مصرف</mat-label>
-            <mat-select> </mat-select>
-          </mat-form-field>
-        </div>
-    
-        <div>
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>تعداد در نوبت</mat-label>
-            <input type="number" matInput />
-          </mat-form-field>
-        </div>
-    
-        <div>
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>مبلغ پرداخت شده توسط بیمار</mat-label>
-            <input step="1000" type="number" matInput />
-          </mat-form-field>
-        </div>
-      </div>
-      <div class="d-flex">
-        <div class="col-7">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>توضیحات</mat-label>
-            <textarea matInput></textarea>
-          </mat-form-field>
-        </div>
-        <div class="col-auto"></div>
-      </div>
-    </form>
+    </div>
+  </form>
 </div>

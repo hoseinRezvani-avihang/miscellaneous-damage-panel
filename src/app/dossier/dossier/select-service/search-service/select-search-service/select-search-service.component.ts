@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormControl, Validators } from '@angular/forms';
@@ -18,6 +18,8 @@ export class SelectSearchServiceComponent {
   @Input() title = 'جستجوی خدمت';
   @Input() serviceType = "D"
   @Input() control = new FormControl(null);
+
+  @Output() selectService = new EventEmitter<SearchServiceResult>();
 
   message =  new BehaviorSubject<string | null>("در حال جستجو ...");
 
@@ -46,6 +48,10 @@ export class SelectSearchServiceComponent {
     }, err => {
       this.message.next(err.error.resMessage);
     })
+  }
+
+  onSelectService(service: SearchServiceResult) {
+    this.selectService.emit(service);
   }
 
 }

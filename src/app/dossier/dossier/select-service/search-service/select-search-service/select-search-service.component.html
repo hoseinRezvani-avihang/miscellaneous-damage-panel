@@ -2,11 +2,15 @@
   <mat-label>{{ title }}</mat-label>
   <mat-select [formControl]="control" (opened)="searchService()">
     <ng-container *ngIf="!(message | async)">
-      <mat-option iranYekan [value]="option.id" *ngFor="let option of options | async">{{
-        option.shortName
-      }}</mat-option>
+      <mat-option
+        iranYekan
+        [value]="option.id"
+        *ngFor="let option of options | async"
+        (click)="onSelectService(option)"
+        >{{ option.shortName }}</mat-option
+      >
     </ng-container>
-    <ng-container *ngIf="(message | async)">
+    <ng-container *ngIf="message | async">
       <mat-option iranYekan disabled>{{ message | async }}</mat-option>
     </ng-container>
   </mat-select>

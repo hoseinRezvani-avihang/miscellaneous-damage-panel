@@ -7,6 +7,7 @@ import {
   debounceTime,
   distinctUntilChanged,
   of,
+  retry,
   switchMap,
   tap,
 } from 'rxjs';
@@ -28,6 +29,8 @@ export class QuickSearchCpartyComponent implements OnInit {
   searhMessage = new BehaviorSubject<string | null>(null);
   $searhMessage = this.searhMessage.asObservable();
 
+  allowSearching = false;
+
   constructor(
     private cpartyService: CpartyService
   ) {}
@@ -43,10 +46,16 @@ export class QuickSearchCpartyComponent implements OnInit {
         distinctUntilChanged(),
         tap((value: any) => {
           this.searhMessage.next('در حال جستجو ...');
+          this.allowSearching = true;
         }),
         switchMap((value: string) => {
-          if (this.cpartySearchControl.valid) {
-            return this.searchCparty(value);
+          if (this.cpartySearchControl.valid && value) {
+            return this.searchCparty(value).pipe(
+              catchError(err => {
+                this.searhMessage.next(err.error.resMessage);
+                return of([]);
+              })
+            );
           }
           this.searhMessage.next("");
           return EMPTY;
@@ -69,9 +78,8 @@ export class QuickSearchCpartyComponent implements OnInit {
   }
 
   onSelectCparty(cparty: CPartyResult) {
-    this.cpartySearchControl.disable();
     this.cpartySearchControl.setValue(cparty.fullName, {emitEvent: false, onlySelf: false})
-    this.cpartySearchControl.enable();
     this.selectCparty.emit(cparty);
+
   }
 }

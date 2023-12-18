@@ -72,7 +72,7 @@ export interface PartnerSearchResult {
 }
 
 export interface SelectPartner {
-  partner: PartnerInfo, 
+  partner: PartnerInfoResult, 
   partnerType: PartnerTypeEnum,
   serviceDate: Date,
 }

@@ -1,8 +1,9 @@
-import { Component, Input, OnInit, Signal, computed, signal } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, Signal, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { QuickSearchServiceComponent } from './quick-search-service/quick-search-service.component';
 import { SelectSearchServiceComponent } from './select-search-service/select-search-service.component';
+import { SearchServiceResult } from 'src/app/dossier/models/service.models';
 
 @Component({
   selector: 'app-search-service',
@@ -14,12 +15,18 @@ import { SelectSearchServiceComponent } from './select-search-service/select-sea
 export class SearchServiceComponent implements OnInit {
 
   
-  @Input() searchType: Signal<SearchType> = signal(SearchType.select);
+  @Input() searchType: Signal<SearchType> = signal(SearchType.quick);
+  @Output() selectService = new EventEmitter<SearchServiceResult>();
+
   quickSearch: Signal<boolean> = computed(() => {
     return this.searchType() === SearchType.quick;
   });
   
   ngOnInit(): void {
+  }
+
+  onSelectService(service: SearchServiceResult) {
+    this.selectService.emit(service);
   }
 }
 

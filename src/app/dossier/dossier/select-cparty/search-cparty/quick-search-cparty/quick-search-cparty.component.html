@@ -12,7 +12,6 @@
         <ng-container *ngIf="!($searhMessage | async) as searhMessage">
           <mat-option
             *ngFor="let cparty of $options | async"
-            [value]="cparty"
             (click)="onSelectCparty(cparty)"
             iranYekan
           >

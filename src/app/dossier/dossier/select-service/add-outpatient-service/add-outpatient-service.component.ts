@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SearchServiceComponent } from '../search-service/search-service.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { FormControl, FormGroup } from '@angular/forms';
-import { SearchServiceResult } from 'src/app/dossier/models/service.models';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { SubsDetail, OutpatientServiceInput, SearchServiceResult } from 'src/app/dossier/models/service.models';
+import { DossierSubsService } from '../services/dossier-subs.service';
 
 @Component({
   selector: 'app-add-outpatient-service',
@@ -12,15 +13,49 @@ import { SearchServiceResult } from 'src/app/dossier/models/service.models';
   templateUrl: './add-outpatient-service.component.html',
   styleUrls: ['./add-outpatient-service.component.css']
 })
-export class AddOutpatientServiceComponent {
+export class AddOutpatientServiceComponent implements OnInit {
 
-  form = new FormGroup({
-    service: new FormControl<SearchServiceResult | null>(null),
-    cnt: new FormControl(null),
-    isMarkMatchService: new FormControl(null),
-    claimAmount: new FormControl(null),
-    ISGlobal: new FormControl(null),
-    
-  })
+  @Input() config!: OutpatientServiceInput; 
+
+  @Output() cancel = new EventEmitter<void>();
+
+  service!: SearchServiceResult;
+
+  form!: FormGroup;
+
+  constructor(
+    private dossierSubService: DossierSubsService
+  ) {};
+
+  ngOnInit(): void {
+    this.form = new FormGroup({
+      service: new FormControl<SearchServiceResult | null>(null, Validators.required),
+      cnt: new FormControl(1),
+      isMarkMatchService: new FormControl(false),
+      claimAmount: new FormControl(null),
+      ISGlobal: new FormControl(true),
+      cpartyId: new FormControl(this.config.cparties[0].id), 
+      description: new FormControl(null), 
+      consumption: new FormControl(null),
+      queueCount: new FormControl(1)
+    });
+  }
+
+  onSelectService(service: SearchServiceResult) {
+    (this.form.get("service") as FormControl).setValue(service);
+    this.service = service;
+  };
+
+  addService() {
+    this.dossierSubService.fetchOmr(this.form.value as any).subscribe({
+      next: () => {
+        this.close();
+      }
+    });
+  };
+
+  close() {
+    this.cancel.emit();
+  }
 
 }

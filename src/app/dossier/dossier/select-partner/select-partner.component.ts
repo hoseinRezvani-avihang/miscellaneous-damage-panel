@@ -28,12 +28,12 @@ export class SelectPartnerComponent implements OnInit, OnDestroy {
     this.partnerInfoSubscription = this.partnerInfo.subscribe((partnerInfo: SelectPartner | null) => {
       if (partnerInfo) {
         this.partner = {
-          partnerName: partnerInfo.partner.partnerName, 
-          address: partnerInfo.partner.address, 
-          hasContract: partnerInfo.partner.hasContract, 
-          delivererType: PartnerType.getParnterNameBYSymbol(partnerInfo.partner.delivererType).name,
-          image: partnerInfo.partner.image,
-          nationalNumber: partnerInfo.partner.nationalNumber,
+          partnerName: partnerInfo.partner.partnerInfo.partnerName, 
+          address: partnerInfo.partner.partnerInfo.address, 
+          hasContract: partnerInfo.partner.partnerInfo.hasContract, 
+          delivererType: PartnerType.getParnterNameBYSymbol(partnerInfo.partner.partnerInfo.delivererType).name,
+          image: partnerInfo.partner.partnerInfo.image,
+          nationalNumber: partnerInfo.partner.partnerInfo.nationalNumber,
           serviceDate: partnerInfo.serviceDate
         }
       }

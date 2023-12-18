@@ -25,6 +25,8 @@ export class QuickSearchPartnerComponent implements OnInit {
   $searhMessage = this.searhMessage.asObservable();
   loading = false;
 
+  allowSearching = false;
+
   constructor(
     private partnerService: ParnterService
   ) {};
@@ -42,9 +44,10 @@ export class QuickSearchPartnerComponent implements OnInit {
       distinctUntilChanged(), 
       tap((value: any) => {
         this.searhMessage.next("در حال جستجو ...");
+        this.allowSearching = true;
       }), 
       switchMap((value: string) => {
-        if (this.control.valid) {
+        if (this.control.valid && value) {
           return this.searchParnter(value)
         }
         this.searhMessage.next(null);
@@ -52,7 +55,7 @@ export class QuickSearchPartnerComponent implements OnInit {
       }), 
       catchError((err) => {
         this.searhMessage = err.error.resMessage;
-        return of([]);
+        return EMPTY;
       })
     ).subscribe((value: PartnerSearchResult[]) => {
       this.options.next(value);
@@ -77,9 +80,7 @@ export class QuickSearchPartnerComponent implements OnInit {
   }
 
   selectParnter(parnter: PartnerSearchResult) {
-    this.control.disable();
-    this.control.patchValue(parnter.partnerName, {emitEvent: false, onlySelf: true});
-    this.control.enable();
+    this.control.setValue(parnter.partnerName, {emitEvent: false });
     this.onSelectPartner.emit(parnter);
   }
 

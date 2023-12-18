@@ -1,16 +1,17 @@
-import { ChangeDetectorRef, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { CitizenResult } from '../models/citizen.models';
 import { BehaviorSubject } from 'rxjs';
 import { DossierStep } from '../models/dossier-core.models';
 import { ObjectUtil } from 'src/app/shared/utils/object-util';
 import { PartnerInfo, SelectPartner } from '../models/partner.models';
 import { CpartyInfo } from '../models/cparty.models';
+import { Subs } from '../models/service.models';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DossierCoreDataService {
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor() {}
 
   // ============= save dossier navigation ===========
 
@@ -118,6 +119,16 @@ export class DossierCoreDataService {
 
   setCpartyInfo(cpartyInfo: CpartyInfo | null) {
     this.cpartyInfo.next(cpartyInfo);
+  }
+
+  // ================== subs info ===================
+
+  subs = new BehaviorSubject<Subs[]>([]);
+
+  addSub(sub: Subs) {
+    let subs = this.subs.value;
+    subs.push(sub);
+    this.subs.next(subs);
   }
 
   // =================================================
