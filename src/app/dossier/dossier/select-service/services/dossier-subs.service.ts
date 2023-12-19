@@ -21,6 +21,7 @@ export class DossierSubsService {
     partnerInfo = this.dossierService.partnerInfo as BehaviorSubject<SelectPartner>;
     cpartyInfo = this.dossierService.cpartyInfo as BehaviorSubject<CpartyInfo>;
     memberInfo = this.dossierService.citizenInfo as BehaviorSubject<CitizenResult>;
+    subs = this.dossierService.subs as BehaviorSubject<Subs[]>;
 
   searchService(input: SearchServiceInput) {
     return this.dossierHttpService.searchService(input);
@@ -40,7 +41,7 @@ export class DossierSubsService {
       deliveredDate: DateUtil.noSlashShamsi(this.partnerInfo.value.serviceDate),
       orderedDate: DateUtil.noSlashShamsi(this.cpartyInfo.value.serviceDate),
       claimAmount: input.claimAmount,
-      subs: [],
+      subs: this.getRecheckCodes(),
       isMarkMatchService: input.isMarkMatchService, 
       reviewType: "notContract"
     };
@@ -56,5 +57,11 @@ export class DossierSubsService {
         } 
       })
     )
+  }
+
+  getRecheckCodes() {
+    return this.subs.value.map((sub: Subs) => {
+      return sub.omrResult.reCheckCode;
+    })
   }
 }

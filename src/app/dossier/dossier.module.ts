@@ -17,6 +17,10 @@ import { SearchCpartyComponent } from './dossier/select-cparty/search-cparty/sea
 import { QuickSearchCpartyComponent } from './dossier/select-cparty/search-cparty/quick-search-cparty/quick-search-cparty.component';
 import { SearchServiceComponent } from './dossier/select-service/search-service/search-service.component';
 import { AddOutpatientServiceComponent } from './dossier/select-service/add-outpatient-service/add-outpatient-service.component';
+import { SubsComponent } from './dossier/select-service/subs/subs.component';
+import { SubsListComponent } from './dossier/select-service/subs/subs-list/subs-list.component';
+import { SubsShareComponent } from './dossier/select-service/subs/subs-share/subs-share.component';
+import { SubItemComponent } from './dossier/select-service/subs/subs-list/sub-item/sub-item.component';
 
 
 
@@ -35,7 +39,11 @@ import { AddOutpatientServiceComponent } from './dossier/select-service/add-outp
     MemberInfoComponent,
     CpartyInfoComponent,
     SearchCpartyComponent,
-    QuickSearchCpartyComponent
+    QuickSearchCpartyComponent,
+    SubsComponent,
+    SubsListComponent,
+    SubsShareComponent,
+    SubItemComponent
   ],
   imports: [
     CommonModule, 

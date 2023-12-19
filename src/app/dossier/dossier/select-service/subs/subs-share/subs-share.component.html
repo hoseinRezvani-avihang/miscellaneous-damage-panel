@@ -1,0 +1,16 @@
+<p>{{ shares | json }}</p>
+
+<mat-form-field>
+    <mat-label>سهم کل</mat-label>
+    <input type="number" matInput [formControl]="totalShareControl">
+</mat-form-field>
+
+<mat-form-field>
+    <mat-label>سهم بیمه شده</mat-label>
+    <input type="number" matInput [formControl]="insuredShareControl">
+</mat-form-field>
+
+<mat-form-field>
+    <mat-label>سهم بانک</mat-label>
+    <input type="number" matInput [formControl]="orgShareControl">
+</mat-form-field>

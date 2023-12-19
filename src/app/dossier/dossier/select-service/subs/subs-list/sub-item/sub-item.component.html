@@ -1,0 +1,23 @@
+<div class="border rounded p-3 d-flex justify-content-between">
+  <div>
+    <p class="m-0" iranYekan>
+      <span>[ {{ subItem.serviceNN }} ]</span>
+      <span>
+        {{ subItem.serviceName }}
+      </span>
+    </p>
+  </div>
+  <div>
+    <div>
+      <span iranYekan>سهم کل: </span>
+      <span iranYekan>{{ subItem.totalAmount }}</span>
+    </div>
+    <div class="text-nowrap">
+        <span>سهم بانک: </span>
+        <span>{{ subItem.orgAmount }}</span>
+        <span> / </span>
+        <span>سهم بیمه شده: </span>
+        <span>{{ subItem.insuredAmount }}</span>
+    </div>
+  </div>
+</div>

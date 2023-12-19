@@ -8,7 +8,7 @@ import {
   SelectPartner,
 } from '../../models/partner.models';
 import { CpartyInfo } from '../../models/cparty.models';
-import { OutpatientServiceInput } from '../../models/service.models';
+import { OutpatientServiceInput, SubItemUI, Subs, SubsUI } from '../../models/service.models';
 
 @Component({
   selector: 'app-select-service',
@@ -18,13 +18,16 @@ import { OutpatientServiceInput } from '../../models/service.models';
 export class SelectServiceComponent implements OnInit {
   parnterInfo = this.dossierService.partnerInfo.asObservable();
   cpartyInfo = this.dossierService.cpartyInfo.asObservable();
+  subsInfo = this.dossierService.subs.asObservable();
 
   outpatientServiceInput!: OutpatientServiceInput;
+  subs: SubsUI = {subs: [], subShares: {}}
 
   constructor(private dossierService: DossierCoreDataService) {}
 
   ngOnInit(): void {
     this.onOutpatientServiceInput();
+    this.onSubsUpdate();
   }
 
   onOutpatientServiceInput() {
@@ -37,6 +40,39 @@ export class SelectServiceComponent implements OnInit {
         };
       }
     });
+  };
+
+  onSubsUpdate() {
+    this.subsInfo.subscribe((subs: Subs[]) => {
+      this.subs['subs'] = subs.map((subItem: Subs) => {
+        let subUI: SubItemUI = {
+          serviceName: subItem.omrResult.subInfo.service.baseInfo.name,
+          serviceNN: subItem.omrResult.subInfo.service.baseInfo.nationalNumber,
+          recheckCode: subItem.omrResult.reCheckCode,
+          totalAmount: subItem.omrResult.price.totalAmount,
+          orgAmount: subItem.omrResult.price.orgAmount,
+          insuredAmount: subItem.omrResult.price.insuredAmount,
+        };
+
+        return subUI;
+      });
+      let totalAmount: number = subs.reduce((prev: number, curr: Subs) => {
+        return prev + curr.omrResult.price.totalAmount;
+      }, 0);
+
+      let totalOrg = subs.reduce((prev: number, curr: Subs) => {
+        return prev + curr.omrResult.price.orgAmount;
+      }, 0);
+
+      let totalInsured = subs.reduce((prev: number, curr: Subs) => {
+        return prev + curr.omrResult.price.insuredAmount;
+      }, 0);
+      this.subs["subShares"] = {
+        totalAmount: totalAmount,
+        orgAmount: totalOrg,
+        insuredAmount: totalInsured
+      }
+    })
   }
 
   getName(symbol: PartnerTypeEnum) {

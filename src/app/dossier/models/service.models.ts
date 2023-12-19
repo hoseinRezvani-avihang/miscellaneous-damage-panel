@@ -47,3 +47,28 @@ export interface Subs {
 export interface OutpatientServiceInput {
   cparties: { id: string; name: string }[];
 };
+
+export interface SubsUI {
+  subs: SubItemUI[],
+  subShares: Partial<SubShares>,
+}
+
+export interface SubItemUI {
+  serviceName: string,
+  serviceNN: number,
+  recheckCode: string,
+  totalAmount: number,
+  orgAmount: number,
+  insuredAmount: number,
+}
+
+export interface SubShares {
+  basePart: number,
+  supplementaryPart: number,
+  veteranPart: number,
+  otherPart: number,
+  insuredPart: number,
+  totalAmount: number,
+  orgAmount: number,
+  insuredAmount: number,
+}
