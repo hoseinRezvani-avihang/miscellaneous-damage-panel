@@ -131,6 +131,18 @@ export class DossierCoreDataService {
     this.subs.next(subs);
   }
 
+  deleteSub(recheckCode: string) {
+    let subs = this.subs.value;
+    let foundedSub = subs.findIndex((sub: Subs) => {
+      return sub.omrResult.reCheckCode === recheckCode;
+    })
+
+    if (foundedSub > -1) {
+      subs.splice(foundedSub, 1);
+      this.subs.next(subs);
+    }
+  }
+
   // =================================================
   // =================================================
 }

@@ -10,4 +10,8 @@ export class SubsListComponent {
 
   @Input() subs!: SubItemUI[];
 
+  onDeleteSub(recheckCode: string) {
+
+  }
+
 }

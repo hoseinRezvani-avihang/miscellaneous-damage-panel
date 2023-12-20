@@ -1,4 +1,4 @@
-<div class="border rounded p-3 d-flex justify-content-between">
+<div class="border rounded p-3 d-flex">
   <div>
     <p class="m-0" iranYekan>
       <span>[ {{ subItem.serviceNN }} ]</span>
@@ -7,7 +7,7 @@
       </span>
     </p>
   </div>
-  <div>
+  <div class="me-auto">
     <div>
       <span iranYekan>سهم کل: </span>
       <span iranYekan>{{ subItem.totalAmount }}</span>
@@ -19,5 +19,8 @@
         <span>سهم بیمه شده: </span>
         <span>{{ subItem.insuredAmount }}</span>
     </div>
+  </div>
+  <div class="center">
+    <mat-icon (click)="onDeleteSub()">delete</mat-icon>
   </div>
 </div>

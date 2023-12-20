@@ -1,16 +1,101 @@
-<p>{{ shares | json }}</p>
+<div class="p-3 d-flex justify-content-between border rounded bg-light">
+  <div>
+    <div>
+      <p class="m-0">نوع پرداخت:</p>
+    </div>
+    <div>
+      <mat-radio-group color="primary">
+        <mat-radio-button>حقوق</mat-radio-button>
+        <mat-radio-button>آنی</mat-radio-button>
+      </mat-radio-group>
+    </div>
+  </div>
+  <div class="d-flex flex-column justify-content-around">
+    <div>
+      <p class="m-0 text-start">
+        <span>سرجمع کل نسخه‌ها: </span>
+        <span>{{ shares.totalAmount }}</span>
+      </p>
+    </div>
+    <div>
+      <p class="m-0 text-start">
+        <span>سرجمع کل سهم بانک: </span>
+        <span>{{ shares.orgAmount }}</span>
+        <span> / </span>
+        <span>سرجمع کل سهم بیمه شده: </span>
+        <span>{{ shares.insuredAmount }}</span>
+      </p>
+    </div>
+  </div>
+</div>
 
-<mat-form-field>
-    <mat-label>سهم کل</mat-label>
-    <input type="number" matInput [formControl]="totalShareControl">
-</mat-form-field>
+<form [formGroup]="shareForm" class="mt-4 p-3 border rounded">
+  <div class="d-flex gap-5">
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>مبلغ پرداخت شده توسط بیمه شده</mat-label>
+        <input type="number" matInput formControlName="paiedAmount" />
+      </mat-form-field>
+    </div>
 
-<mat-form-field>
-    <mat-label>سهم بیمه شده</mat-label>
-    <input type="number" matInput [formControl]="insuredShareControl">
-</mat-form-field>
+    <div class="center">
+      <p class="m-0">
+        <span>مبلغ قابل پرداخت: </span>
+        <span> - </span>
+      </p>
+    </div>
+  </div>
 
-<mat-form-field>
-    <mat-label>سهم بانک</mat-label>
-    <input type="number" matInput [formControl]="orgShareControl">
-</mat-form-field>
+  <div class="d-flex gap-5">
+    <div class="center">
+      <p class="m-0">
+        <span>کسور: </span>
+        <span> {{ deductionControl.value }} </span>
+      </p>
+    </div>
+
+    <div>
+      <mat-form-field appearance="outline">
+        <mat-label>خارج از پوشش بیمه</mat-label>
+        <input type="number" matInput formControlName="outOfCover" />
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-between">
+    <div>
+      <p>
+        <span>سهم بهداشت و درمان: </span>
+        <span> - </span>
+      </p>
+    </div>
+
+    <div>
+      <p>
+        <span>سهم تکمیلی: </span>
+        <span> - </span>
+      </p>
+    </div>
+
+    <div>
+      <p>
+        <span>سهم ایثارگران: </span>
+        <span> - </span>
+      </p>
+    </div>
+
+    <div>
+      <p>
+        <span>سهم سایر: </span>
+        <span> - </span>
+      </p>
+    </div>
+
+    <div>
+      <p>
+        <span>سهم بیمه شده: </span>
+        <span> {{ shares.basePart }} </span>
+      </p>
+    </div>
+  </div>
+</form>

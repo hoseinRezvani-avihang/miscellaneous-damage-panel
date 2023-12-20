@@ -9,11 +9,13 @@ import {
 } from '../../models/partner.models';
 import { CpartyInfo } from '../../models/cparty.models';
 import { OutpatientServiceInput, SubItemUI, Subs, SubsUI } from '../../models/service.models';
+import { ServiceEventService } from '../../services/service-event.service';
 
 @Component({
   selector: 'app-select-service',
   templateUrl: './select-service.component.html',
   styleUrls: ['./select-service.component.css'],
+  providers: [ServiceEventService]
 })
 export class SelectServiceComponent implements OnInit {
   parnterInfo = this.dossierService.partnerInfo.asObservable();
@@ -23,11 +25,15 @@ export class SelectServiceComponent implements OnInit {
   outpatientServiceInput!: OutpatientServiceInput;
   subs: SubsUI = {subs: [], subShares: {}}
 
-  constructor(private dossierService: DossierCoreDataService) {}
+  constructor(
+    private dossierService: DossierCoreDataService,
+    private serviceEvent: ServiceEventService
+    ) {}
 
   ngOnInit(): void {
     this.onOutpatientServiceInput();
     this.onSubsUpdate();
+    this.onDeleteSub();
   }
 
   onOutpatientServiceInput() {
@@ -67,11 +73,22 @@ export class SelectServiceComponent implements OnInit {
       let totalInsured = subs.reduce((prev: number, curr: Subs) => {
         return prev + curr.omrResult.price.insuredAmount;
       }, 0);
+
+      let totalBasePart = subs.reduce((prev: number, curr: Subs) => {
+        return prev + curr.omrResult.subInfo.service.baseInfo.basePrice;
+      }, 0);
       this.subs["subShares"] = {
         totalAmount: totalAmount,
         orgAmount: totalOrg,
-        insuredAmount: totalInsured
+        insuredAmount: totalInsured,
+        basePart: totalBasePart
       }
+    })
+  };
+
+  onDeleteSub() {
+    this.serviceEvent.deleteSub.subscribe((recheckCode: string) => {
+      this.dossierService.deleteSub(recheckCode);
     })
   }
 
