@@ -59,16 +59,22 @@ export interface SubItemUI {
   recheckCode: string,
   totalAmount: number,
   orgAmount: number,
-  insuredAmount: number,
+  insuredAmount: number
 }
 
 export interface SubShares {
+  totalAmount: number,
+  orgAmount: number,
+  insuredAmount: number,
+  shareInfo: ShareInfoItems
+}
+
+export interface ShareInfoItems {
   basePart: number,
   supplementaryPart: number,
   veteranPart: number,
   otherPart: number,
   insuredPart: number,
-  totalAmount: number,
-  orgAmount: number,
-  insuredAmount: number,
 }
+
+export const SHAREINFO: Array<keyof ShareInfoItems> = ["basePart", "insuredPart", "otherPart", "supplementaryPart", "veteranPart"];

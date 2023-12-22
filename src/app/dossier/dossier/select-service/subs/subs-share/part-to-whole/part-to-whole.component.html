@@ -1,0 +1,86 @@
+<div class="wrapper w-100">
+  <h2 class="text-primary" iranYekan>محاسبه جزء به کل</h2>
+  <form class="mt-2" [formGroup]="shareForm" (ngSubmit)="submit()">
+    <form [formGroup]="orgControl">
+      <div class="row mx-auto w-100">
+        <div class="col center">سهم بهداشت و درمان</div>
+        <div class="col center">
+          {{ shares.orgAmount.basePart | seperator }}
+        </div>
+
+        <div class="col">
+          <mat-form-field appearance="outline">
+            <input matInput type="number" formControlName="basePart" />
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row mx-auto w-100">
+        <div class="col center" iranYekan>سهم تکمیلی</div>
+        <div class="col center">
+          {{ shares.orgAmount.supplementaryPart | seperator }}
+        </div>
+        <div class="col">
+          <mat-form-field appearance="outline">
+            <input matInput type="number" formControlName="supplementaryPart" />
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row mx-auto w-100">
+        <div class="col center" iranYekan>سهم ایثارگر</div>
+        <div class="col center">
+          {{ shares.orgAmount.veteranPart | seperator }}
+        </div>
+        <div class="col">
+          <mat-form-field appearance="outline">
+            <input matInput type="number" formControlName="veteranPart" />
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row mx-auto w-100">
+        <div class="col center" iranYekan>سهم سایر</div>
+        <div class="col center">
+          {{ shares.orgAmount.otherPart | seperator }}
+        </div>
+        <div class="col">
+          <mat-form-field appearance="outline">
+            <input matInput type="number" formControlName="otherPart" />
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+
+    <div class="row mx-auto w-100">
+      <div class="col center" iranYekan>سهم بیمه شده</div>
+      <div class="col center">{{ shares.insuredPart | seperator }}</div>
+      <div class="col">
+        <mat-form-field appearance="outline">
+          <input matInput type="number" formControlName="insuredPart" />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row mx-auto w-100">
+      <div class="col center" iranYekan>مبلغ محاسبه شده توسط سیستم</div>
+      <div class="col center"></div>
+      <div class="col">
+        {{ shares.totalAmount | seperator }}
+      </div>
+    </div>
+
+    <div class="row mx-auto w-100">
+      <div class="col center" iranYekan>مبلغ تغییر یافته</div>
+      <div class="col center"></div>
+      <div class="col">
+        {{ changedPrice | seperator }}
+      </div>
+    </div>
+
+    <div class="d-flex gap-2">
+        <div><button class="btn btn-outline-primary" type="button" iranYekan>بازگشت</button></div>
+        <div><button class="btn btn-primary" type="submit" iranYekan>محاسبه جزء به کل</button></div>
+    </div>
+  </form>
+</div>

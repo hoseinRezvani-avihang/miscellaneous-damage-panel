@@ -1,4 +1,4 @@
-<div class="border rounded p-3 d-flex">
+<div class="border rounded p-3 d-flex gap-2">
   <div>
     <p class="m-0" iranYekan>
       <span>[ {{ subItem.serviceNN }} ]</span>
@@ -8,16 +8,16 @@
     </p>
   </div>
   <div class="me-auto">
-    <div>
+    <div class="text-start">
       <span iranYekan>سهم کل: </span>
-      <span iranYekan>{{ subItem.totalAmount }}</span>
+      <span iranYekan>{{ subItem.totalAmount | seperator }}</span>
     </div>
     <div class="text-nowrap">
         <span>سهم بانک: </span>
-        <span>{{ subItem.orgAmount }}</span>
+        <span>{{ subItem.orgAmount | seperator }}</span>
         <span> / </span>
         <span>سهم بیمه شده: </span>
-        <span>{{ subItem.insuredAmount }}</span>
+        <span>{{ subItem.insuredAmount | seperator }}</span>
     </div>
   </div>
   <div class="center">

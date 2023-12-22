@@ -83,7 +83,12 @@
           <button class="btn btn-outline-primary" type="button" (click)="close()">بستن</button>
         </div>
         <div>
-          <button class="btn btn-primary" type="submit">افزودن</button>
+          <button class="btn btn-primary d-flex gap-1" type="submit">
+            <span>افزودن</span>
+            <span *ngIf="loading">
+              <mat-spinner [diameter]="25"></mat-spinner>
+            </span>
+          </button>
         </div>
       </div>
     </div>

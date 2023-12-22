@@ -1,3 +1,5 @@
+import { ShareInfoItems } from "./service.models";
+
 export interface DossierStep {
   name: string;
   isActive: boolean;
@@ -67,7 +69,7 @@ export interface Calculated {
 
 export interface ShareInfo {
   key: string;
-  engKey: string;
+  engKey: keyof ShareInfoItems;
   value: number;
 }
 

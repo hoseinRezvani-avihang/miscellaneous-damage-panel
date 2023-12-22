@@ -10,20 +10,20 @@
       </mat-radio-group>
     </div>
   </div>
-  <div class="d-flex flex-column justify-content-around">
+  <div class="d-flex flex-column justify-content-around fw-bold">
     <div>
       <p class="m-0 text-start">
         <span>سرجمع کل نسخه‌ها: </span>
-        <span>{{ shares.totalAmount }}</span>
+        <span>{{ shares.totalAmount | seperator }}</span>
       </p>
     </div>
     <div>
       <p class="m-0 text-start">
         <span>سرجمع کل سهم بانک: </span>
-        <span>{{ shares.orgAmount }}</span>
+        <span>{{ shares.orgAmount | seperator }}</span>
         <span> / </span>
         <span>سرجمع کل سهم بیمه شده: </span>
-        <span>{{ shares.insuredAmount }}</span>
+        <span>{{ shares.insuredAmount | seperator }}</span>
       </p>
     </div>
   </div>
@@ -41,8 +41,12 @@
     <div class="center">
       <p class="m-0">
         <span>مبلغ قابل پرداخت: </span>
-        <span> - </span>
+        <span> {{ this.control("payableAmount").value | seperator }} </span>
       </p>
+    </div>
+
+    <div class="calc me-auto">
+      <button class="btn btn-outline-success" (click)="openPartToWholeDialog()">محاسبه جزء به کل</button>
     </div>
   </div>
 
@@ -50,7 +54,7 @@
     <div class="center">
       <p class="m-0">
         <span>کسور: </span>
-        <span> {{ deductionControl.value }} </span>
+        <span> {{ this.control('deduction').value | seperator }} </span>
       </p>
     </div>
 
@@ -66,35 +70,35 @@
     <div>
       <p>
         <span>سهم بهداشت و درمان: </span>
-        <span> - </span>
+        <span> {{ control("basePart").value | seperator }} </span>
       </p>
     </div>
 
     <div>
       <p>
         <span>سهم تکمیلی: </span>
-        <span> - </span>
+        <span> {{ this.control('supplementaryPart').value | seperator }} </span>
       </p>
     </div>
 
     <div>
       <p>
         <span>سهم ایثارگران: </span>
-        <span> - </span>
+        <span> {{ this.control('veteranPart').value | seperator }} </span>
       </p>
     </div>
 
     <div>
       <p>
         <span>سهم سایر: </span>
-        <span> - </span>
+        <span> {{ this.control('otherPart').value | seperator }} </span>
       </p>
     </div>
 
     <div>
       <p>
         <span>سهم بیمه شده: </span>
-        <span> {{ shares.basePart }} </span>
+        <span> {{ this.control('insuredPart').value | seperator }} </span>
       </p>
     </div>
   </div>

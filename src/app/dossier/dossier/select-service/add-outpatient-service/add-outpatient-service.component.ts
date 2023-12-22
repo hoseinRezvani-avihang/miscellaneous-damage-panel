@@ -5,6 +5,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SubsDetail, OutpatientServiceInput, SearchServiceResult } from 'src/app/dossier/models/service.models';
 import { DossierSubsService } from '../services/dossier-subs.service';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-add-outpatient-service',
@@ -22,6 +23,7 @@ export class AddOutpatientServiceComponent implements OnInit {
   service!: SearchServiceResult;
 
   form!: FormGroup;
+  loading = false;
 
   constructor(
     private dossierSubService: DossierSubsService
@@ -47,7 +49,12 @@ export class AddOutpatientServiceComponent implements OnInit {
   };
 
   addService() {
-    this.dossierSubService.fetchOmr(this.form.value as any).subscribe({
+    this.loading = true;
+    this.dossierSubService.fetchOmr(this.form.value as any).pipe(
+      finalize(() => {
+        this.loading = false;
+      })
+    ).subscribe({
       next: () => {
         this.close();
       }

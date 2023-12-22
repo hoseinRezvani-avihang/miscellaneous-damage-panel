@@ -8,14 +8,22 @@ import {
   SelectPartner,
 } from '../../models/partner.models';
 import { CpartyInfo } from '../../models/cparty.models';
-import { OutpatientServiceInput, SubItemUI, Subs, SubsUI } from '../../models/service.models';
+import {
+  OutpatientServiceInput,
+  SHAREINFO,
+  ShareInfoItems,
+  SubItemUI,
+  Subs,
+  SubsUI,
+} from '../../models/service.models';
 import { ServiceEventService } from '../../services/service-event.service';
+import { ShareInfo } from '../../models/dossier-core.models';
 
 @Component({
   selector: 'app-select-service',
   templateUrl: './select-service.component.html',
   styleUrls: ['./select-service.component.css'],
-  providers: [ServiceEventService]
+  providers: [ServiceEventService],
 })
 export class SelectServiceComponent implements OnInit {
   parnterInfo = this.dossierService.partnerInfo.asObservable();
@@ -23,12 +31,12 @@ export class SelectServiceComponent implements OnInit {
   subsInfo = this.dossierService.subs.asObservable();
 
   outpatientServiceInput!: OutpatientServiceInput;
-  subs: SubsUI = {subs: [], subShares: {}}
+  subs: SubsUI = { subs: [], subShares: {} };
 
   constructor(
     private dossierService: DossierCoreDataService,
     private serviceEvent: ServiceEventService
-    ) {}
+  ) {}
 
   ngOnInit(): void {
     this.onOutpatientServiceInput();
@@ -46,7 +54,7 @@ export class SelectServiceComponent implements OnInit {
         };
       }
     });
-  };
+  }
 
   onSubsUpdate() {
     this.subsInfo.subscribe((subs: Subs[]) => {
@@ -74,22 +82,37 @@ export class SelectServiceComponent implements OnInit {
         return prev + curr.omrResult.price.insuredAmount;
       }, 0);
 
-      let totalBasePart = subs.reduce((prev: number, curr: Subs) => {
-        return prev + curr.omrResult.subInfo.service.baseInfo.basePrice;
-      }, 0);
-      this.subs["subShares"] = {
+      let totalShareInfo = SHAREINFO.map((value: keyof ShareInfoItems) => {
+        return subs.reduce((previousValue: number, currentValue: Subs) => {
+          return (
+            (currentValue.omrResult.price.shareInfo.find(
+              (shareItem: ShareInfo) => {
+                return shareItem.engKey === value;
+              }
+            )?.value ?? 0) + previousValue
+          );
+        }, 0);
+      });
+
+      this.subs['subShares'] = {
         totalAmount: totalAmount,
         orgAmount: totalOrg,
         insuredAmount: totalInsured,
-        basePart: totalBasePart
-      }
-    })
-  };
+        shareInfo: {
+          basePart: totalShareInfo[0],
+          insuredPart: totalShareInfo[1],
+          otherPart: totalShareInfo[2],
+          supplementaryPart: totalShareInfo[3],
+          veteranPart: totalShareInfo[4],
+        },
+      };
+    });
+  }
 
   onDeleteSub() {
     this.serviceEvent.deleteSub.subscribe((recheckCode: string) => {
       this.dossierService.deleteSub(recheckCode);
-    })
+    });
   }
 
   getName(symbol: PartnerTypeEnum) {
