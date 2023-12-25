@@ -10,7 +10,7 @@
 
         <div class="col">
           <mat-form-field appearance="outline">
-            <input matInput type="number" formControlName="basePart" />
+            <input [appMax]="maxOrgAmount('basePart')" matInput type="number" formControlName="basePart" />
           </mat-form-field>
         </div>
       </div>
@@ -22,7 +22,7 @@
         </div>
         <div class="col">
           <mat-form-field appearance="outline">
-            <input matInput type="number" formControlName="supplementaryPart" />
+            <input [appMax]="maxOrgAmount('supplementaryPart')" matInput type="number" formControlName="supplementaryPart" />
           </mat-form-field>
         </div>
       </div>
@@ -34,7 +34,7 @@
         </div>
         <div class="col">
           <mat-form-field appearance="outline">
-            <input matInput type="number" formControlName="veteranPart" />
+            <input [appMax]="maxOrgAmount('veteranPart')" matInput type="number" formControlName="veteranPart" />
           </mat-form-field>
         </div>
       </div>
@@ -46,7 +46,7 @@
         </div>
         <div class="col">
           <mat-form-field appearance="outline">
-            <input matInput type="number" formControlName="otherPart" />
+            <input [appMax]="maxOrgAmount('otherPart')" matInput type="number" formControlName="otherPart" />
           </mat-form-field>
         </div>
       </div>
@@ -57,7 +57,7 @@
       <div class="col center">{{ shares.insuredPart | seperator }}</div>
       <div class="col">
         <mat-form-field appearance="outline">
-          <input matInput type="number" formControlName="insuredPart" />
+          <input [appMax]="maxInusredAmount" matInput type="number" formControlName="insuredPart" />
         </mat-form-field>
       </div>
     </div>

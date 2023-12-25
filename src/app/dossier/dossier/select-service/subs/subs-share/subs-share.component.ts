@@ -117,9 +117,9 @@ export class SubsShareComponent implements OnInit {
   }
 
   payableAmount() {
-    return this.control("basePart").value + 
-    this.control("supplementaryPart").value + 
-    this.control("veteranPart").value + 
+    return this.control("basePart").value +
+    this.control("supplementaryPart").value +
+    this.control("veteranPart").value +
     this.control("otherPart").value +
     this.control("insuredPart").value;
   };
@@ -127,7 +127,7 @@ export class SubsShareComponent implements OnInit {
   openPartToWholeDialog() {
     let dialogRef = this.dialog.open(PartToWholeDialogComponent, {
       data: {...this.shareForm.value, totalAmount: this.shares.totalAmount},
-      width: "600px", 
+      width: "600px",
       height: "600px",
       autoFocus: false,
     });

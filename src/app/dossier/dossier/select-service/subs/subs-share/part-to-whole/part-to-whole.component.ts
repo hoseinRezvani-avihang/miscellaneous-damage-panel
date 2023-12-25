@@ -34,7 +34,7 @@ export class PartToWholeComponent implements OnInit {
 
   orgControl = this.shareForm.get("orgAmount") as FormGroup;
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit(): void {
     this.onOrgAmountChange();
@@ -54,7 +54,7 @@ export class PartToWholeComponent implements OnInit {
     let partToWholeResult = {
       newFactors: this.calcuateFactor(),
       newShares: {
-        ...this.shareForm.value, 
+        ...this.shareForm.value,
         paiedAmount: this.changedPrice,
       }
     };
@@ -95,5 +95,13 @@ export class PartToWholeComponent implements OnInit {
       (this.shareForm.value.orgAmount?.supplementaryPart ?? 0) +
       (this.shareForm.value.orgAmount?.veteranPart ?? 0)
     )
+  };
+
+  maxOrgAmount(field: string) {
+    return this.shares.totalAmount - (this.changedPrice - (this.shareForm.value.orgAmount as any)?.[field] ?? 0)
+  }
+
+  get maxInusredAmount() {
+    return (this.shares.totalAmount ?? 0) - this.orgAmount;
   }
 }

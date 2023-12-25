@@ -16,7 +16,7 @@ export class PartToWholeDialogComponent {
   shareInfo!: any;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public shares: any, 
+    @Inject(MAT_DIALOG_DATA) public shares: any,
     private dialogRef: MatDialogRef<PartToWholeDialogComponent>
     ) {
     this.shareInfo = {

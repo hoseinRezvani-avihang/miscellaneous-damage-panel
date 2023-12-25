@@ -77,4 +77,5 @@ export interface ShareInfoItems {
   insuredPart: number,
 }
 
+export const TOTALINFO: Array<keyof SubShares> = ["insuredAmount", "orgAmount", "totalAmount"];
 export const SHAREINFO: Array<keyof ShareInfoItems> = ["basePart", "insuredPart", "otherPart", "supplementaryPart", "veteranPart"];

@@ -12,7 +12,7 @@ import { finalize } from 'rxjs';
 })
 export class SearchInsuredComponent implements OnInit {
 
-  searchControl = new FormControl("", Validators.required)
+  searchControl = new FormControl("2529925291", Validators.required)
   loading = false;
   @Output() selectMember = new EventEmitter<CitizenResult>();
 
@@ -21,7 +21,7 @@ export class SearchInsuredComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    
+
   }
 
   onSeach()  {
@@ -35,7 +35,7 @@ export class SearchInsuredComponent implements OnInit {
       ).subscribe(
         (result: CitizenResult) => {
           this.selectMember.emit(result);
-        } 
+        }
       )
     }
   }

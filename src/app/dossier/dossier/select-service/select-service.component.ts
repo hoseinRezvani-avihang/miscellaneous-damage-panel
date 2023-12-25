@@ -18,6 +18,7 @@ import {
 } from '../../models/service.models';
 import { ServiceEventService } from '../../services/service-event.service';
 import { ShareInfo } from '../../models/dossier-core.models';
+import { calculateTotals } from '../../models/dossier.util';
 
 @Component({
   selector: 'app-select-service',
@@ -70,42 +71,8 @@ export class SelectServiceComponent implements OnInit {
 
         return subUI;
       });
-      let totalAmount: number = subs.reduce((prev: number, curr: Subs) => {
-        return prev + curr.omrResult.price.totalAmount;
-      }, 0);
 
-      let totalOrg = subs.reduce((prev: number, curr: Subs) => {
-        return prev + curr.omrResult.price.orgAmount;
-      }, 0);
-
-      let totalInsured = subs.reduce((prev: number, curr: Subs) => {
-        return prev + curr.omrResult.price.insuredAmount;
-      }, 0);
-
-      let totalShareInfo = SHAREINFO.map((value: keyof ShareInfoItems) => {
-        return subs.reduce((previousValue: number, currentValue: Subs) => {
-          return (
-            (currentValue.omrResult.price.shareInfo.find(
-              (shareItem: ShareInfo) => {
-                return shareItem.engKey === value;
-              }
-            )?.value ?? 0) + previousValue
-          );
-        }, 0);
-      });
-
-      this.subs['subShares'] = {
-        totalAmount: totalAmount,
-        orgAmount: totalOrg,
-        insuredAmount: totalInsured,
-        shareInfo: {
-          basePart: totalShareInfo[0],
-          insuredPart: totalShareInfo[1],
-          otherPart: totalShareInfo[2],
-          supplementaryPart: totalShareInfo[3],
-          veteranPart: totalShareInfo[4],
-        },
-      };
+      this.subs['subShares'] = calculateTotals(subs);
     });
   }
 
