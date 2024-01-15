@@ -1,23 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DossierCoreDataService } from '../../services/dossier-core-data.service';
 import {
   CPartiesInfo,
-  PartnerInfo,
   PartnerType,
   PartnerTypeEnum,
   SelectPartner,
 } from '../../models/partner.models';
-import { CpartyInfo } from '../../models/cparty.models';
 import {
   OutpatientServiceInput,
-  SHAREINFO,
-  ShareInfoItems,
   SubItemUI,
   Subs,
   SubsUI,
 } from '../../models/service.models';
 import { ServiceEventService } from '../../services/service-event.service';
-import { ShareInfo } from '../../models/dossier-core.models';
 import { calculateTotals } from '../../models/dossier.util';
 
 @Component({
@@ -26,7 +21,7 @@ import { calculateTotals } from '../../models/dossier.util';
   styleUrls: ['./select-service.component.css'],
   providers: [ServiceEventService],
 })
-export class SelectServiceComponent implements OnInit {
+export class SelectServiceComponent implements OnInit, OnDestroy {
   parnterInfo = this.dossierService.partnerInfo.asObservable();
   cpartyInfo = this.dossierService.cpartyInfo.asObservable();
   subsInfo = this.dossierService.subs.asObservable();
@@ -37,7 +32,7 @@ export class SelectServiceComponent implements OnInit {
   constructor(
     private dossierService: DossierCoreDataService,
     private serviceEvent: ServiceEventService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.onOutpatientServiceInput();
@@ -84,5 +79,9 @@ export class SelectServiceComponent implements OnInit {
 
   getName(symbol: PartnerTypeEnum) {
     return PartnerType.getParnterNameBYSymbol(symbol).name;
+  }
+
+  ngOnDestroy(): void {
+      this.dossierService.resetSubs();
   }
 }

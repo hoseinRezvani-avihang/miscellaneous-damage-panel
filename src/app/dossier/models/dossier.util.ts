@@ -1,8 +1,8 @@
 import { ShareInfo } from './dossier-core.models';
-import { SHAREINFO, ShareInfoItems, SubShares, Subs, TOTALINFO } from './service.models';
+import { SHAREINFO, ShareInfoItems, SharedForm, SubShares, Subs, TOTALINFO } from './service.models';
 
 export const calculateTotals = (subs: Subs[]): SubShares => {
-  let totals: SubShares = {shareInfo: {}} as SubShares;
+  let totals: SubShares = { shareInfo: {} } as SubShares;
   TOTALINFO.forEach((value: keyof SubShares) => {
     (totals[value] as number) = subs.reduce((prev: number, curr: Subs) => {
       return prev + ((curr.omrResult.price[value] as number) ?? 0);
@@ -28,13 +28,40 @@ export const calculateShareInfoFactors = (
   shareInfo: ShareInfoItems,
   total: number
 ) => {
-    let shareInfoFactors: {[key: string]: number} = {};
-    Object.entries(shareInfo).forEach(([key, value]) => {
-        shareInfoFactors[key] = calculateFactor(value, total)
-    });
-    return shareInfoFactors;
+  let shareInfoFactors: { [key: string]: number } = {};
+  Object.entries(shareInfo).forEach(([key, value]) => {
+    shareInfoFactors[key] = calculateFactor(value, total)
+  });
+  return shareInfoFactors;
 };
 
 export const calculateFactor = (value: number, total: number) => {
   return total ? (value / total) : 0;
 };
+
+export const calculateFinalOrgAmout = (subs: Subs[]) => {
+  return subs.reduce((prev: number, curr: Subs) => {
+    return prev + (curr.detail.claimAmount ?? 0);
+  }, 0)
+}
+
+export const calculateBankPart = (shares: SharedForm) => {
+  const { deduction, insuredPart, outOfCover, paiedAmount, payableAmount, ...bankParts } = shares;
+  return Object.values(bankParts).reduce((prev: number, curr: any) => {
+    return prev + (curr ?? 0);
+  }, 0);
+}
+
+export const price = (price: string | null): number | null => {
+
+  const cleanValue = price?.replace(/[^\d-]/g, '');
+
+  if (!cleanValue) {
+    return null;
+  }
+
+  const isNegative = cleanValue.startsWith('-');
+  const numericValue = parseFloat(cleanValue);
+
+  return isNaN(numericValue) ? null : (isNegative ? -numericValue : numericValue);
+}

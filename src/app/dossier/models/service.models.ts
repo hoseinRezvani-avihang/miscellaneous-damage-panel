@@ -1,3 +1,4 @@
+import { FormControl, FormGroup } from "@angular/forms";
 import { OmrResult } from "./dossier-core.models";
 
 export interface SearchServiceInput {
@@ -79,3 +80,15 @@ export interface ShareInfoItems {
 
 export const TOTALINFO: Array<keyof SubShares> = ["insuredAmount", "orgAmount", "totalAmount"];
 export const SHAREINFO: Array<keyof ShareInfoItems> = ["basePart", "insuredPart", "otherPart", "supplementaryPart", "veteranPart"];
+
+export interface SharedForm {
+  paiedAmount: null | number,
+  outOfCover: number,
+  deduction: number,
+  basePart: number,
+  insuredPart: number,
+  otherPart: number,
+  supplementaryPart: number,
+  veteranPart: number,
+  payableAmount: number,
+};

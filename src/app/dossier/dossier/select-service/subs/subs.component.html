@@ -1,4 +1,4 @@
 <app-subs-list [subs]="subs.subs"></app-subs-list>
 <div class="mt-4">
-    <app-subs-share [subsShare]="subs.subShares"></app-subs-share>
+    <app-subs-share [subsShare]="subs.subShares" (updateShares)="updateShares($event)"></app-subs-share>
 </div>

@@ -1,19 +1,19 @@
 <form class="center gap-2" (ngSubmit)="onSeach()">
-    <mat-form-field appearance="outline">
-      <mat-label class="iran-yekan">شماره ملی</mat-label>
-      <input type="text" matInput [formControl]="searchControl"/>
-      <mat-error *ngIf="searchControl.invalid">
-        وارد کردن کد ملی الزامی است.
-      </mat-error>
-    </mat-form-field>
-    <div>
-        <button class="btn btn-outline-primary" type="submit">
-          <div class="center gap-2">
-            <span>جستجو</span>
-            <span *ngIf="loading">
-              <mat-spinner [diameter]="25"></mat-spinner>
-            </span>
-          </div>
-        </button>
-    </div>
+  <mat-form-field appearance="outline">
+    <mat-label class="iran-yekan">شماره ملی</mat-label>
+    <input type="text" matInput [formControl]="searchControl" />
+    <mat-error *ngIf="searchControl.invalid">
+      وارد کردن کد ملی الزامی است.
+    </mat-error>
+  </mat-form-field>
+  <div>
+    <button class="btn btn-outline-primary" type="submit">
+      <div class="center gap-2">
+        <span>جستجو</span>
+        <span *ngIf="loading">
+          <mat-spinner [diameter]="25"></mat-spinner>
+        </span>
+      </div>
+    </button>
+  </div>
 </form>

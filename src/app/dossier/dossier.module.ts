@@ -21,6 +21,7 @@ import { SubsComponent } from './dossier/select-service/subs/subs.component';
 import { SubsListComponent } from './dossier/select-service/subs/subs-list/subs-list.component';
 import { SubsShareComponent } from './dossier/select-service/subs/subs-share/subs-share.component';
 import { SubItemComponent } from './dossier/select-service/subs/subs-list/sub-item/sub-item.component';
+import { DossierActionsComponent } from './dossier/select-service/dossier-actions/dossier-actions.component';
 
 
 
@@ -43,7 +44,8 @@ import { SubItemComponent } from './dossier/select-service/subs/subs-list/sub-it
     SubsComponent,
     SubsListComponent,
     SubsShareComponent,
-    SubItemComponent
+    SubItemComponent,
+    DossierActionsComponent
   ],
   imports: [
     CommonModule, 

@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { SubItemUI, SubsUI } from 'src/app/dossier/models/service.models';
+import { SharedForm, SubsUI } from 'src/app/dossier/models/service.models';
+import { DossierCoreDataService } from 'src/app/dossier/services/dossier-core-data.service';
 
 @Component({
   selector: 'app-subs',
@@ -9,5 +10,13 @@ import { SubItemUI, SubsUI } from 'src/app/dossier/models/service.models';
 export class SubsComponent {
 
   @Input() subs!: SubsUI;
+
+  constructor(
+    private dossierService: DossierCoreDataService
+  ) {};
+
+  updateShares(shares: SharedForm) {
+    this.dossierService.setShareInfo(shares)
+  }
 
 }

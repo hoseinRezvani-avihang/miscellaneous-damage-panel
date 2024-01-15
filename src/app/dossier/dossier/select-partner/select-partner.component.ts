@@ -23,14 +23,14 @@ export class SelectPartnerComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.onPartnerUpdate();
   }
-  
+
   onPartnerUpdate() {
     this.partnerInfoSubscription = this.partnerInfo.subscribe((partnerInfo: SelectPartner | null) => {
       if (partnerInfo) {
         this.partner = {
-          partnerName: partnerInfo.partner.partnerInfo.partnerName, 
-          address: partnerInfo.partner.partnerInfo.address, 
-          hasContract: partnerInfo.partner.partnerInfo.hasContract, 
+          partnerName: partnerInfo.partner.partnerInfo.partnerName,
+          address: partnerInfo.partner.partnerInfo.address,
+          hasContract: partnerInfo.partner.partnerInfo.hasContract,
           delivererType: PartnerType.getParnterNameBYSymbol(partnerInfo.partner.partnerInfo.delivererType).name,
           image: partnerInfo.partner.partnerInfo.image,
           nationalNumber: partnerInfo.partner.partnerInfo.nationalNumber,
@@ -47,7 +47,7 @@ export class SelectPartnerComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       // this.dossierDataService.resetStep("selectPartner")
     })
-    this.dossierDataService.passStep("selectPartner");
+    this.dossierDataService.break("selectPartner");
   }
 
   ngOnDestroy(): void {

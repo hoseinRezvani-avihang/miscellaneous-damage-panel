@@ -1,17 +1,21 @@
-import { Injectable } from '@angular/core';
+import { ChangeDetectorRef, Injectable } from '@angular/core';
 import { CitizenResult } from '../models/citizen.models';
 import { BehaviorSubject } from 'rxjs';
-import { DossierStep } from '../models/dossier-core.models';
+import { DossierSave, DossierStep, ShareInfo } from '../models/dossier-core.models';
 import { ObjectUtil } from 'src/app/shared/utils/object-util';
 import { PartnerInfo, SelectPartner } from '../models/partner.models';
 import { CpartyInfo } from '../models/cparty.models';
-import { Subs } from '../models/service.models';
+import { SharedForm, Subs } from '../models/service.models';
+import { prepareCparty, preparePartner } from '../models/save-dossier-util';
+import { calculateBankPart, calculateFinalOrgAmout, calculateTotals } from '../models/dossier.util';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DossierCoreDataService {
-  constructor() {}
+  constructor(
+    private cdr: ChangeDetectorRef
+  ) { }
 
   // ============= save dossier navigation ===========
 
@@ -45,24 +49,24 @@ export class DossierCoreDataService {
     },
   ];
 
-  $dossierSteps = new BehaviorSubject<any>(this.dossierSteps);
+  $dossierSteps = new BehaviorSubject<DossierStep[]>(this.dossierSteps);
 
-  passStep(stepName: string) {
-    let steps = ObjectUtil.flatten(this.dossierSteps, 'subStep');
+  passStep(stepName: string, breakStep = false) {
+    let steps = ObjectUtil.flatten(this.$dossierSteps.value, 'subStep');
     let activeStepIndex = steps.findIndex((step: DossierStep) => {
       return step.name === stepName;
     });
     if (steps[activeStepIndex + 1]) {
-      steps[activeStepIndex + 1].isActive = true;
+      steps[activeStepIndex + 1].isActive = !breakStep;
       if (steps[activeStepIndex + 1].subStep && steps[activeStepIndex + 2]) {
-        steps[activeStepIndex + 2].isActive = true;
+        steps[activeStepIndex + 2].isActive = !breakStep;
       }
       this.$dossierSteps.next(this.dossierSteps);
     }
   }
 
   break(stepName: string) {
-    let steps = ObjectUtil.flatten(this.dossierSteps, 'subStep');
+    let steps = ObjectUtil.flatten(this.$dossierSteps.value, 'subStep');
     let activeStepIndex = steps.findIndex((step: DossierStep) => {
       return step.name === stepName;
     });
@@ -71,11 +75,13 @@ export class DossierCoreDataService {
       steps[i].isActive = false;
     }
 
-    steps[activeStepIndex + 1].isActive = true;
+    steps[activeStepIndex + 1].isActive = false;
+    this.$dossierSteps.next(this.dossierSteps);
     setTimeout(() => {
+      steps[activeStepIndex + 1].isActive = true;
       this.$dossierSteps.next(this.dossierSteps);
-      // this.resetStep(stepName);
-    }, 1);
+      this.cdr.markForCheck();
+    });
   }
 
   resetStep(stepName: string) {
@@ -93,7 +99,7 @@ export class DossierCoreDataService {
   }
 
   isActive(stepName: string) {
-    let steps = ObjectUtil.flatten(this.dossierSteps, 'subStep');
+    let steps = ObjectUtil.flatten(this.$dossierSteps.value, 'subStep');
     return steps.find((step) => step.name === stepName)?.isActive;
   }
 
@@ -143,6 +149,45 @@ export class DossierCoreDataService {
     }
   }
 
-  // =================================================
-  // =================================================
+  resetSubs() {
+    this.subs.next([])
+  }
+
+  // =================== share Info =====================
+
+  shareInfo = new BehaviorSubject<SharedForm | null>(null);
+
+  setShareInfo(shareInfo: SharedForm) {
+    this.shareInfo.next(shareInfo);
+  }
+
+  // ===================== save dossier ================
+
+  saveDossier() {
+    let totals = calculateTotals(this.subs.value);
+    let dossierInfo: DossierSave = {
+      memberInfo: this.citizenInfo.value as CitizenResult,
+      orderInfo: prepareCparty(this.cpartyInfo.value as CpartyInfo),
+      deliverInfo: preparePartner(this.partnerInfo.value as SelectPartner),
+      delivererType: this.partnerInfo.value?.partner.partnerInfo.delivererType as string,
+      sumOfInsuredAmount: totals.insuredAmount,
+      sumOfOrgAmount: totals.orgAmount,
+      sumOfTotalAmount: totals.totalAmount,
+      sumOfFinalOrgAmount: calculateFinalOrgAmout(this.subs.value),
+      sumOfClaimBankPart: calculateBankPart(this.shareInfo.value as SharedForm),
+      sumOfClaimInsuredAmount: (this.shareInfo.value?.insuredPart ?? 0),
+      sumOfClaimOtherPart: (this.shareInfo.value?.otherPart ?? 0),
+      sumOfClaimTakmiliPart: (this.shareInfo.value?.supplementaryPart ?? 0),
+      sumOfClaimTotalAmount: (this.shareInfo.value?.paiedAmount ?? 0),
+      sumOfClaimVeteranPart: (this.shareInfo.value?.veteranPart ?? 0),
+      sumOfClaimDeduction: (this.shareInfo.value?.deduction ?? 0),
+      sumOfClaimOutOfCover: (this.shareInfo.value?.outOfCover ?? 0),
+      sumOfClaimPayAmount: (this.shareInfo.value?.payableAmount ?? 0),
+      sumOfInsuredPayedAmount: totals.insuredAmount
+    }
+
+    console.log(dossierInfo);
+
+  }
+
 }

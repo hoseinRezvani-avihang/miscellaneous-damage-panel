@@ -1,4 +1,7 @@
-import { ShareInfoItems } from "./service.models";
+import { CitizenResult } from "./citizen.models";
+import { SaveCpartyInfo } from "./cparty.models";
+import { SaveParnterInfo } from "./partner.models";
+import { ShareInfoItems, SharedForm } from "./service.models";
 
 export interface DossierStep {
   name: string;
@@ -190,4 +193,31 @@ export interface BaseInfo {
   isCovered: boolean;
   basePrice: number;
   ihioBasePrice: number;
+}
+
+export interface DossierSave {
+  memberInfo: CitizenResult,
+  orderInfo: SaveCpartyInfo,
+  deliverInfo: SaveParnterInfo,
+  delivererType: string,
+  sumOfInsuredAmount: number,
+	sumOfOrgAmount: number,
+	sumOfTotalAmount: number,
+  sumOfFinalOrgAmount:number,
+	sumOfClaimBankPart:number,
+	sumOfClaimTakmiliPart:number,
+	sumOfClaimVeteranPart:number,
+	sumOfClaimOtherPart:number,
+	sumOfClaimInsuredAmount:number,
+	sumOfClaimTotalAmount:number,
+	sumOfInsuredPayedAmount:number,
+  // regNoId: string,
+	// category: string,
+	sumOfClaimDeduction: number,
+	sumOfClaimOutOfCover: number,
+	sumOfClaimPayAmount: number,
+	// status: string,
+	// deductionReason: null | string,
+	// deductionDescription: null | string,
+	// hasInsuredMark: boolean
 }

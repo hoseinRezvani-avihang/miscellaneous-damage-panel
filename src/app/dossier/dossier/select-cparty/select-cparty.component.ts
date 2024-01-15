@@ -30,7 +30,7 @@ export class SelectCpartyComponent implements OnInit, OnDestroy {
           fullName: cpartyInfo.cparty.fullName,
           noMedicalSystem: cpartyInfo.cparty.certificate?.[0]?.noMedicalSystem,
           address: cpartyInfo.cparty.partnerInfo.address,
-          serviceDate: cpartyInfo.serviceDate, 
+          serviceDate: cpartyInfo.serviceDate,
           image: cpartyInfo.cparty.image
         }
       }
@@ -40,9 +40,9 @@ export class SelectCpartyComponent implements OnInit, OnDestroy {
   selectCparty(cparty: CpartyInfo) {
     this.dossierService.setCpartyInfo(cparty);
     this.editting = false;
-    this.dossierService.passStep("selectCparty");
+    this.dossierService.break("selectCparty");
   }
-  
+
   ngOnDestroy(): void {
     this.cpartyInfoSubscription.unsubscribe();
     this.dossierService.setCpartyInfo(null);

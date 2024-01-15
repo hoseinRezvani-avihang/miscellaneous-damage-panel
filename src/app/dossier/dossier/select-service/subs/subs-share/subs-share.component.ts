@@ -1,12 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import {
-  calculateFactor,
   calculateShareInfoFactors,
 } from 'src/app/dossier/models/dossier.util';
 import {
   ShareInfoItems,
+  SharedForm,
   SubShares,
 } from 'src/app/dossier/models/service.models';
 import { PartToWholeDialogComponent } from './part-to-whole-dialog/part-to-whole-dialog.component';
@@ -19,22 +19,24 @@ import { PartToWholeDialogComponent } from './part-to-whole-dialog/part-to-whole
 export class SubsShareComponent implements OnInit {
   @Input() set subsShare(shares: Partial<SubShares>) {
     this.shares = shares;
-    this.shareInfoFactors = this.shareInfoFactors ? this.shareInfoFactors : this.calcuateFactor();
+    this.shareInfoFactors = this.calcuateFactor();
     setTimeout(() => {
       this.paiedAmountControl.setValue(shares.totalAmount);
     }, 0);
-  }
+  };
+
+  @Output() updateShares = new EventEmitter();
 
   shareForm = new FormGroup({
     paiedAmount: new FormControl<null | number>(0),
-    outOfCover: new FormControl(0),
-    deduction: new FormControl(0),
-    basePart: new FormControl(0),
-    insuredPart: new FormControl(0),
-    otherPart: new FormControl(0),
-    supplementaryPart: new FormControl(0),
-    veteranPart: new FormControl(0),
-    payableAmount: new FormControl(0),
+    outOfCover: new FormControl<null | number>(0),
+    deduction: new FormControl<null | number>(0),
+    basePart: new FormControl<null | number>(0),
+    insuredPart: new FormControl<null | number>(0),
+    otherPart: new FormControl<null | number>(0),
+    supplementaryPart: new FormControl<null | number>(0),
+    veteranPart: new FormControl<null | number>(0),
+    payableAmount: new FormControl<null | number>(0),
   });
 
   paiedAmountControl = this.control('paiedAmount');
@@ -46,7 +48,7 @@ export class SubsShareComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.onSharesChange();
@@ -62,7 +64,7 @@ export class SubsShareComponent implements OnInit {
       this.shareForm.patchValue({
         outOfCover,
         payableAmount: this.payableAmount(),
-      });
+      }, { emitEvent: false });
     });
 
     this.outOfCoverControl.valueChanges.subscribe((outOfCoverValue: number) => {
@@ -73,8 +75,12 @@ export class SubsShareComponent implements OnInit {
       let deduction = Math.max(outOfCover - outOfCoverValue, 0);
       this.shareForm.patchValue({
         deduction,
-      });
+      }, { emitEvent: false });
     });
+
+    this.shareForm.valueChanges.subscribe((value) => {
+      this.updateShares.emit(value);
+    })
   }
 
   calcuateFactor() {
@@ -113,20 +119,20 @@ export class SubsShareComponent implements OnInit {
         this.shareInfoFactors['veteranPart'],
         total
       ),
-    });
+    }, { emitEvent: false });
   }
 
   payableAmount() {
     return this.control("basePart").value +
-    this.control("supplementaryPart").value +
-    this.control("veteranPart").value +
-    this.control("otherPart").value +
-    this.control("insuredPart").value;
+      this.control("supplementaryPart").value +
+      this.control("veteranPart").value +
+      this.control("otherPart").value +
+      this.control("insuredPart").value;
   };
 
   openPartToWholeDialog() {
     let dialogRef = this.dialog.open(PartToWholeDialogComponent, {
-      data: {...this.shareForm.value, totalAmount: this.shares.totalAmount},
+      data: { ...this.shareForm.value, totalAmount: this.shares.totalAmount },
       width: "600px",
       height: "600px",
       autoFocus: false,
@@ -141,5 +147,12 @@ export class SubsShareComponent implements OnInit {
 
   control(filed: string) {
     return this.shareForm.get(filed) as FormControl;
+  }
+
+  get MaxOutOfCover() {
+    return Math.max(
+      0,
+      this.paiedAmountControl.value - (this.shares.totalAmount as number)
+    );
   }
 }

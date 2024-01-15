@@ -5,7 +5,7 @@ export interface CPartyResult {
   certificate: Certificate[];
   image: any;
   fullName: string;
-  partnerInfo: Partial<PartnerInfo>;
+  partnerInfo: PartnerInfo;
   contractPartyId: string;
 }
 
@@ -22,7 +22,11 @@ export interface Certificate {
 export interface CpartyInfo {
     cparty: CPartyResult,
     serviceDate: Date,
-}
+};
+
+export interface SaveCpartyInfo extends CPartyResult {
+  dateOfService: string
+};
 
 export interface CpartyInfoUI {
     fullName: string,

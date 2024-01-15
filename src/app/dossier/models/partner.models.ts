@@ -11,11 +11,11 @@ export enum PartnerTypeEnum {
   hospital = "hospital",
   other = "other",
   infirmary = "infirmary",
-} 
+}
 
 export class PartnerType {
   static CLINIC = new PartnerType(PartnerTypeEnum.clinic, 'مطب');
-  static DRUGSTORE = new PartnerType(PartnerTypeEnum.drugstore, 'داروخانه');
+  static DRUGSTORE = new PartnerType(PartnerTypeEnum.drugstore, 'داروخانه', "D");
   static EQUIPMENT = new PartnerType(PartnerTypeEnum.equipment, 'تجهیزات');
   static LABORATORY = new PartnerType(PartnerTypeEnum.laboratory, 'آزمایشگاه');
   static IMAGING = new PartnerType(PartnerTypeEnum.imaging, 'تصویربرداری');
@@ -25,7 +25,7 @@ export class PartnerType {
   static OTHER = new PartnerType(PartnerTypeEnum.other, 'سایر');
   static INFIRMARY = new PartnerType(PartnerTypeEnum.infirmary, 'درمانگاه');
 
-  constructor(public symbol: PartnerTypeEnum, public name: string) {}
+  constructor(public symbol: PartnerTypeEnum, public name: string, serviceSymbol?: string) { }
 
   static getTypes: PartnerType[] = [
     this.CLINIC,
@@ -72,7 +72,7 @@ export interface PartnerSearchResult {
 }
 
 export interface SelectPartner {
-  partner: PartnerInfoResult, 
+  partner: PartnerInfoResult,
   partnerType: PartnerTypeEnum,
   serviceDate: Date,
 }
@@ -125,4 +125,11 @@ export interface PartnerInfoUI {
   hasContract: boolean,
   delivererType: string,
   serviceDate: Date,
+}
+
+export interface SaveParnterInfo extends PartnerInfo {
+  cpartyName: string,
+  deliverDate: string,
+  contractPartyId: string,
+  isSimpleRegistration: boolean
 }

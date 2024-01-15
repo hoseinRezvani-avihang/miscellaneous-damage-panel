@@ -20,6 +20,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SeperatorPipe } from './pipes/seperator.pipe';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MaxDirective } from './directives/max.directive';
+import { ThousandSeperatorDirective } from './directives/thousand-seperator.directive';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { MaxDirective } from './directives/max.directive';
     ShamsiPipe,
     SeperatorPipe,
     MaxDirective,
+    ThousandSeperatorDirective,
   ],
   imports: [
     CommonModule,
@@ -69,7 +71,8 @@ import { MaxDirective } from './directives/max.directive';
     MatCheckboxModule,
     SeperatorPipe,
     MatDialogModule,
-    MaxDirective
+    MaxDirective,
+    ThousandSeperatorDirective
   ],
 })
 export class SharedModule {}

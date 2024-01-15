@@ -34,7 +34,7 @@
     <div>
       <mat-form-field appearance="outline">
         <mat-label>مبلغ پرداخت شده توسط بیمه شده</mat-label>
-        <input type="number" matInput formControlName="paiedAmount" />
+        <input limit [maximum]="999999999999" [minimum]="0" type="number" matInput formControlName="paiedAmount" />
       </mat-form-field>
     </div>
 
@@ -61,7 +61,7 @@
     <div>
       <mat-form-field appearance="outline">
         <mat-label>خارج از پوشش بیمه</mat-label>
-        <input type="number" matInput formControlName="outOfCover" />
+        <input limit [minimum]="0" [maximum]="MaxOutOfCover"  type="number" matInput formControlName="outOfCover" />
       </mat-form-field>
     </div>
   </div>

@@ -5,11 +5,11 @@ import { DossierSubsService } from './select-service/services/dossier-subs.servi
 @Component({
   selector: 'app-dossier',
   templateUrl: './dossier.component.html',
-  styleUrls: ['./dossier.component.css'], 
+  styleUrls: ['./dossier.component.css'],
   providers: [
-    DossierCoreDataService, 
+    DossierCoreDataService,
     DossierSubsService
-  ], 
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DossierComponent {

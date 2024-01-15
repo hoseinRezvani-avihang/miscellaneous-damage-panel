@@ -25,7 +25,7 @@ export class SearchInsuredComponent implements OnInit {
   }
 
   onSeach()  {
-    console.log(this.searchControl.value)
+
     if (this.searchControl.valid) {
       this.loading = true;
       this.dossierService.fetchCitizen(this.searchControl.value as string, null).pipe(
