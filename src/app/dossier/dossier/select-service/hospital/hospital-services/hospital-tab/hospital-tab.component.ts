@@ -12,5 +12,4 @@ export class HospitalTabComponent {
   @Input() isSelected!: boolean;
 
   @Output() selectTab = new EventEmitter<void>();
-
 }

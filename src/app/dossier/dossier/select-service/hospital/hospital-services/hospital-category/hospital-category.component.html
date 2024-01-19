@@ -1,0 +1,19 @@
+<div class="wrapper position-relative border p-4">
+  <div
+    class="title border px-4 py-2 position-absolute top-0 start-50 translate-middle rounded-md bg-white"
+  >
+    {{ config.title }}
+  </div>
+  <div>
+    <app-hospital-category-shares></app-hospital-category-shares>
+  </div>
+  <app-divider>
+    <div class="px-4">خدمات</div>
+  </app-divider>
+  <div>
+    <ng-content></ng-content>
+  </div>
+  <div>
+    <!-- <app-subs-share></app-subs-share> -->
+  </div>
+</div>

@@ -11,3 +11,7 @@ export enum HospitalCategories {
   hotelingServices = "hotelingServices",
   otherServices = "otherServices"
 };
+
+export interface HospitalCategoryConfig {
+  title: string,
+}

@@ -30,7 +30,12 @@ import { HospitalDrugEquipmentComponent } from './dossier/select-service/hospita
 import { HospitalParaclinicComponent } from './dossier/select-service/hospital/hospital-services/hospital-paraclinic/hospital-paraclinic.component';
 import { HospitalHotelingComponent } from './dossier/select-service/hospital/hospital-services/hospital-hoteling/hospital-hoteling.component';
 import { HospitalOtherServicesComponent } from './dossier/select-service/hospital/hospital-services/hospital-other-services/hospital-other-services.component';
-
+import { HospitalCategoryComponent } from './dossier/select-service/hospital/hospital-services/hospital-category/hospital-category.component';
+import { HospitalCategorySharesComponent } from './dossier/select-service/hospital/hospital-services/hospital-category/hospital-category-shares/hospital-category-shares.component';
+import { VisitServicesComponent } from './dossier/select-service/hospital/hospital-services/hospital-doctor-services/visit-services/visit-services.component';
+import { SelectVisitComponent } from './dossier/select-service/hospital/hospital-services/hospital-doctor-services/visit-services/select-visit/select-visit.component';
+import { VisitListComponent } from './dossier/select-service/hospital/hospital-services/hospital-doctor-services/visit-services/visit-list/visit-list.component';
+import { VisitItemComponent } from './dossier/select-service/hospital/hospital-services/hospital-doctor-services/visit-services/visit-item/visit-item.component';
 
 
 @NgModule({
@@ -61,11 +66,17 @@ import { HospitalOtherServicesComponent } from './dossier/select-service/hospita
     HospitalDrugEquipmentComponent,
     HospitalParaclinicComponent,
     HospitalHotelingComponent,
-    HospitalOtherServicesComponent
+    HospitalOtherServicesComponent,
+    HospitalCategoryComponent,
+    HospitalCategorySharesComponent,
+    VisitServicesComponent,
+    SelectVisitComponent,
+    VisitListComponent,
+    VisitItemComponent,
   ],
   imports: [
-    CommonModule, 
-    SharedModule, 
+    CommonModule,
+    SharedModule,
     SearchServiceComponent,
     AddOutpatientServiceComponent
   ]

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HospitalCategoryConfig } from '../../models/hospital.models';
 
 @Component({
   selector: 'app-hospital-hoteling',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./hospital-hoteling.component.css']
 })
 export class HospitalHotelingComponent {
+
+  hotelingConfig: HospitalCategoryConfig = {
+    title: "تخت"
+  }
 
 }
