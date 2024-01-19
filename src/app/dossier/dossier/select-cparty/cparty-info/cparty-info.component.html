@@ -1,6 +1,8 @@
-<div class="cparty-info d-flex">
-  <div class="col-1"></div>
-  <div class="col">
+<div class="cparty-info d-flex gap-3">
+  <div class="col-1 center">
+    <img src="../../../../../assets/images/doctor.png" alt="" class="w-100 rounded-full">
+  </div>
+  <div class="col d-flex flex-column justify-content-around gap-2">
     <div>
       <span>نام و نام خانوادگی پزشک: </span><span>{{ cparty.fullName }}</span>
     </div>
@@ -12,7 +14,7 @@
       <span>آدرس: </span><span>{{ cparty.address ?? "نامشخص" }}</span>
     </div>
   </div>
-  <div class="col">
+  <div class="col d-flex flex-column justify-content-around gap-2">
     <div>
       <span>تاریخ تجویز خدمت: </span
       ><span>{{ cparty.serviceDate | shamsi }}</span>

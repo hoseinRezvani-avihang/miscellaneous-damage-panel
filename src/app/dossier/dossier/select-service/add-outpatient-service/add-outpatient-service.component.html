@@ -4,6 +4,7 @@
       <div class="col-6">
         <app-search-service
           (selectService)="onSelectService($event)"
+          [serviceType]="config.serviceType"
         ></app-search-service>
       </div>
 
@@ -31,7 +32,7 @@
       <div>
         <mat-form-field appearance="outline" class="w-100">
           <mat-label>تعداد در نوبت</mat-label>
-          <input formControlName="queueCount" type="number" matInput />
+          <input formControlName="numberOfPeriod" type="number" matInput />
         </mat-form-field>
       </div>
     </div>

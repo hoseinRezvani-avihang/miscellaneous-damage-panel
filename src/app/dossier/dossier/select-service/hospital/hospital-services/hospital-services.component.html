@@ -1,0 +1,27 @@
+<div class="d-flex gap-3">
+  <div class="tabs col-3">
+    <app-hospital-tab
+      *ngFor="let tab of tabs"
+      [tabInfo]="tab"
+      [isSelected]="selectedTab === tab.symbol"
+      (selectTab)="onSelectTab(tab.symbol)"
+    ></app-hospital-tab>
+  </div>
+  <div class="services flex-grow-1">
+    <app-hospital-doctor-services
+      *ngIf="selectedTab == hospitalCategory.doctorServices"
+    ></app-hospital-doctor-services>
+    <app-hospital-drug-equipment
+      *ngIf="selectedTab == hospitalCategory.drugAndEquipServices"
+    ></app-hospital-drug-equipment>
+    <app-hospital-hoteling
+      *ngIf="selectedTab == hospitalCategory.hotelingServices"
+    ></app-hospital-hoteling>
+    <app-hospital-paraclinic
+      *ngIf="selectedTab == hospitalCategory.paraclinicServices"
+    ></app-hospital-paraclinic>
+    <app-hospital-other-services
+      *ngIf="selectedTab == hospitalCategory.otherServices"
+    ></app-hospital-other-services>
+  </div>
+</div>

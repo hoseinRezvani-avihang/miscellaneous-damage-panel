@@ -52,16 +52,16 @@ export const calculateBankPart = (shares: SharedForm) => {
   }, 0);
 }
 
-export const price = (price: string | null): number | null => {
+export const price = (price: string | number | null): number => {
 
-  const cleanValue = price?.replace(/[^\d-]/g, '');
+  const cleanValue = price?.toString()?.replace(/[^\d-]/g, '');
 
   if (!cleanValue) {
-    return null;
+    return 0;
   }
 
   const isNegative = cleanValue.startsWith('-');
-  const numericValue = parseFloat(cleanValue);
+  const numericValue = parseFloat(cleanValue) ?? 0;
 
-  return isNaN(numericValue) ? null : (isNegative ? -numericValue : numericValue);
+  return isNaN(numericValue) ? 0 : (isNegative ? -numericValue : numericValue);
 }

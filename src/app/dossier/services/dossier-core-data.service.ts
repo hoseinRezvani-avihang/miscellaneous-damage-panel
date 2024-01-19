@@ -1,12 +1,12 @@
 import { ChangeDetectorRef, Injectable } from '@angular/core';
 import { CitizenResult } from '../models/citizen.models';
 import { BehaviorSubject } from 'rxjs';
-import { DossierSave, DossierStep, ShareInfo } from '../models/dossier-core.models';
+import { DossierSave, DossierStep } from '../models/dossier-core.models';
 import { ObjectUtil } from 'src/app/shared/utils/object-util';
 import { PartnerInfo, SelectPartner } from '../models/partner.models';
 import { CpartyInfo } from '../models/cparty.models';
 import { SharedForm, Subs } from '../models/service.models';
-import { prepareCparty, preparePartner } from '../models/save-dossier-util';
+import { createDrugInfo, prepareCparty, preparePartner } from '../models/save-dossier-util';
 import { calculateBankPart, calculateFinalOrgAmout, calculateTotals } from '../models/dossier.util';
 
 @Injectable({
@@ -170,6 +170,7 @@ export class DossierCoreDataService {
       orderInfo: prepareCparty(this.cpartyInfo.value as CpartyInfo),
       deliverInfo: preparePartner(this.partnerInfo.value as SelectPartner),
       delivererType: this.partnerInfo.value?.partner.partnerInfo.delivererType as string,
+      drugInfo: createDrugInfo(this.subs.value),
       sumOfInsuredAmount: totals.insuredAmount,
       sumOfOrgAmount: totals.orgAmount,
       sumOfTotalAmount: totals.totalAmount,

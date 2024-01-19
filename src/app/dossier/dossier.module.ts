@@ -22,6 +22,14 @@ import { SubsListComponent } from './dossier/select-service/subs/subs-list/subs-
 import { SubsShareComponent } from './dossier/select-service/subs/subs-share/subs-share.component';
 import { SubItemComponent } from './dossier/select-service/subs/subs-list/sub-item/sub-item.component';
 import { DossierActionsComponent } from './dossier/select-service/dossier-actions/dossier-actions.component';
+import { HospitalComponent } from './dossier/select-service/hospital/hospital.component';
+import { HospitalServicesComponent } from './dossier/select-service/hospital/hospital-services/hospital-services.component';
+import { HospitalTabComponent } from './dossier/select-service/hospital/hospital-services/hospital-tab/hospital-tab.component';
+import { HospitalDoctorServicesComponent } from './dossier/select-service/hospital/hospital-services/hospital-doctor-services/hospital-doctor-services.component';
+import { HospitalDrugEquipmentComponent } from './dossier/select-service/hospital/hospital-services/hospital-drug-equipment/hospital-drug-equipment.component';
+import { HospitalParaclinicComponent } from './dossier/select-service/hospital/hospital-services/hospital-paraclinic/hospital-paraclinic.component';
+import { HospitalHotelingComponent } from './dossier/select-service/hospital/hospital-services/hospital-hoteling/hospital-hoteling.component';
+import { HospitalOtherServicesComponent } from './dossier/select-service/hospital/hospital-services/hospital-other-services/hospital-other-services.component';
 
 
 
@@ -45,7 +53,15 @@ import { DossierActionsComponent } from './dossier/select-service/dossier-action
     SubsListComponent,
     SubsShareComponent,
     SubItemComponent,
-    DossierActionsComponent
+    DossierActionsComponent,
+    HospitalComponent,
+    HospitalServicesComponent,
+    HospitalTabComponent,
+    HospitalDoctorServicesComponent,
+    HospitalDrugEquipmentComponent,
+    HospitalParaclinicComponent,
+    HospitalHotelingComponent,
+    HospitalOtherServicesComponent
   ],
   imports: [
     CommonModule, 

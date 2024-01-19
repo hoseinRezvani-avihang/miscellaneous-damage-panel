@@ -16,7 +16,7 @@ import { finalize } from 'rxjs';
 })
 export class AddOutpatientServiceComponent implements OnInit {
 
-  @Input() config!: OutpatientServiceInput; 
+  @Input() config!: OutpatientServiceInput;
 
   @Output() cancel = new EventEmitter<void>();
 
@@ -27,7 +27,7 @@ export class AddOutpatientServiceComponent implements OnInit {
 
   constructor(
     private dossierSubService: DossierSubsService
-  ) {};
+  ) { };
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -36,10 +36,10 @@ export class AddOutpatientServiceComponent implements OnInit {
       isMarkMatchService: new FormControl(false),
       claimAmount: new FormControl(null),
       ISGlobal: new FormControl(true),
-      cpartyId: new FormControl(this.config.cparties[0].id), 
-      description: new FormControl(null), 
+      cpartyId: new FormControl(this.config.cparties[0].id),
+      description: new FormControl(null),
       consumption: new FormControl(null),
-      queueCount: new FormControl(1)
+      numberOfPeriod: new FormControl(1)
     });
   }
 
@@ -50,15 +50,15 @@ export class AddOutpatientServiceComponent implements OnInit {
 
   addService() {
     this.loading = true;
-    this.dossierSubService.fetchOmr(this.form.value as any).pipe(
-      finalize(() => {
-        this.loading = false;
-      })
-    ).subscribe({
-      next: () => {
-        this.close();
-      }
-    });
+    this.dossierSubService.fetchOmr(this.form.value as any)
+      .subscribe({
+        next: () => {
+          this.close();
+        },
+        complete: () => {
+          this.loading = false;
+        }
+      });
   };
 
   close() {

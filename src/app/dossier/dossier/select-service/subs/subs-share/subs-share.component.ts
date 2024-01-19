@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import {
-  calculateShareInfoFactors,
+  calculateShareInfoFactors, price,
 } from 'src/app/dossier/models/dossier.util';
 import {
   ShareInfoItems,
@@ -21,7 +21,7 @@ export class SubsShareComponent implements OnInit {
     this.shares = shares;
     this.shareInfoFactors = this.calcuateFactor();
     setTimeout(() => {
-      this.paiedAmountControl.setValue(shares.totalAmount);
+      this.paiedAmountControl.patchValue(shares.totalAmount);
     }, 0);
   };
 
@@ -58,9 +58,9 @@ export class SubsShareComponent implements OnInit {
     this.paiedAmountControl.valueChanges.subscribe((paiedAmount: number) => {
       let outOfCover = Math.max(
         0,
-        paiedAmount - (this.shares.totalAmount as number)
+        price(paiedAmount) - (this.shares.totalAmount as number)
       );
-      this.udpateShareInfos(paiedAmount);
+      this.udpateShareInfos(price(paiedAmount));
       this.shareForm.patchValue({
         outOfCover,
         payableAmount: this.payableAmount(),
@@ -70,9 +70,9 @@ export class SubsShareComponent implements OnInit {
     this.outOfCoverControl.valueChanges.subscribe((outOfCoverValue: number) => {
       let outOfCover = Math.max(
         0,
-        this.paiedAmountControl.value - (this.shares.totalAmount as number)
+        price(this.paiedAmountControl.value) - (this.shares.totalAmount as number)
       );
-      let deduction = Math.max(outOfCover - outOfCoverValue, 0);
+      let deduction = Math.max(outOfCover - price(outOfCoverValue), 0);
       this.shareForm.patchValue({
         deduction,
       }, { emitEvent: false });

@@ -37,7 +37,7 @@ export interface SubsDetail {
   cpartyId: string;
   description: string | null;
   consumption: string | null;
-  queueCount: number;
+  numberOfPeriod: number;
 };
 
 export interface Subs {
@@ -47,6 +47,7 @@ export interface Subs {
 
 export interface OutpatientServiceInput {
   cparties: { id: string; name: string }[];
+  serviceType: string,
 };
 
 export interface SubsUI {
@@ -92,3 +93,22 @@ export interface SharedForm {
   veteranPart: number,
   payableAmount: number,
 };
+
+export interface DrugInfo {
+    drugName: string
+    ircCode: boolean
+    drugNumber: string
+    numberOfPeriod: string
+    drugConsumption: string
+    drugExplain: string
+    drugConsumptionAmont: string
+    DrugNN: string
+    finalOrgAmount: any
+    total: number
+    orgAmount: number
+    insuredAmount: number
+    showAlert: string
+    shape: string
+    isMarkMatchService: boolean,
+    omrResult: OmrResult
+}

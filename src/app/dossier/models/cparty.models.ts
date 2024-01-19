@@ -25,7 +25,7 @@ export interface CpartyInfo {
 };
 
 export interface SaveCpartyInfo extends CPartyResult {
-  dateOfService: string
+  dateOfService?: string
 };
 
 export interface CpartyInfoUI {

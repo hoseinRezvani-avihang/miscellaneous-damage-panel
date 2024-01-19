@@ -47,6 +47,7 @@ export class SelectServiceComponent implements OnInit, OnDestroy {
           cparties: parnterInfo.partner.cPartiesInfo.map(
             (value: CPartiesInfo) => ({ name: value.fullName, id: value.id })
           ),
+          serviceType: PartnerType.getParnterBYSymbol(this.dossierService.partnerInfo.value?.partnerType as PartnerTypeEnum).serviceType
         };
       }
     });
@@ -78,7 +79,7 @@ export class SelectServiceComponent implements OnInit, OnDestroy {
   }
 
   getName(symbol: PartnerTypeEnum) {
-    return PartnerType.getParnterNameBYSymbol(symbol).name;
+    return PartnerType.getParnterBYSymbol(symbol).name;
   }
 
   ngOnDestroy(): void {

@@ -1,7 +1,7 @@
 import { CitizenResult } from "./citizen.models";
 import { SaveCpartyInfo } from "./cparty.models";
 import { SaveParnterInfo } from "./partner.models";
-import { ShareInfoItems, SharedForm } from "./service.models";
+import { DrugInfo, ShareInfoItems, SharedForm } from "./service.models";
 
 export interface DossierStep {
   name: string;
@@ -200,6 +200,7 @@ export interface DossierSave {
   orderInfo: SaveCpartyInfo,
   deliverInfo: SaveParnterInfo,
   delivererType: string,
+  drugInfo: DrugInfo[],
   sumOfInsuredAmount: number,
 	sumOfOrgAmount: number,
 	sumOfTotalAmount: number,

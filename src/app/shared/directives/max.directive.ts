@@ -1,6 +1,7 @@
 import { Directive, HostListener, Input } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { exist } from '../utils/object-util';
+import { price } from 'src/app/dossier/models/dossier.util';
 
 @Directive({
   selector: '[limit]'
@@ -9,8 +10,8 @@ export class MaxDirective {
 
   @Input('maximum') set max(maximum: number | undefined) {
     if (maximum !== undefined) {
-      this.maximum = maximum;
-      this.maxValidValue = maximum;
+      this.maximum = parseNumber(maximum) as number;
+      this.maxValidValue = parseNumber(maximum) as number;
     }
   };
   maxValidValue!: number | undefined;
@@ -20,8 +21,8 @@ export class MaxDirective {
 
   @Input("minimum") set min(minimum: number | undefined) {
     if (minimum !== undefined) {
-      this.minimum = minimum;
-      this.minValidValue = minimum;
+      this.minimum = parseNumber(minimum) as number;
+      this.minValidValue = parseNumber(minimum) as number;
     }
   }
 
@@ -38,8 +39,8 @@ export class MaxDirective {
     }
 
     if (exist(value)) {
-      let parsedValue = parseInt(value);
-      if (parsedValue == parsedValue) {
+      let parsedValue = parseNumber(value) as number;
+      if (exist(parsedValue)) {
         if (exist(this.maximum)) {
           if (parsedValue <= (this.maximum as number)) {
             this.maxValidValue = parsedValue;
@@ -59,4 +60,12 @@ export class MaxDirective {
     }
   }
 
+}
+
+export const parseNumber = (number: null | number | string): number | null => {
+  if (exist(number)) {
+    return parseFloat((number as number).toString().replace(/[^\d-.]/g, "")) as number
+  }
+
+  return null
 }

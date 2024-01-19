@@ -14,14 +14,15 @@ import { SearchServiceResult } from 'src/app/dossier/models/service.models';
 })
 export class SearchServiceComponent implements OnInit {
 
-  
+
   @Input() searchType: Signal<SearchType> = signal(SearchType.quick);
+  @Input() serviceType!: string;
   @Output() selectService = new EventEmitter<SearchServiceResult>();
 
   quickSearch: Signal<boolean> = computed(() => {
     return this.searchType() === SearchType.quick;
   });
-  
+
   ngOnInit(): void {
   }
 

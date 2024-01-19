@@ -1,6 +1,8 @@
-<div class="partner-info d-flex">
-  <div class="member-image col-1"></div>
-  <div class="col">
+<div class="partner-info d-flex gap-3">
+  <div class="member-image col-1 center">
+    <img src="../../../../../assets/images/medical-center.png" alt="" class="w-100 rounded-full">
+  </div>
+  <div class="col d-flex flex-column justify-content-around gap-2">
     <div>
       <span>نام مرکز ارائه دهنده: </span><span>{{ partner.partnerName }}</span>
     </div>
@@ -11,7 +13,7 @@
       <span>آدرس: </span><span>{{ partner.address }}</span>
     </div>
   </div>
-  <div class="col">
+  <div class="col d-flex flex-column justify-content-around gap-2">
     <div>
       <span>قرارداد: </span
       ><span>{{ partner.hasContract ? "دارد" : "ندارد" }}</span>

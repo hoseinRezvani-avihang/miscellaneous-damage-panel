@@ -1,5 +1,3 @@
-import { FormGroup } from "@angular/forms";
-
 export enum PartnerTypeEnum {
   clinic = "clinic",
   drugstore = "drugstore",
@@ -13,19 +11,33 @@ export enum PartnerTypeEnum {
   infirmary = "infirmary",
 }
 
-export class PartnerType {
-  static CLINIC = new PartnerType(PartnerTypeEnum.clinic, 'مطب');
-  static DRUGSTORE = new PartnerType(PartnerTypeEnum.drugstore, 'داروخانه', "D");
-  static EQUIPMENT = new PartnerType(PartnerTypeEnum.equipment, 'تجهیزات');
-  static LABORATORY = new PartnerType(PartnerTypeEnum.laboratory, 'آزمایشگاه');
-  static IMAGING = new PartnerType(PartnerTypeEnum.imaging, 'تصویربرداری');
-  static PHYSIOTHERAPY = new PartnerType(PartnerTypeEnum.physiotherapy, 'توان بخشی');
-  static DENTAL = new PartnerType(PartnerTypeEnum.dental, 'دندانپزشکی');
-  static HOSPITAL = new PartnerType(PartnerTypeEnum.hospital, 'بیمارستان');
-  static OTHER = new PartnerType(PartnerTypeEnum.other, 'سایر');
-  static INFIRMARY = new PartnerType(PartnerTypeEnum.infirmary, 'درمانگاه');
+export enum ServiceType {
+  Equipment ='E',
+  Clinic ='O',
+  Pharmacy ='D',
+  Labratoar = 'L',
+  Imaging ='I',
+  Physio = 'P',
+  Dental = 'T',
+  Hoteling = 'R',
+  HospitalOther = 'H',
+  Surgury = 'S',
+  Other = 'A',
+}
 
-  constructor(public symbol: PartnerTypeEnum, public name: string, serviceSymbol?: string) { }
+export class PartnerType {
+  static CLINIC = new PartnerType(PartnerTypeEnum.clinic, 'مطب', ServiceType.Clinic);
+  static DRUGSTORE = new PartnerType(PartnerTypeEnum.drugstore, 'داروخانه', ServiceType.Pharmacy);
+  static EQUIPMENT = new PartnerType(PartnerTypeEnum.equipment, 'تجهیزات', ServiceType.Equipment);
+  static LABORATORY = new PartnerType(PartnerTypeEnum.laboratory, 'آزمایشگاه', ServiceType.Labratoar);
+  static IMAGING = new PartnerType(PartnerTypeEnum.imaging, 'تصویربرداری', ServiceType.Imaging);
+  static PHYSIOTHERAPY = new PartnerType(PartnerTypeEnum.physiotherapy, 'توان بخشی', ServiceType.Physio);
+  static DENTAL = new PartnerType(PartnerTypeEnum.dental, 'دندانپزشکی', ServiceType.Dental);
+  static HOSPITAL = new PartnerType(PartnerTypeEnum.hospital, 'بیمارستان', ServiceType.Hoteling);
+  static OTHER = new PartnerType(PartnerTypeEnum.other, 'سایر', ServiceType.Other);
+  static INFIRMARY = new PartnerType(PartnerTypeEnum.infirmary, 'درمانگاه', ServiceType.Other);
+
+  constructor(public symbol: PartnerTypeEnum, public name: string, public serviceType: ServiceType) { }
 
   static getTypes: PartnerType[] = [
     this.CLINIC,
@@ -44,7 +56,7 @@ export class PartnerType {
     (partner: PartnerType) => partner.symbol
   );
 
-  static getParnterNameBYSymbol(symbol: PartnerTypeEnum): PartnerType {
+  static getParnterBYSymbol(symbol: PartnerTypeEnum): PartnerType {
     return PartnerType.getTypes.find((parnter: PartnerType) => {
       return parnter.symbol === symbol;
     }) as PartnerType;
