@@ -1,1 +1,12 @@
-<app-hospital-category [config]="hotelingConfig"></app-hospital-category>
+<ng-container *ngFor="let config of hospitalCareConfigs; let f = first">
+  <app-hospital-category [config]="config" [open]="f">
+    <app-general-service [config]="config"></app-general-service>
+  </app-hospital-category>
+  <br>
+  <br>
+  <br>
+</ng-container>
+
+<app-hospital-category [config]="hotelingConfig">
+  <app-bed-service></app-bed-service>
+</app-hospital-category>

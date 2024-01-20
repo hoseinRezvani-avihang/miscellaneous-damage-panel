@@ -1,3 +1,25 @@
-<app-hospital-category [config]="visitConfig">
+<app-hospital-category [config]="visitConfig" [open]="true">
   <app-visit-services></app-visit-services>
+</app-hospital-category>
+
+<br>
+<br>
+<br>
+
+<app-hospital-category [config]="surgonConfig">
+  <app-general-service [config]="surgonConfig"></app-general-service>
+</app-hospital-category>
+
+<br>
+<br>
+<br>
+
+<app-hospital-category [config]="consultantConfig">
+</app-hospital-category>
+
+<br>
+<br>
+<br>
+
+<app-hospital-category [config]="hospitalDentalConfig">
 </app-hospital-category>

@@ -9,5 +9,6 @@ import { HospitalCategoryConfig } from '../../models/hospital.models';
 export class HospitalCategoryComponent {
 
   @Input() config!: HospitalCategoryConfig;
+  @Input() open = false;
 
 }

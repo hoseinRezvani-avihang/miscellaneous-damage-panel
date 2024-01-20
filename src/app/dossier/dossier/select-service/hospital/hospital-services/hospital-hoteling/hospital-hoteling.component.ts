@@ -8,6 +8,14 @@ import { HospitalCategoryConfig } from '../../models/hospital.models';
 })
 export class HospitalHotelingComponent {
 
+  hospitalCareConfigs: HospitalCategoryConfig[] = [
+    {
+      title: "مراقبت پرستاری"
+    }, {
+      title: "خدمت پرستاری"
+    }
+  ]
+
   hotelingConfig: HospitalCategoryConfig = {
     title: "تخت"
   }

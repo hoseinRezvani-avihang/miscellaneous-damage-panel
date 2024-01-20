@@ -36,6 +36,13 @@ import { VisitServicesComponent } from './dossier/select-service/hospital/hospit
 import { SelectVisitComponent } from './dossier/select-service/hospital/hospital-services/hospital-doctor-services/visit-services/select-visit/select-visit.component';
 import { VisitListComponent } from './dossier/select-service/hospital/hospital-services/hospital-doctor-services/visit-services/visit-list/visit-list.component';
 import { VisitItemComponent } from './dossier/select-service/hospital/hospital-services/hospital-doctor-services/visit-services/visit-item/visit-item.component';
+import { BedServiceComponent } from './dossier/select-service/hospital/hospital-services/hospital-hoteling/bed-service/bed-service.component';
+import { SelectBedComponent } from './dossier/select-service/hospital/hospital-services/hospital-hoteling/bed-service/select-bed/select-bed.component';
+import { BedListComponent } from './dossier/select-service/hospital/hospital-services/hospital-hoteling/bed-service/bed-list/bed-list.component';
+import { BedItemComponent } from './dossier/select-service/hospital/hospital-services/hospital-hoteling/bed-service/bed-list/bed-item/bed-item.component';
+import { GeneralServiceComponent } from './dossier/select-service/hospital/hospital-services/general-service/general-service.component';
+import { AddLevel3ServiceComponent } from './dossier/select-service/hospital/hospital-services/general-service/add-level-3-service/add-level-3-service.component';
+import { AddGeneralServiceComponent } from './dossier/select-service/hospital/hospital-services/general-service/add-general-service/add-general-service.component';
 
 
 @NgModule({
@@ -73,6 +80,13 @@ import { VisitItemComponent } from './dossier/select-service/hospital/hospital-s
     SelectVisitComponent,
     VisitListComponent,
     VisitItemComponent,
+    BedServiceComponent,
+    SelectBedComponent,
+    BedListComponent,
+    BedItemComponent,
+    GeneralServiceComponent,
+    AddLevel3ServiceComponent,
+    AddGeneralServiceComponent,
   ],
   imports: [
     CommonModule,

@@ -1,1 +1,8 @@
-<p>hospital-other-services works!</p>
+<ng-container *ngFor="let config of otherConfigs; let f = first">
+  <app-hospital-category [config]="config" [open]="f">
+    <app-general-service [config]="config"></app-general-service>
+  </app-hospital-category>
+  <br>
+  <br>
+  <br>
+</ng-container>

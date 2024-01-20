@@ -12,4 +12,16 @@ export class HospitalDoctorServicesComponent {
     title: "ویزیت در بخش"
   }
 
+  surgonConfig: HospitalCategoryConfig = {
+    title: "جراح"
+  }
+
+  consultantConfig: HospitalCategoryConfig = {
+    title: "مشاوره در بخش"
+  }
+
+  hospitalDentalConfig: HospitalCategoryConfig = {
+    title: "بیمارستانی دندانپزشکی"
+  }
+
 }

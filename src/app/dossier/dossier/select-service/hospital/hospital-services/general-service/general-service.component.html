@@ -1,0 +1,44 @@
+<div class="row w-100 mx-auto">
+  <div [ngClass]="generalCard.status ? 'col-12' : 'col-6'">
+    <app-expand-card #generalCard>
+      <div
+        *ngIf="!generalCard.status"
+        button
+        class="border rounded-md px-16 py-3 text-center"
+        role="button"
+        (click)="generalCard.status = !generalCard.status"
+      >
+        <span class="text-primary">+</span>
+        <span>&nbsp;</span>
+        <span>اضافه کردن خدمت کلی</span>
+        <span>&nbsp;</span>
+        <span>{{ config.title }}</span>
+      </div>
+      <div *ngIf="generalCard.status" content>
+        <app-add-general-service></app-add-general-service>
+      </div>
+    </app-expand-card>
+  </div>
+  <div [ngClass]="level3Card.status ? 'col-12' : 'col-6'">
+    <app-expand-card #level3Card>
+      <div
+        *ngIf="!level3Card.status"
+        button
+        class="border rounded-md px-16 py-3 text-center"
+        role="button"
+        (click)="level3Card.status = !level3Card.status"
+      >
+        <span class="text-primary">+</span>
+        <span>&nbsp;</span>
+        <span>اضافه کردن خدمت</span>
+        <span>&nbsp;</span>
+        <span>{{ config.title }}</span>
+      </div>
+      <div *ngIf="level3Card.status" content>
+        <app-add-level-3-service
+          (cancel)="level3Card.status = false"
+        ></app-add-level-3-service>
+      </div>
+    </app-expand-card>
+  </div>
+</div>

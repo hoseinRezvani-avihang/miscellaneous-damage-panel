@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HospitalCategoryConfig } from '../../models/hospital.models';
 
 @Component({
   selector: 'app-hospital-paraclinic',
@@ -6,5 +7,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./hospital-paraclinic.component.css']
 })
 export class HospitalParaclinicComponent {
+
+  paraclinicConfigs: HospitalCategoryConfig[] = [
+    {
+      title: "آزمایشگاه"
+    }, {
+      title: "پاتوبیولوژی"
+    }, {
+      title: "تصویربرداری"
+    }, {
+      title: "خدمات قلب"
+    },{
+      title: "فیزیوتراپی"
+    },
+  ]
 
 }

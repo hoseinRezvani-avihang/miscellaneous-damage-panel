@@ -35,6 +35,7 @@
               <app-divider></app-divider>
             </div>
             <ng-container *ngIf="isActive('selectService')">
+              <br>
               <app-hospital *ngIf="hospitalSelected; else outPatientServices"></app-hospital>
               <ng-template #outPatientServices>
                 <app-select-service

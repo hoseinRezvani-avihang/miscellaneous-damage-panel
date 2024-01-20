@@ -4,6 +4,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { QuickSearchServiceComponent } from './quick-search-service/quick-search-service.component';
 import { SelectSearchServiceComponent } from './select-search-service/select-search-service.component';
 import { SearchServiceResult } from 'src/app/dossier/models/service.models';
+import { ServiceType } from 'src/app/dossier/models/partner.models';
 
 @Component({
   selector: 'app-search-service',
@@ -16,7 +17,7 @@ export class SearchServiceComponent implements OnInit {
 
 
   @Input() searchType: Signal<SearchType> = signal(SearchType.quick);
-  @Input() serviceType!: string;
+  @Input() serviceType: string = ServiceType.Clinic;
   @Output() selectService = new EventEmitter<SearchServiceResult>();
 
   quickSearch: Signal<boolean> = computed(() => {

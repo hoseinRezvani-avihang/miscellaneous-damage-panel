@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HospitalCategoryConfig } from '../../models/hospital.models';
 
 @Component({
   selector: 'app-hospital-drug-equipment',
@@ -6,5 +7,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./hospital-drug-equipment.component.css']
 })
 export class HospitalDrugEquipmentComponent {
+
+  drugEuipmentConfigs: HospitalCategoryConfig[] = [
+    {
+      title: "دارو"
+    }, {
+      title: "لوازم بهداشتی"
+    }, {
+      title: "لوازم مصرفی"
+    }, {
+      title: "تجهیزات"
+    },
+  ]
 
 }

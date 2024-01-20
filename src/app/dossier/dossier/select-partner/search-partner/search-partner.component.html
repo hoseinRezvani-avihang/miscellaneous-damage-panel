@@ -1,11 +1,14 @@
 <form [formGroup]="partnerForm" (ngSubmit)="selectPartnerDone()">
-  <mat-radio-group color="primary" [formControl]="partnerTypeControl">
-    <mat-radio-button
-      *ngFor="let partner of parnterTypes"
-      [value]="partner.symbol"
-      >{{ partner.name }}</mat-radio-button
-    >
-  </mat-radio-group>
+  <div>
+    <mat-radio-group color="primary" [formControl]="partnerTypeControl">
+      <mat-radio-button
+        *ngFor="let partner of parnterTypes"
+        [value]="partner.symbol"
+        >{{ partner.name }}</mat-radio-button
+      >
+    </mat-radio-group>
+  </div>
+  <br>
   <div class="d-flex gap-2">
     <div class="col-7">
       <app-quick-search-partner
