@@ -1,10 +1,10 @@
 <app-select-search-service
   (selectService)="onSelectService($event)"
-  *ngIf="!quickSearch()"
+  *ngIf="!quickSearch"
 
 ></app-select-search-service>
 <app-quick-search-service
   (selectService)="onSelectService($event)"
-  *ngIf="quickSearch()"
+  *ngIf="quickSearch"
   [serviceType]="serviceType"
 ></app-quick-search-service>

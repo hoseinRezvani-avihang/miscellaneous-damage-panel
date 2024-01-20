@@ -16,15 +16,14 @@ import { ServiceType } from 'src/app/dossier/models/partner.models';
 export class SearchServiceComponent implements OnInit {
 
 
-  @Input() searchType: Signal<SearchType> = signal(SearchType.quick);
+  @Input() searchType: SearchType = SearchType.quick;
   @Input() serviceType: string = ServiceType.Clinic;
   @Output() selectService = new EventEmitter<SearchServiceResult>();
 
-  quickSearch: Signal<boolean> = computed(() => {
-    return this.searchType() === SearchType.quick;
-  });
+  quickSearch = false;;
 
   ngOnInit(): void {
+    this.quickSearch = this.searchType === SearchType.quick;
   }
 
   onSelectService(service: SearchServiceResult) {

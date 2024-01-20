@@ -1,18 +1,26 @@
-<div class="member d-flex gap-2">
+<div class="member px-4 py-2">
+  <div class="px-2 d-flex gap-2">
     <div class="member-image col-1">
-        <img [src]="memberInfo.avatar" class="rounded-circle d-block w-100">
+      <img [src]="memberInfo.avatar" class="rounded-circle d-block w-100" />
     </div>
-    <div class="memberInfo flex-grow-1 d-flex flex-column justify-content-around">
-        <div class="d-flex gap-1">
-            <span>{{ memberInfo.firstName }} {{ memberInfo.lastName }}</span>
-            <span>[ {{ memberInfo.nationalNumber }} ]</span>
-            <span>[ {{ memberInfo.relationType === "responsible" ? 'بیمه شده اصلی' : '' }} ]</span>
-        </div>
-        <div>
-            <span>متولد {{ memberInfo.birthDate }}</span>
-        </div>
-        <div>
-            <span>{{ memberInfo.personnelNo }}</span>
-        </div>
+    <div
+      class="memberInfo flex-grow-1 d-flex flex-column justify-content-around"
+    >
+      <div class="d-flex gap-1">
+        <span>{{ memberInfo.firstName }} {{ memberInfo.lastName }}</span>
+        <span>[ {{ memberInfo.nationalNumber }} ]</span>
+        <span
+          >[
+          {{ memberInfo.relationType === "responsible" ? "بیمه شده اصلی" : "" }}
+          ]</span
+        >
+      </div>
+      <div>
+        <span>متولد {{ memberInfo.birthDate }}</span>
+      </div>
+      <div>
+        <span>{{ memberInfo.personnelNo }}</span>
+      </div>
     </div>
+  </div>
 </div>

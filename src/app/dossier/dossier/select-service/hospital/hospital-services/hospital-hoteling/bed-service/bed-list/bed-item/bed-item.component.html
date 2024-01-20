@@ -1,1 +1,23 @@
-<p>bed-item works!</p>
+<div class="border p-3 row w-100 mx-auto">
+  <div class="bg-light px-3 py-2 col-3 center">
+    {{ bedControl.value.bed.name }}
+  </div>
+  <div class="col-2">
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>تعداد</mat-label>
+      <input type="number" matInput [formControl]="cntControl">
+    </mat-form-field>
+  </div>
+
+  <div class="col-4">
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>تعرفه قابل پرداخت</mat-label>
+      <input type="text" matInput [formControl]="payAmountControl">
+    </mat-form-field>
+  </div>
+
+  <div class="d-flex gap-2 col-3 center">
+    <mat-checkbox color="primary" [formControl]="nursingCareControl">مراقبت پرستاری</mat-checkbox>
+    <mat-checkbox color="primary" [formControl]="nursingServiceControl">خدمات پرستاری</mat-checkbox>
+  </div>
+</div>

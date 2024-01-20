@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { SearchType } from '../../../../search-service/search-service.component';
 
 @Component({
   selector: 'app-add-general-service',
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./add-general-service.component.css']
 })
 export class AddGeneralServiceComponent {
+
+  @Output() cancel = new EventEmitter<void>();
+
+  searchType = SearchType;
+
+  onCancel() {
+    this.cancel.emit();
+  }
 
 }

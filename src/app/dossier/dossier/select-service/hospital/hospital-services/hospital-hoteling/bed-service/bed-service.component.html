@@ -1,1 +1,7 @@
-<app-select-bed></app-select-bed>
+<app-select-bed [form]="bedForm"></app-select-bed>
+<br>
+<app-bed-list [bedControls]="selectedBeds(bedForm)"></app-bed-list>
+<br>
+<div class="d-flex justify-content-end" *ngIf="selectedBeds(bedForm).length">
+  <button class="btn btn-primary">افزودن</button>
+</div>

@@ -1,5 +1,10 @@
 <div class="row w-100 mx-auto">
-  <div class="col-4 gap-1" *ngFor="let bed of beds">
-    <mat-checkbox color="primary" class="text-nowrap">{{ bed.name }}</mat-checkbox>
+  <div class="col-4 gap-1" *ngFor="let bed of form.controls">
+    <mat-checkbox
+      color="primary"
+      class="text-nowrap"
+      [formControl]="getControl(bed)"
+      >{{ getBedName(bed) }}</mat-checkbox
+    >
   </div>
 </div>
