@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { HospitalCategoryConfig } from '../../models/hospital.models';
+import { GeneralServiceConfig, HospitalCategoryConfig } from '../../models/hospital.models';
 
 @Component({
   selector: 'app-general-service',
@@ -9,5 +9,11 @@ import { HospitalCategoryConfig } from '../../models/hospital.models';
 export class GeneralServiceComponent {
 
   @Input() config!: HospitalCategoryConfig;
+
+  generalServiceConfig() {
+    return {
+      serviceType: this.config.serviceType
+    } as GeneralServiceConfig;
+  }
 
 }

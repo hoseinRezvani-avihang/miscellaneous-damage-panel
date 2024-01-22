@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { HospitalCategoryConfig } from '../../models/hospital.models';
+import { HospitalCategoryConfig, HospitalType } from '../../models/hospital.models';
+import { ServiceType } from 'src/app/dossier/models/partner.models';
 
 @Component({
   selector: 'app-hospital-drug-equipment',
@@ -10,13 +11,21 @@ export class HospitalDrugEquipmentComponent {
 
   drugEuipmentConfigs: HospitalCategoryConfig[] = [
     {
-      title: "دارو"
+      title: "دارو",
+      serviceType: ServiceType.Pharmacy,
+      hospitalType: HospitalType.DRUG
     }, {
-      title: "لوازم بهداشتی"
+      title: "لوازم بهداشتی",
+      serviceType: ServiceType.Equipment,
+      hospitalType: HospitalType.COSMETICS
     }, {
-      title: "لوازم مصرفی"
+      title: "لوازم مصرفی",
+      serviceType: ServiceType.Equipment,
+      hospitalType: HospitalType.CONSUMABLES
     }, {
-      title: "تجهیزات"
+      title: "تجهیزات",
+      serviceType: ServiceType.Equipment,
+      hospitalType: HospitalType.EQUIPMENT
     },
   ]
 

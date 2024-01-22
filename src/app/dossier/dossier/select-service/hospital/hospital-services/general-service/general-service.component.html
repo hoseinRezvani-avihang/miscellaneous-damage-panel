@@ -15,7 +15,7 @@
         <span>{{ config.title }}</span>
       </div>
       <div *ngIf="generalCard.status" content>
-        <app-add-general-service (cancel)="generalCard.status = false"></app-add-general-service>
+        <app-add-general-service [config]="generalServiceConfig()" (cancel)="generalCard.status = false"></app-add-general-service>
       </div>
     </app-expand-card>
   </div>
@@ -36,6 +36,7 @@
       </div>
       <div *ngIf="level3Card.status" content>
         <app-add-level-3-service
+          [config]="generalServiceConfig()"
           (cancel)="level3Card.status = false"
         ></app-add-level-3-service>
       </div>

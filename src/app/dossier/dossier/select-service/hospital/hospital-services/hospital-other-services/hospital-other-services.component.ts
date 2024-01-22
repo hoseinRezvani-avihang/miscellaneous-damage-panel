@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HospitalCategoryConfig } from '../../models/hospital.models';
+import { ServiceType } from 'src/app/dossier/models/partner.models';
 
 @Component({
   selector: 'app-hospital-other-services',
@@ -10,11 +11,14 @@ export class HospitalOtherServicesComponent {
 
   otherConfigs: HospitalCategoryConfig[] = [
     {
-      title: "خدمات اورژانس"
+      title: "خدمات اورژانس",
+      serviceType: ServiceType.Clinic
     }, {
-      title: "سی پی آر"
+      title: "سی پی آر",
+      serviceType: ServiceType.Clinic
     }, {
-      title: "سایر"
+      title: "سایر",
+      serviceType: ServiceType.Other
     }
   ]
 

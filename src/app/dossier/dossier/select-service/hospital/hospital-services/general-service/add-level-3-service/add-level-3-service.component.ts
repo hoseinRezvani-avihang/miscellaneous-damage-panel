@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { GeneralServiceConfig } from '../../../models/hospital.models';
 
 @Component({
   selector: 'app-add-level-3-service',
@@ -7,6 +8,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class AddLevel3ServiceComponent {
 
+  @Input() config!: GeneralServiceConfig;
   @Output() cancel = new EventEmitter<void>();
 
   onCancel() {

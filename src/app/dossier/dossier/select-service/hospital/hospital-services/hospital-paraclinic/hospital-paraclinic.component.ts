@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { HospitalCategoryConfig } from '../../models/hospital.models';
+import { HospitalCategoryConfig, HospitalType } from '../../models/hospital.models';
+import { ServiceType } from 'src/app/dossier/models/partner.models';
 
 @Component({
   selector: 'app-hospital-paraclinic',
@@ -10,15 +11,25 @@ export class HospitalParaclinicComponent {
 
   paraclinicConfigs: HospitalCategoryConfig[] = [
     {
-      title: "آزمایشگاه"
+      title: "آزمایشگاه",
+      serviceType: ServiceType.Labratoar,
+      hospitalType: HospitalType.LABORATORY
     }, {
-      title: "پاتوبیولوژی"
+      title: "پاتوبیولوژی",
+      serviceType: ServiceType.Labratoar,
+      hospitalType: HospitalType.PATHOBIOLOGY
     }, {
-      title: "تصویربرداری"
+      title: "تصویربرداری",
+      serviceType: ServiceType.Imaging,
+      hospitalType: HospitalType.IMAGING
     }, {
-      title: "خدمات قلب"
+      title: "خدمات قلب",
+      serviceType: ServiceType.Imaging,
+      hospitalType: HospitalType.CPR
     },{
-      title: "فیزیوتراپی"
+      title: "فیزیوتراپی",
+      serviceType: ServiceType.Physio,
+      hospitalType: HospitalType.PHYSIOTHERAPY
     },
   ]
 

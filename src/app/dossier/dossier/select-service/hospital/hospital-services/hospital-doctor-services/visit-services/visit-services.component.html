@@ -1,1 +1,7 @@
-<app-select-visit></app-select-visit>
+<app-select-visit [form]="visitForm"></app-select-visit>
+<br>
+<app-visit-list [visitControls]="selectedVisit(visitForm)"></app-visit-list>
+<br>
+<div class="d-flex justify-content-end" *ngIf="selectedVisit(visitForm).length">
+  <button class="btn btn-primary">افزودن</button>
+</div>

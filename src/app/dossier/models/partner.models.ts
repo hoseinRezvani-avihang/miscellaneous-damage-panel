@@ -23,6 +23,10 @@ export enum ServiceType {
   HospitalOther = 'H',
   Surgury = 'S',
   Other = 'A',
+  EQUP = 'equp',
+  SRVC = 'srvc',
+  DRUG = 'drug',
+  DNTS ='dnts',
 }
 
 export class PartnerType {

@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SearchType } from '../../../../search-service/search-service.component';
+import { GeneralServiceConfig } from '../../../models/hospital.models';
 
 @Component({
   selector: 'app-add-general-service',
@@ -8,6 +9,7 @@ import { SearchType } from '../../../../search-service/search-service.component'
 })
 export class AddGeneralServiceComponent {
 
+  @Input() config!: GeneralServiceConfig;
   @Output() cancel = new EventEmitter<void>();
 
   searchType = SearchType;

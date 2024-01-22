@@ -1,1 +1,4 @@
-<p>visit-list works!</p>
+<app-visit-item
+  *ngFor="let visitControl of visitControls"
+  [visitControl]="visitControl"
+></app-visit-item>
