@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SearchServiceComponent } from '../search-service/search-service.component';
+import { SearchServiceComponent, SearchType } from '../search-service/search-service.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SubsDetail, OutpatientServiceInput, SearchServiceResult } from 'src/app/dossier/models/service.models';
 import { DossierSubsService } from '../services/dossier-subs.service';
 import { finalize } from 'rxjs';
+import { ServiceSearchConfig } from 'src/app/dossier/models/dossier-core.models';
 
 @Component({
   selector: 'app-add-outpatient-service',
@@ -60,6 +61,13 @@ export class AddOutpatientServiceComponent implements OnInit {
         }
       });
   };
+
+  get searchConfig() {
+    return {
+      serviceType: this.config.serviceType,
+      searchType: SearchType.quick,
+    } as ServiceSearchConfig;
+  }
 
   close() {
     this.cancel.emit();

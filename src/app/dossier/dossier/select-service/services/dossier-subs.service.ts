@@ -14,7 +14,7 @@ import { DateUtil } from 'src/app/shared/utils/date.util';
 })
 export class DossierSubsService {
   constructor(
-    private dossierHttpService: HttpDossierService, 
+    private dossierHttpService: HttpDossierService,
     private dossierService: DossierCoreDataService
     ) {}
 
@@ -34,15 +34,15 @@ export class DossierSubsService {
       orderedPartnerId: this.cpartyInfo.value.cparty.partnerInfo.id as string,
       orderedCpartyId: this.cpartyInfo.value.cparty.contractPartyId,
       membernn: this.memberInfo.value.nationalNumber,
-      serviceNN: input.service.nationalNumber,
+      serviceNN: input.service.nationalNumber as string,
       cnt: input.cnt,
-      ISGlobal: input.ISGlobal, 
+      ISGlobal: input.ISGlobal,
       type: 'drug',
       deliveredDate: DateUtil.noSlashShamsi(this.partnerInfo.value.serviceDate),
       orderedDate: DateUtil.noSlashShamsi(this.cpartyInfo.value.serviceDate),
       claimAmount: input.claimAmount,
       subs: this.getRecheckCodes(),
-      isMarkMatchService: input.isMarkMatchService, 
+      isMarkMatchService: input.isMarkMatchService,
       reviewType: "notContract"
     };
 
@@ -54,7 +54,7 @@ export class DossierSubsService {
             omrResult: omrResult
           }
           this.dossierService.addSub(sub);
-        } 
+        }
       })
     )
   }

@@ -5,6 +5,8 @@ import { QuickSearchServiceComponent } from './quick-search-service/quick-search
 import { SelectSearchServiceComponent } from './select-search-service/select-search-service.component';
 import { SearchServiceResult } from 'src/app/dossier/models/service.models';
 import { ServiceType } from 'src/app/dossier/models/partner.models';
+import { HospitalType } from '../hospital/models/hospital.models';
+import { ServiceSearchConfig } from 'src/app/dossier/models/dossier-core.models';
 
 @Component({
   selector: 'app-search-service',
@@ -16,14 +18,13 @@ import { ServiceType } from 'src/app/dossier/models/partner.models';
 export class SearchServiceComponent implements OnInit {
 
 
-  @Input() searchType: SearchType = SearchType.quick;
-  @Input() serviceType: string = ServiceType.Clinic;
+  @Input() config!: ServiceSearchConfig;
   @Output() selectService = new EventEmitter<SearchServiceResult>();
 
   quickSearch = false;;
 
   ngOnInit(): void {
-    this.quickSearch = this.searchType === SearchType.quick;
+    this.quickSearch = this.config.searchType === SearchType.quick;
   }
 
   onSelectService(service: SearchServiceResult) {

@@ -27,8 +27,8 @@ export const createDrugInfo = (subs: Subs[]) => {
 
 export const convertDrugService = (drugService: Subs) => {
   let drug: DrugInfo = {
-    drugName: drugService.detail.service.fullName,
-    DrugNN: drugService.detail.service.nationalNumber,
+    drugName: drugService.detail.service.fullName as string,
+    DrugNN: drugService.detail.service.nationalNumber as string,
     ircCode: drugService.detail.ISGlobal,
     drugNumber: drugService.detail.cnt.toString(),
     numberOfPeriod: drugService.detail.numberOfPeriod.toString(),

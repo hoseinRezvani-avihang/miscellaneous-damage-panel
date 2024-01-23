@@ -2,9 +2,14 @@ import { Injectable } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Bed } from '../models/Bed.models';
 import { Visit } from '../models/Visit.models';
+import { HospitalServiceSymbol, HospitalSubs } from '../models/Hospital-services.model';
+import { Subs } from 'src/app/dossier/models/service.models';
 
 @Injectable()
 export class HospitalService {
+
+  constructor() { }
+
 
   // ================== beds service ==================
 
@@ -38,6 +43,39 @@ export class HospitalService {
     ...this.visitFormControls
   ])
 
+  // ================== visit service ==================
 
-  constructor() { }
+  hospitalSubs: HospitalSubs = {
+    doctorServices: {
+      [HospitalServiceSymbol.visitInWard]: [] as Subs[],
+      [HospitalServiceSymbol.surgeon]: [] as Subs[],
+      [HospitalServiceSymbol.consultingInWarded]: [] as Subs[],
+      [HospitalServiceSymbol.hospitalDental]: [] as Subs[],
+    },
+    drugAndEquipServices: {
+      [HospitalServiceSymbol.drug]: [] as Subs[],
+      [HospitalServiceSymbol.cosmetics]: [] as Subs[],
+      [HospitalServiceSymbol.consumables]: [] as Subs[],
+      [HospitalServiceSymbol.equipment]: [] as Subs[],
+    },
+    paraclinicServices: {
+      [HospitalServiceSymbol.laboratory]: [] as Subs[],
+      [HospitalServiceSymbol.pathobiology]: [] as Subs[],
+      [HospitalServiceSymbol.imaging]: [] as Subs[],
+      [HospitalServiceSymbol.echo]: [] as Subs[],
+      [HospitalServiceSymbol.physiotherapy]: [] as Subs[],
+    },
+    hotelingServices: {
+      [HospitalServiceSymbol.nursingCare]: [] as Subs[],
+      [HospitalServiceSymbol.nursingServices]: [] as Subs[],
+      [HospitalServiceSymbol.bed]: [] as Subs[],
+    },
+    otherServices: {
+      [HospitalServiceSymbol.emergencyServices]: [] as Subs[],
+      [HospitalServiceSymbol.cpr]: [] as Subs[],
+      [HospitalServiceSymbol.other]: [] as Subs[],
+
+    }
+  };
+
 }

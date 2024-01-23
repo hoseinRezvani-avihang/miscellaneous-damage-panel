@@ -1,6 +1,8 @@
+import { HospitalType } from "../dossier/select-service/hospital/models/hospital.models";
+import { SearchType } from "../dossier/select-service/search-service/search-service.component";
 import { CitizenResult } from "./citizen.models";
 import { SaveCpartyInfo } from "./cparty.models";
-import { SaveParnterInfo } from "./partner.models";
+import { SaveParnterInfo, ServiceType } from "./partner.models";
 import { DrugInfo, ShareInfoItems, SharedForm } from "./service.models";
 
 export interface DossierStep {
@@ -221,4 +223,10 @@ export interface DossierSave {
 	// deductionReason: null | string,
 	// deductionDescription: null | string,
 	// hasInsuredMark: boolean
+}
+
+export interface ServiceSearchConfig {
+  searchType: SearchType;
+  serviceType: ServiceType;
+  hospitalType: HospitalType;
 }

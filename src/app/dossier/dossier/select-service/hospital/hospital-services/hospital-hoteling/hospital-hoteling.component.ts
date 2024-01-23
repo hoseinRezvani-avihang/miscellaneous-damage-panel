@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HospitalCategoryConfig, HospitalType } from '../../models/hospital.models';
 import { ServiceType } from 'src/app/dossier/models/partner.models';
+import { HospitalService } from '../../models/Hospital-services.model';
 
 @Component({
   selector: 'app-hospital-hoteling',
@@ -12,18 +13,18 @@ export class HospitalHotelingComponent {
   hospitalCareConfigs: HospitalCategoryConfig[] = [
     {
       title: "مراقبت پرستاری",
-      serviceType: ServiceType.Clinic,
-      hospitalType: HospitalType.NURSINGCARE
+      serviceType: HospitalService.nursingCare.serviceType,
+      hospitalType: HospitalService.nursingCare.hospitalType
     }, {
       title: "خدمت پرستاری",
-      serviceType: ServiceType.Clinic,
-      hospitalType: HospitalType.NURSINGSERVICES
+      serviceType: HospitalService.nursingServices.serviceType,
+      hospitalType: HospitalService.nursingServices.hospitalType
     }
   ]
 
   hotelingConfig: HospitalCategoryConfig = {
     title: "تخت",
-    serviceType: ServiceType.SRVC
+    serviceType: HospitalService.bed.serviceType
   }
 
 }

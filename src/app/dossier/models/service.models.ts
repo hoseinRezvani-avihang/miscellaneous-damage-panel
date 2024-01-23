@@ -1,11 +1,13 @@
 import { FormControl, FormGroup } from "@angular/forms";
 import { OmrResult } from "./dossier-core.models";
+import { HospitalType } from "../dossier/select-service/hospital/models/hospital.models";
 
 export interface SearchServiceInput {
   searchClause: string;
   maxResultCount: number;
   serviceType: string;
   isIrc: boolean;
+  hospitalType?: HospitalType
 }
 
 export interface SearchServiceResult {
@@ -29,7 +31,7 @@ export interface State {
 }
 
 export interface SubsDetail {
-  service: SearchServiceResult;
+  service: Partial<SearchServiceResult>;
   cnt: number;
   isMarkMatchService: boolean;
   claimAmount: number | null;

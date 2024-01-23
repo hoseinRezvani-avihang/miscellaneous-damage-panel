@@ -5,6 +5,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { SearchServiceInput, SearchServiceResult } from 'src/app/dossier/models/service.models';
 import { DossierSubsService } from '../../services/dossier-subs.service';
 import { BehaviorSubject } from 'rxjs';
+import { HospitalType } from '../../hospital/models/hospital.models';
 
 @Component({
   selector: 'app-select-search-service',
@@ -18,6 +19,7 @@ export class SelectSearchServiceComponent {
   @Input() title = 'جستجوی خدمت';
   @Input() serviceType = "D"
   @Input() control = new FormControl(null);
+  @Input() hospitalType!: HospitalType;
 
   @Output() selectService = new EventEmitter<SearchServiceResult>();
 
@@ -32,9 +34,10 @@ export class SelectSearchServiceComponent {
   searchService() {
     let input: SearchServiceInput = {
       isIrc: false,
-      maxResultCount: 10, 
+      maxResultCount: 10,
       searchClause: "GNRL",
-      serviceType: this.serviceType
+      serviceType: this.serviceType,
+      hospitalType: this.hospitalType
     };
     if ((this.options.getValue() ?? []).length) return;
     this.message.next('در حال جستجو ...');

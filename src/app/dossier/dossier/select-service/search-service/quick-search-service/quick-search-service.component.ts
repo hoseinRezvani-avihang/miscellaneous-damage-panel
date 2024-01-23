@@ -19,6 +19,7 @@ import {
   throwError,
 } from 'rxjs';
 import { FormControl, Validators } from '@angular/forms';
+import { HospitalType } from '../../hospital/models/hospital.models';
 
 @Component({
   selector: 'app-quick-search-service',
@@ -31,6 +32,7 @@ export class QuickSearchServiceComponent implements OnInit {
   @Input() title = 'جستجوی خدمت';
   @Input() serviceType = 'D';
   @Input() control = new FormControl("", Validators.required);
+  @Input() hospitalType!: HospitalType;
 
   @Output() selectService = new EventEmitter<SearchServiceResult>();
 
@@ -90,6 +92,7 @@ export class QuickSearchServiceComponent implements OnInit {
       maxResultCount: 10,
       searchClause: searchClause,
       serviceType: this.serviceType,
+      hospitalType: this.hospitalType,
     };
     return this.dossierSubs.searchService(input);
   }
