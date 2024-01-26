@@ -40,7 +40,8 @@ export class AddOutpatientServiceComponent implements OnInit {
       cpartyId: new FormControl(this.config.cparties[0].id),
       description: new FormControl(null),
       consumption: new FormControl(null),
-      numberOfPeriod: new FormControl(1)
+      numberOfPeriod: new FormControl(1),
+      serviceType: new FormControl(this.config.serviceType)
     });
   }
 
@@ -64,7 +65,7 @@ export class AddOutpatientServiceComponent implements OnInit {
 
   get searchConfig() {
     return {
-      serviceType: this.config.serviceType,
+      serviceType: this.config.searchType,
       searchType: SearchType.quick,
     } as ServiceSearchConfig;
   }

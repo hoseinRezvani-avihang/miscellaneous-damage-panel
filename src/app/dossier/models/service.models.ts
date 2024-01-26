@@ -1,6 +1,8 @@
 import { FormControl, FormGroup } from "@angular/forms";
 import { OmrResult } from "./dossier-core.models";
 import { HospitalType } from "../dossier/select-service/hospital/models/hospital.models";
+import { ServiceType } from "./partner.models";
+import { HospitalService } from "../dossier/select-service/hospital/models/Hospital-services.model";
 
 export interface SearchServiceInput {
   searchClause: string;
@@ -40,6 +42,7 @@ export interface SubsDetail {
   description: string | null;
   consumption: string | null;
   numberOfPeriod: number;
+  type?: HospitalService
 };
 
 export interface Subs {
@@ -49,7 +52,8 @@ export interface Subs {
 
 export interface OutpatientServiceInput {
   cparties: { id: string; name: string }[];
-  serviceType: string,
+  serviceType: ServiceType,
+  searchType: ServiceType
 };
 
 export interface SubsUI {
@@ -86,31 +90,34 @@ export const SHAREINFO: Array<keyof ShareInfoItems> = ["basePart", "insuredPart"
 
 export interface SharedForm {
   paiedAmount: null | number,
-  outOfCover: number,
-  deduction: number,
-  basePart: number,
-  insuredPart: number,
-  otherPart: number,
-  supplementaryPart: number,
-  veteranPart: number,
-  payableAmount: number,
+  outOfCover: number | null,
+  deduction: number | null,
+  basePart: number | null,
+  insuredPart: number | null,
+  otherPart: number | null,
+  supplementaryPart: number | null,
+  veteranPart: number | null,
+  payableAmount: number | null,
+  totalAmount: number | null
+  orgAmount: number | null
+  insuredAmount: number | null
 };
 
 export interface DrugInfo {
-    drugName: string
-    ircCode: boolean
-    drugNumber: string
-    numberOfPeriod: string
-    drugConsumption: string
-    drugExplain: string
-    drugConsumptionAmont: string
-    DrugNN: string
-    finalOrgAmount: any
-    total: number
-    orgAmount: number
-    insuredAmount: number
-    showAlert: string
-    shape: string
-    isMarkMatchService: boolean,
-    omrResult: OmrResult
+  drugName: string
+  ircCode: boolean
+  drugNumber: string
+  numberOfPeriod: string
+  drugConsumption: string
+  drugExplain: string
+  drugConsumptionAmont: string
+  DrugNN: string
+  finalOrgAmount: any
+  total: number
+  orgAmount: number
+  insuredAmount: number
+  showAlert: string
+  shape: string
+  isMarkMatchService: boolean,
+  omrResult: OmrResult
 }

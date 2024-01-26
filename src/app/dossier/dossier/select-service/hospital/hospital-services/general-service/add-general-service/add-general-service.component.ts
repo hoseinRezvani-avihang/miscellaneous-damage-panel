@@ -29,7 +29,7 @@ export class AddGeneralServiceComponent {
 
   get searchConfig() {
     return {
-      serviceType: this.config.serviceType,
+      serviceType: this.config.type.serviceSearchType,
       searchType: SearchType.select,
       hospitalType: this.config.hospitalType
     } as ServiceSearchConfig;

@@ -12,25 +12,22 @@ export class HospitalDoctorServicesComponent {
 
   visitConfig: HospitalCategoryConfig = {
     title: "ویزیت در بخش",
-    serviceType: HospitalService.visit.serviceType,
+    type: HospitalService.visit
   }
 
   surgonConfig: HospitalCategoryConfig = {
     title: "جراح",
-    serviceType: HospitalService.surgeon.serviceType,
-    hospitalType: HospitalService.surgeon.hospitalType
+    type: HospitalService.surgeon
   }
 
   consultantConfig: HospitalCategoryConfig = {
     title: "مشاوره در بخش",
-    serviceType: HospitalService.consulting.serviceType,
-    hospitalType: HospitalService.consulting.hospitalType
+    type: HospitalService.visit
   }
 
   hospitalDentalConfig: HospitalCategoryConfig = {
     title: "بیمارستانی دندانپزشکی",
-    serviceType: HospitalService.hospitalDental.serviceType,
-    hospitalType: HospitalService.hospitalDental.hospitalType
+    type: HospitalService.hospitalDental
   }
 
 }

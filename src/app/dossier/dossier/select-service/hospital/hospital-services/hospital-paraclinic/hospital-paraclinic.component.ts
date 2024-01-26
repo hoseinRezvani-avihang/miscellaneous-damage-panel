@@ -13,24 +13,19 @@ export class HospitalParaclinicComponent {
   paraclinicConfigs: HospitalCategoryConfig[] = [
     {
       title: "آزمایشگاه",
-      serviceType: HospitalService.labratoar.serviceType,
-      hospitalType: HospitalService.labratoar.hospitalType
+      type: HospitalService.labratoar
     }, {
       title: "پاتوبیولوژی",
-      serviceType: HospitalService.pathobiology.serviceType,
-      hospitalType: HospitalService.pathobiology.hospitalType
+      type: HospitalService.pathobiology
     }, {
       title: "تصویربرداری",
-      serviceType: HospitalService.imaging.serviceType,
-      hospitalType: HospitalService.imaging.hospitalType
+      type: HospitalService.imaging
     }, {
       title: "خدمات قلب",
-      serviceType: HospitalService.echo.serviceType,
-      hospitalType: HospitalService.echo.hospitalType
+      type: HospitalService.echo
     },{
       title: "فیزیوتراپی",
-      serviceType: HospitalService.physiotherapy.serviceType,
-      hospitalType: HospitalService.physiotherapy.hospitalType
+      type: HospitalService.physiotherapy
     },
   ]
 

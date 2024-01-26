@@ -13,18 +13,16 @@ export class HospitalHotelingComponent {
   hospitalCareConfigs: HospitalCategoryConfig[] = [
     {
       title: "مراقبت پرستاری",
-      serviceType: HospitalService.nursingCare.serviceType,
-      hospitalType: HospitalService.nursingCare.hospitalType
+      type: HospitalService.nursingCare
     }, {
       title: "خدمت پرستاری",
-      serviceType: HospitalService.nursingServices.serviceType,
-      hospitalType: HospitalService.nursingServices.hospitalType
+      type: HospitalService.nursingServices
     }
   ]
 
   hotelingConfig: HospitalCategoryConfig = {
     title: "تخت",
-    serviceType: HospitalService.bed.serviceType
+    type: HospitalService.bed
   }
 
 }

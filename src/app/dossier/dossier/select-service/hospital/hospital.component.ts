@@ -5,9 +5,6 @@ import { HospitalService } from './services/hospital.service';
   selector: 'app-hospital',
   templateUrl: './hospital.component.html',
   styleUrls: ['./hospital.component.css'],
-  providers: [
-    HospitalService
-  ]
 })
 export class HospitalComponent {
 

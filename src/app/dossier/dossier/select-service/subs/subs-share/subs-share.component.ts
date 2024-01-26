@@ -22,6 +22,11 @@ export class SubsShareComponent implements OnInit {
     this.shareInfoFactors = this.calcuateFactor();
     setTimeout(() => {
       this.paiedAmountControl.patchValue(shares.totalAmount);
+      this.shareForm.patchValue({
+        totalAmount: shares.totalAmount,
+        orgAmount: shares.orgAmount,
+        insuredAmount: shares.insuredAmount
+      })
     }, 0);
   };
 
@@ -37,6 +42,9 @@ export class SubsShareComponent implements OnInit {
     supplementaryPart: new FormControl<null | number>(0),
     veteranPart: new FormControl<null | number>(0),
     payableAmount: new FormControl<null | number>(0),
+    totalAmount: new FormControl<null | number>(0),
+    orgAmount: new FormControl<null | number>(0),
+    insuredAmount: new FormControl<null | number>(0),
   });
 
   paiedAmountControl = this.control('paiedAmount');

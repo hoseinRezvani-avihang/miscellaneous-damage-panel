@@ -1,5 +1,5 @@
 <div class="row w-100 mx-auto">
-  <div [ngClass]="generalCard.status ? 'col-12' : 'col-6'">
+  <div [ngClass]="generalCard.status ? 'col-12 my-4' : 'col-6'">
     <app-expand-card #generalCard>
       <div
         *ngIf="!generalCard.status"
@@ -15,11 +15,11 @@
         <span>{{ config.title }}</span>
       </div>
       <div *ngIf="generalCard.status" content>
-        <app-add-general-service (selectService)="onSelectService($event)" [config]="generalServiceConfig()" (cancel)="generalCard.status = false"></app-add-general-service>
+        <app-add-general-service [config]="generalServiceConfig()" (cancel)="generalCard.status = false"></app-add-general-service>
       </div>
     </app-expand-card>
   </div>
-  <div [ngClass]="level3Card.status ? 'col-12' : 'col-6'">
+  <div [ngClass]="level3Card.status ? 'col-12 my-4' : 'col-6'">
     <app-expand-card #level3Card>
       <div
         *ngIf="!level3Card.status"
@@ -37,6 +37,7 @@
       <div *ngIf="level3Card.status" content>
         <app-add-level-3-service
           [config]="generalServiceConfig()"
+          (addService)="onAddService($event)"
           (cancel)="level3Card.status = false"
         ></app-add-level-3-service>
       </div>

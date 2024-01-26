@@ -3,18 +3,22 @@ import { CitizenResult } from '../models/citizen.models';
 import { BehaviorSubject } from 'rxjs';
 import { DossierSave, DossierStep } from '../models/dossier-core.models';
 import { ObjectUtil } from 'src/app/shared/utils/object-util';
-import { PartnerInfo, SelectPartner } from '../models/partner.models';
+import { PartnerInfo, PartnerTypeEnum, SelectPartner } from '../models/partner.models';
 import { CpartyInfo } from '../models/cparty.models';
 import { SharedForm, Subs } from '../models/service.models';
 import { createDrugInfo, prepareCparty, preparePartner } from '../models/save-dossier-util';
 import { calculateBankPart, calculateFinalOrgAmout, calculateTotals } from '../models/dossier.util';
+import { HospitalService } from '../dossier/select-service/hospital/services/hospital.service';
+import { HospitalService as HospitalServiceModel } from '../dossier/select-service/hospital/models/Hospital-services.model';
+import { HospitalSubs, HospitalSubsCategory } from '../dossier/select-service/hospital/models/Hospital-services.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DossierCoreDataService {
   constructor(
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private hospitalService: HospitalService
   ) { }
 
   // ============= save dossier navigation ===========
@@ -130,11 +134,25 @@ export class DossierCoreDataService {
   // ================== subs info ===================
 
   subs = new BehaviorSubject<Subs[]>([]);
+  hospitalSubs = new BehaviorSubject<HospitalSubs>(this.hospitalService.hospitalSubs);
 
   addSub(sub: Subs) {
-    let subs = this.subs.value;
-    subs.push(sub);
-    this.subs.next(subs);
+
+    if (this.isOutPatient) {
+      let subs = structuredClone(this.subs.value);
+      subs.push(sub);
+      this.subs.next(subs);
+    } else {
+      let subs = structuredClone(this.hospitalSubs.value) as HospitalSubs;
+      if (subs) {
+        if (sub.detail.type) {
+          let hospitalType = sub.detail.type.hospitalCategory as keyof HospitalSubs;
+          let hospitalServiceSymbol = sub.detail.type.symbol as keyof HospitalSubsCategory;
+          subs[hospitalType][hospitalServiceSymbol].push(sub);
+          this.hospitalSubs.next(subs);
+        }
+      }
+    }
   }
 
   deleteSub(recheckCode: string) {
@@ -153,12 +171,23 @@ export class DossierCoreDataService {
     this.subs.next([])
   }
 
+
   // =================== share Info =====================
 
   shareInfo = new BehaviorSubject<SharedForm | null>(null);
+  hospitalShareInfo = new BehaviorSubject<any>({});
 
   setShareInfo(shareInfo: SharedForm) {
     this.shareInfo.next(shareInfo);
+  }
+
+  updateHospitalShares(shares: SharedForm, type: HospitalServiceModel) {
+    let shareInfo = structuredClone(this.hospitalShareInfo.value);
+    let hospitalCategory = type?.hospitalCategory as keyof HospitalSubs;
+    let hospitalServiceSymbol = type?.symbol as keyof HospitalSubsCategory;
+    shareInfo[hospitalCategory] = {};
+    shareInfo[hospitalCategory][hospitalServiceSymbol] = shares;
+    this.hospitalShareInfo.next(shareInfo)
   }
 
   // ===================== save dossier ================
@@ -189,6 +218,10 @@ export class DossierCoreDataService {
 
     console.log(dossierInfo);
 
+  }
+
+  get isOutPatient() {
+    return this.partnerInfo.value?.partnerType !== PartnerTypeEnum.hospital
   }
 
 }

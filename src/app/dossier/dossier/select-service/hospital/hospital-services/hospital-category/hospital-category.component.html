@@ -7,21 +7,28 @@
   >
     {{ config.title }}
   </div>
-  <br>
+  <br />
   <ng-container *ngIf="open">
     <div>
-      <app-hospital-category-shares></app-hospital-category-shares>
+      <app-hospital-category-shares
+        [shares]="shares"
+      ></app-hospital-category-shares>
     </div>
-    <br>
+    <br />
     <app-divider>
       <div class="px-4">خدمات</div>
     </app-divider>
-    <br>
+    <br />
     <div>
       <ng-content></ng-content>
     </div>
-    <div>
-      <!-- <app-subs-share></app-subs-share> -->
+    <div *ngIf="subs?.subs?.length">
+      <br />
+      <br />
+      <app-subs
+        [subs]="subs"
+        (updateShares)="onUpdateShares($event)"
+      ></app-subs>
     </div>
   </ng-container>
 </div>

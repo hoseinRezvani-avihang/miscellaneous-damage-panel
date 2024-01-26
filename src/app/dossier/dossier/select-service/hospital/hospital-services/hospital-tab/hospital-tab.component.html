@@ -3,7 +3,7 @@
   <div class="shares text-muted">
     <div class="d-flex justify-content-between gap-5">
       <div>مبلغ کل:</div>
-      <div>0</div>
+      <div>{{ (tabInfo.shares?.totalAmount ?? 0) | seperator }}</div>
     </div>
 
     <div class="d-flex justify-content-between">

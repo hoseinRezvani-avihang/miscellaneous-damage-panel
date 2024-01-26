@@ -8,12 +8,14 @@ import {
 } from '../../models/partner.models';
 import {
   OutpatientServiceInput,
+  SharedForm,
   SubItemUI,
   Subs,
   SubsUI,
 } from '../../models/service.models';
 import { ServiceEventService } from '../../services/service-event.service';
 import { calculateTotals } from '../../models/dossier.util';
+import { parseSubs } from '../../models/save-dossier-util';
 
 @Component({
   selector: 'app-select-service',
@@ -47,7 +49,8 @@ export class SelectServiceComponent implements OnInit, OnDestroy {
           cparties: parnterInfo.partner.cPartiesInfo.map(
             (value: CPartiesInfo) => ({ name: value.fullName, id: value.id })
           ),
-          serviceType: PartnerType.getParnterBYSymbol(this.dossierService.partnerInfo.value?.partnerType as PartnerTypeEnum).serviceType
+          serviceType: PartnerType.getParnterBYSymbol(this.dossierService.partnerInfo.value?.partnerType as PartnerTypeEnum).serviceType,
+          searchType: PartnerType.getParnterBYSymbol(this.dossierService.partnerInfo.value?.partnerType as PartnerTypeEnum).searchType,
         };
       }
     });
@@ -55,20 +58,7 @@ export class SelectServiceComponent implements OnInit, OnDestroy {
 
   onSubsUpdate() {
     this.subsInfo.subscribe((subs: Subs[]) => {
-      this.subs['subs'] = subs.map((subItem: Subs) => {
-        let subUI: SubItemUI = {
-          serviceName: subItem.omrResult.subInfo.service.baseInfo.name,
-          serviceNN: subItem.omrResult.subInfo.service.baseInfo.nationalNumber,
-          recheckCode: subItem.omrResult.reCheckCode,
-          totalAmount: subItem.omrResult.price.totalAmount,
-          orgAmount: subItem.omrResult.price.orgAmount,
-          insuredAmount: subItem.omrResult.price.insuredAmount,
-        };
-
-        return subUI;
-      });
-
-      this.subs['subShares'] = calculateTotals(subs);
+      this.subs = parseSubs(subs);
     });
   }
 
@@ -76,6 +66,10 @@ export class SelectServiceComponent implements OnInit, OnDestroy {
     this.serviceEvent.deleteSub.subscribe((recheckCode: string) => {
       this.dossierService.deleteSub(recheckCode);
     });
+  }
+
+  onUpdateShares(shares: SharedForm) {
+    this.dossierService.setShareInfo(shares)
   }
 
   getName(symbol: PartnerTypeEnum) {

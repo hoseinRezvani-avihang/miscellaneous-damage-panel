@@ -21,7 +21,7 @@
 </app-expand-card>
 
 <div class="mt-5" *ngIf="subs.subs?.length">
-  <app-subs [subs]="subs"></app-subs>
+  <app-subs [subs]="subs" (updateShares)="onUpdateShares($event)"></app-subs>
 </div>
 
 

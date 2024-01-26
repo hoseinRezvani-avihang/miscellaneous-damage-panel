@@ -11,7 +11,6 @@ import { PartnerType, SelectPartner } from '../models/partner.models';
     DossierCoreDataService,
     DossierSubsService
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DossierComponent implements OnInit {
 

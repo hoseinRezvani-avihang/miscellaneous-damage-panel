@@ -3,9 +3,13 @@ import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Bed } from '../models/Bed.models';
 import { Visit } from '../models/Visit.models';
 import { HospitalServiceSymbol, HospitalSubs } from '../models/Hospital-services.model';
-import { Subs } from 'src/app/dossier/models/service.models';
+import { SharedForm, Subs } from 'src/app/dossier/models/service.models';
 
-@Injectable()
+@Injectable(
+  {
+    providedIn: "root"
+  }
+)
 export class HospitalService {
 
   constructor() { }

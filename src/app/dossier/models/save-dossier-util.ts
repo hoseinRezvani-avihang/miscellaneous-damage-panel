@@ -1,6 +1,7 @@
 import { CpartyInfo, SaveCpartyInfo } from "./cparty.models";
+import { calculateTotals } from "./dossier.util";
 import { SaveParnterInfo, SelectPartner } from "./partner.models";
-import { DrugInfo, Subs } from "./service.models";
+import { DrugInfo, SubItemUI, Subs, SubsUI } from "./service.models";
 
 export const prepareCparty = (cpartyInfo: CpartyInfo): SaveCpartyInfo => {
   return {
@@ -23,6 +24,25 @@ export const createDrugInfo = (subs: Subs[]) => {
   return subs.map((drugService: Subs) => {
     return convertDrugService(drugService);
   })
+}
+
+export const parseSubs = (subsInfo: Subs[]) => {
+  let subs: SubsUI = { subs: [], subShares: {} };
+  subs['subs'] = subsInfo.map((subItem: Subs) => {
+    let subUI: SubItemUI = {
+      serviceName: subItem.omrResult.subInfo.service.baseInfo.name,
+      serviceNN: subItem.omrResult.subInfo.service.baseInfo.nationalNumber,
+      recheckCode: subItem.omrResult.reCheckCode,
+      totalAmount: subItem.omrResult.price.totalAmount,
+      orgAmount: subItem.omrResult.price.orgAmount,
+      insuredAmount: subItem.omrResult.price.insuredAmount,
+    };
+
+    return subUI;
+  });
+
+  subs['subShares'] = calculateTotals(subsInfo);
+  return subs;
 }
 
 export const convertDrugService = (drugService: Subs) => {

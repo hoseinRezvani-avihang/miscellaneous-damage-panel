@@ -12,6 +12,7 @@ export enum PartnerTypeEnum {
 }
 
 export enum ServiceType {
+
   Equipment ='E',
   Clinic ='O',
   Pharmacy ='D',
@@ -23,25 +24,28 @@ export enum ServiceType {
   HospitalOther = 'H',
   Surgury = 'S',
   Other = 'A',
+
   EQUP = 'equp',
   SRVC = 'srvc',
   DRUG = 'drug',
   DNTS ='dnts',
 }
 
-export class PartnerType {
-  static CLINIC = new PartnerType(PartnerTypeEnum.clinic, 'مطب', ServiceType.Clinic);
-  static DRUGSTORE = new PartnerType(PartnerTypeEnum.drugstore, 'داروخانه', ServiceType.Pharmacy);
-  static EQUIPMENT = new PartnerType(PartnerTypeEnum.equipment, 'تجهیزات', ServiceType.Equipment);
-  static LABORATORY = new PartnerType(PartnerTypeEnum.laboratory, 'آزمایشگاه', ServiceType.Labratoar);
-  static IMAGING = new PartnerType(PartnerTypeEnum.imaging, 'تصویربرداری', ServiceType.Imaging);
-  static PHYSIOTHERAPY = new PartnerType(PartnerTypeEnum.physiotherapy, 'توان بخشی', ServiceType.Physio);
-  static DENTAL = new PartnerType(PartnerTypeEnum.dental, 'دندانپزشکی', ServiceType.Dental);
-  static HOSPITAL = new PartnerType(PartnerTypeEnum.hospital, 'بیمارستان', ServiceType.Hoteling);
-  static OTHER = new PartnerType(PartnerTypeEnum.other, 'سایر', ServiceType.Other);
-  static INFIRMARY = new PartnerType(PartnerTypeEnum.infirmary, 'درمانگاه', ServiceType.Other);
 
-  constructor(public symbol: PartnerTypeEnum, public name: string, public serviceType: ServiceType) { }
+
+export class PartnerType {
+  static CLINIC = new PartnerType(PartnerTypeEnum.clinic, 'مطب', ServiceType.SRVC, ServiceType.Clinic);
+  static DRUGSTORE = new PartnerType(PartnerTypeEnum.drugstore, 'داروخانه', ServiceType.DRUG, ServiceType.Pharmacy);
+  static EQUIPMENT = new PartnerType(PartnerTypeEnum.equipment, 'تجهیزات', ServiceType.EQUP, ServiceType.Equipment);
+  static LABORATORY = new PartnerType(PartnerTypeEnum.laboratory, 'آزمایشگاه', ServiceType.SRVC, ServiceType.Labratoar);
+  static IMAGING = new PartnerType(PartnerTypeEnum.imaging, 'تصویربرداری', ServiceType.SRVC, ServiceType.Imaging);
+  static PHYSIOTHERAPY = new PartnerType(PartnerTypeEnum.physiotherapy, 'توان بخشی', ServiceType.SRVC, ServiceType.Physio);
+  static DENTAL = new PartnerType(PartnerTypeEnum.dental, 'دندانپزشکی', ServiceType.DNTS, ServiceType.Dental);
+  static HOSPITAL = new PartnerType(PartnerTypeEnum.hospital, 'بیمارستان', ServiceType.SRVC, ServiceType.Hoteling);
+  static OTHER = new PartnerType(PartnerTypeEnum.other, 'سایر', ServiceType.SRVC, ServiceType.Other);
+  static INFIRMARY = new PartnerType(PartnerTypeEnum.infirmary, 'درمانگاه', ServiceType.SRVC, ServiceType.Clinic);
+
+  constructor(public symbol: PartnerTypeEnum, public name: string, public serviceType: ServiceType, public searchType: ServiceType) { }
 
   static getTypes: PartnerType[] = [
     this.CLINIC,

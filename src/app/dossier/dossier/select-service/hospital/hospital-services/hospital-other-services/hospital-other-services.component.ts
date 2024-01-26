@@ -13,16 +13,13 @@ export class HospitalOtherServicesComponent {
   otherConfigs: HospitalCategoryConfig[] = [
     {
       title: "خدمات اورژانس",
-      serviceType: HospitalService.emergencyServices.serviceType,
-      hospitalType: HospitalService.emergencyServices.hospitalType
+      type: HospitalService.emergencyServices
     }, {
       title: "سی پی آر",
-      serviceType: HospitalService.cpr.serviceType,
-      hospitalType: HospitalService.cpr.hospitalType
+      type: HospitalService.cpr
     }, {
       title: "سایر",
-      serviceType: HospitalService.other.serviceType,
-      hospitalType: HospitalService.other.hospitalType
+      type: HospitalService.other
     }
   ]
 

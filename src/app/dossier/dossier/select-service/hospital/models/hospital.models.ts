@@ -1,4 +1,5 @@
 import { ServiceType } from "src/app/dossier/models/partner.models";
+import { HospitalService } from "./Hospital-services.model";
 
 export interface HospitalTabs {
   symbol: HospitalCategories,
@@ -16,13 +17,12 @@ export enum HospitalCategories {
 
 export interface HospitalCategoryConfig {
   title: string,
-  serviceType: ServiceType,
-  hospitalType?: HospitalType
+  type?: HospitalService
 }
 
 export interface GeneralServiceConfig {
-  serviceType: ServiceType,
-  hospitalType?: HospitalType
+  type: HospitalService,
+  hospitalType?: HospitalType,
 }
 
 export enum HospitalType {
