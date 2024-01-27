@@ -66,9 +66,9 @@ export class SubsShareComponent implements OnInit {
     this.paiedAmountControl.valueChanges.subscribe((paiedAmount: number) => {
       let outOfCover = Math.max(
         0,
-        price(paiedAmount) - (this.shares.totalAmount as number)
+        price(paiedAmount, false) as number - (this.shares.totalAmount as number)
       );
-      this.udpateShareInfos(price(paiedAmount));
+      this.udpateShareInfos(price(paiedAmount, false) as number);
       this.shareForm.patchValue({
         outOfCover,
         payableAmount: this.payableAmount(),
@@ -78,9 +78,9 @@ export class SubsShareComponent implements OnInit {
     this.outOfCoverControl.valueChanges.subscribe((outOfCoverValue: number) => {
       let outOfCover = Math.max(
         0,
-        price(this.paiedAmountControl.value) - (this.shares.totalAmount as number)
+        price(this.paiedAmountControl.value, false) as number - (this.shares.totalAmount as number)
       );
-      let deduction = Math.max(outOfCover - price(outOfCoverValue), 0);
+      let deduction = Math.max(outOfCover - (price(outOfCoverValue, false) as number), 0);
       this.shareForm.patchValue({
         deduction,
       }, { emitEvent: false });

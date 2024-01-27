@@ -30,11 +30,15 @@ export class HospitalCategoryComponent implements OnInit {
   onSubsUpdate() {
     this.dossierService.hospitalSubs.subscribe((hospitalSubs: HospitalSubs) => {
 
-      let hospitalCategory = this.config.type?.hospitalCategory as keyof HospitalSubs;
-      let hospitalServiceSymbol = this.config.type?.symbol as keyof HospitalSubsCategory;
-
-      if (hospitalCategory && hospitalServiceSymbol) {
-        this.subs = parseSubs(hospitalSubs[hospitalCategory][hospitalServiceSymbol]);
+      if (hospitalSubs) {
+        let hospitalCategory = this.config.type?.hospitalCategory as keyof HospitalSubs;
+        let hospitalServiceSymbol = this.config.type?.symbol as keyof HospitalSubsCategory;
+  
+        if (hospitalCategory && hospitalServiceSymbol) {
+          if (hospitalSubs[hospitalCategory][hospitalServiceSymbol]) {
+            this.subs = parseSubs(hospitalSubs[hospitalCategory][hospitalServiceSymbol]);
+          }
+        }
       }
     })
   }

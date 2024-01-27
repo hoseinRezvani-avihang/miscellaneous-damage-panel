@@ -18,7 +18,7 @@
 
     <div class="d-flex justify-content-between">
       <div>مبلغ خارج از پوشش بیمه:</div>
-      <div>0</div>
+      <div>{{ (tabInfo.shares?.outOfCover ?? 0) | seperator }}</div>
     </div>
 
     <div class="d-flex justify-content-between">

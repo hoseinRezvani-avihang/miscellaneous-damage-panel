@@ -25,10 +25,15 @@ export class HospitalTabComponent implements OnInit {
   onUpdateShareInfo() {
     this.dossierService.hospitalShareInfo.subscribe((shareInfo: any) => {
       let shares: any = {};
-      let hospitalShare = this.dossierService.hospitalShareInfo.value?.[this.tabInfo.symbol];
+      let hospitalShare = shareInfo?.[this.tabInfo.symbol];
+      console.log(this.tabInfo.symbol, hospitalShare, );
+      
       if (hospitalShare) {
         shares['totalAmount'] = Object.values(hospitalShare).reduce((prev: number, curr: any) => {
           return prev + curr['totalAmount']
+        }, 0);
+        shares['outOfCover'] = Object.values(hospitalShare).reduce((prev: number, curr: any) => {
+          return prev + curr['outOfCover']
         }, 0);
         this.tabInfo.shares = shares;
       }

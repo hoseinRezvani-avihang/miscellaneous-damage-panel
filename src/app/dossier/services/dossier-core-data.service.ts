@@ -185,7 +185,7 @@ export class DossierCoreDataService {
     let shareInfo = structuredClone(this.hospitalShareInfo.value);
     let hospitalCategory = type?.hospitalCategory as keyof HospitalSubs;
     let hospitalServiceSymbol = type?.symbol as keyof HospitalSubsCategory;
-    shareInfo[hospitalCategory] = {};
+    shareInfo[hospitalCategory] = shareInfo[hospitalCategory] ?? {};
     shareInfo[hospitalCategory][hospitalServiceSymbol] = shares;
     this.hospitalShareInfo.next(shareInfo)
   }
