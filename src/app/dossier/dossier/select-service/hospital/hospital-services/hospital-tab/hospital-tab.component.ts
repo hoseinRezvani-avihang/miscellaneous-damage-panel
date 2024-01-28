@@ -26,8 +26,7 @@ export class HospitalTabComponent implements OnInit {
     this.dossierService.hospitalShareInfo.subscribe((shareInfo: any) => {
       let shares: any = {};
       let hospitalShare = shareInfo?.[this.tabInfo.symbol];
-      console.log(this.tabInfo.symbol, hospitalShare, );
-      
+
       if (hospitalShare) {
         shares['totalAmount'] = Object.values(hospitalShare).reduce((prev: number, curr: any) => {
           return prev + curr['totalAmount']

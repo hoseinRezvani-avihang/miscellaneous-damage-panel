@@ -61,7 +61,7 @@ export class HospitalService {
   static hospitalDental = new HospitalService(HospitalServiceSymbol.hospitalDental, 'بیمارستان دندانپزشکی', ServiceType.Dental,ServiceType.SRVC, HospitalType.DENTALHOSPITAL, HospitalCategories.doctorServices);
   static drug = new HospitalService(HospitalServiceSymbol.drug, 'دارو', ServiceType.DRUG,ServiceType.Pharmacy, HospitalType.DRUG, HospitalCategories.drugAndEquipServices);
   static cosmetics = new HospitalService(HospitalServiceSymbol.cosmetics, 'لوازم بهداشتی', ServiceType.EQUP,ServiceType.Equipment, HospitalType.COSMETICS, HospitalCategories.drugAndEquipServices);
-  static consumables = new HospitalService(HospitalServiceSymbol.visitInWard, 'لوازم مصرفی', ServiceType.EQUP,ServiceType.Equipment, HospitalType.CONSUMABLES, HospitalCategories.drugAndEquipServices);
+  static consumables = new HospitalService(HospitalServiceSymbol.consumables, 'لوازم مصرفی', ServiceType.EQUP,ServiceType.Equipment, HospitalType.CONSUMABLES, HospitalCategories.drugAndEquipServices);
   static equipment = new HospitalService(HospitalServiceSymbol.equipment, 'تجهیزات', ServiceType.EQUP,ServiceType.Equipment, HospitalType.EQUIPMENT, HospitalCategories.drugAndEquipServices);
   static labratoar = new HospitalService(HospitalServiceSymbol.laboratory, 'آزمایشگاه', ServiceType.Labratoar,ServiceType.Labratoar, HospitalType.LABORATORY, HospitalCategories.paraclinicServices);
   static pathobiology = new HospitalService(HospitalServiceSymbol.pathobiology, 'پاتوبیولوژی', ServiceType.Labratoar,ServiceType.Labratoar, HospitalType.PATHOBIOLOGY, HospitalCategories.paraclinicServices);

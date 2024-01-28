@@ -148,6 +148,7 @@ export class DossierCoreDataService {
         if (sub.detail.type) {
           let hospitalType = sub.detail.type.hospitalCategory as keyof HospitalSubs;
           let hospitalServiceSymbol = sub.detail.type.symbol as keyof HospitalSubsCategory;
+          console.log(hospitalType, hospitalServiceSymbol);
           subs[hospitalType][hospitalServiceSymbol].push(sub);
           this.hospitalSubs.next(subs);
         }
