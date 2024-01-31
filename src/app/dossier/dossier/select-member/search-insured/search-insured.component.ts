@@ -12,7 +12,7 @@ import { finalize } from 'rxjs';
 })
 export class SearchInsuredComponent implements OnInit {
 
-  searchControl = new FormControl("2529925291", Validators.required)
+  searchControl = new FormControl("0440809339", Validators.required)
   loading = false;
   @Output() selectMember = new EventEmitter<CitizenResult>();
 

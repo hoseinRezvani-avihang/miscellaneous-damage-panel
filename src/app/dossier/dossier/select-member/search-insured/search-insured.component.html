@@ -1,7 +1,7 @@
 <form class="center gap-2" (ngSubmit)="onSeach()">
   <mat-form-field appearance="outline">
     <mat-label class="iran-yekan">شماره ملی</mat-label>
-    <input type="text" matInput [formControl]="searchControl" />
+    <input type="text" matInput [formControl]="searchControl"/>
     <mat-error *ngIf="searchControl.invalid">
       وارد کردن کد ملی الزامی است.
     </mat-error>

@@ -36,8 +36,8 @@
       <td class="text-center">مبلغ قابل پرداخت</td>
     </tr>
     <tr>
+      <td class="text-center">{{ (shares?.paiedAmount ?? 0) | seperator }}</td>
       <td class="text-center">{{ (shares?.totalAmount ?? 0) | seperator }}</td>
-      <td class="text-center">{{ 0 }}</td>
       <td class="text-center">{{ (shares?.deduction ?? 0) | seperator }}</td>
       <td class="text-center">{{ (shares?.payableAmount ?? 0) | seperator }}</td>
     </tr>

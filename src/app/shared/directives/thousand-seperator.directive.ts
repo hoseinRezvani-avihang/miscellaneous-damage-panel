@@ -1,5 +1,5 @@
 import { Directive, ElementRef, HostListener, Renderer2 } from '@angular/core';
-import { NgControl } from '@angular/forms';
+import { FormControl, NgControl } from '@angular/forms';
 
 @Directive({
   selector: '[seperator]'
@@ -8,17 +8,21 @@ export class ThousandSeperatorDirective {
 
   constructor(private el: ElementRef, private control: NgControl, private renderer: Renderer2) { }
 
-  @HostListener('input', ['$event.target.value'])
+  @HostListener('ngModelChange', ['$event'])
   onInput(value: string) {
+    const parsedValue = value.toString();
+    const needComma = !parsedValue.includes(",") && parsedValue.length > 3;
+    console.log(parsedValue, needComma);
+    if (parsedValue && needComma) {
+      const isNegative = parsedValue.startsWith('-');
+      const cleanValue = parsedValue.replace(/[^\d]/g, '');
+      const formattedValue = cleanValue.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
-    const isNegative = value.startsWith('-');
-    const cleanValue = value.replace(/[^\d]/g, '');
-    const formattedValue = cleanValue.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
-    if (this.control.control) {
-      const newValue = isNegative ? `-${cleanValue}` : cleanValue;
-      this.control.control.setValue(parseFloat(newValue));
-      this.renderer.setProperty(this.el.nativeElement, 'value', formattedValue);
+      if (this.control.control) {
+        const newValue = isNegative ? `-${formattedValue}` : formattedValue;
+        (this.control.control as FormControl).setValue(newValue, {emitEvent: false});
+      }
     }
   }
 
