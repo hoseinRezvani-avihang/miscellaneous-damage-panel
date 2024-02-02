@@ -37,6 +37,7 @@
       <div *ngIf="level3Card.status" content>
         <app-add-level-3-service
           [config]="generalServiceConfig()"
+          [loading]="loading"
           (addService)="onAddService($event)"
           (cancel)="level3Card.status = false"
         ></app-add-level-3-service>

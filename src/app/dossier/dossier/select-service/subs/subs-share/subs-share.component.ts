@@ -72,6 +72,7 @@ export class SubsShareComponent implements OnInit {
       this.shareForm.patchValue({
         outOfCover,
         payableAmount: this.payableAmount(),
+        deduction: outOfCover ? this.control('deduction').value : 0
       }, { emitEvent: false });
     });
 
@@ -87,7 +88,10 @@ export class SubsShareComponent implements OnInit {
     });
 
     this.shareForm.valueChanges.subscribe((value) => {
-      this.updateShares.emit(value);
+      Object.keys(value).forEach((key: string) => {
+        value[key as keyof typeof value] = price(value[key as keyof typeof value] as any, false)
+      })
+      this.updateShares.emit(value); 
     })
   }
 

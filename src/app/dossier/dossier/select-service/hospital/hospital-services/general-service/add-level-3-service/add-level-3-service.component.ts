@@ -13,6 +13,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class AddLevel3ServiceComponent implements OnInit {
 
   @Input() config!: GeneralServiceConfig;
+  @Input() loading = false;
 
   @Output() addService = new EventEmitter<SearchServiceResult>();
   @Output() cancel = new EventEmitter<void>();

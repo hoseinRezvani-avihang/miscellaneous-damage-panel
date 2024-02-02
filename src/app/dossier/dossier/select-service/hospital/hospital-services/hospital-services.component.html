@@ -8,20 +8,25 @@
     ></app-hospital-tab>
   </div>
   <div class="services flex-grow-1">
-    <app-hospital-doctor-services
-      *ngIf="selectedTab == hospitalCategory.doctorServices"
-    ></app-hospital-doctor-services>
-    <app-hospital-drug-equipment
-      *ngIf="selectedTab == hospitalCategory.drugAndEquipServices"
-    ></app-hospital-drug-equipment>
-    <app-hospital-hoteling
-      *ngIf="selectedTab == hospitalCategory.hotelingServices"
-    ></app-hospital-hoteling>
-    <app-hospital-paraclinic
-      *ngIf="selectedTab == hospitalCategory.paraclinicServices"
-    ></app-hospital-paraclinic>
-    <app-hospital-other-services
-      *ngIf="selectedTab == hospitalCategory.otherServices"
-    ></app-hospital-other-services>
+    <div [ngClass]="selectedTab !== hospitalCategory.doctorServices ? 'hide' : null" >
+      <app-hospital-doctor-services
+      ></app-hospital-doctor-services>
+    </div>
+    <div [ngClass]="selectedTab !== hospitalCategory.drugAndEquipServices ? 'hide' : null" >
+      <app-hospital-drug-equipment
+      ></app-hospital-drug-equipment>
+    </div>
+    <div [ngClass]="selectedTab !== hospitalCategory.hotelingServices ? 'hide' : null">
+      <app-hospital-hoteling
+      ></app-hospital-hoteling>
+    </div>
+    <div [ngClass]="selectedTab !== hospitalCategory.paraclinicServices ? 'hide' : null">
+      <app-hospital-paraclinic
+      ></app-hospital-paraclinic>
+    </div>
+    <div [ngClass]="selectedTab !== hospitalCategory.otherServices ? 'hide' : null">
+      <app-hospital-other-services
+      ></app-hospital-other-services>
+    </div>
   </div>
 </div>

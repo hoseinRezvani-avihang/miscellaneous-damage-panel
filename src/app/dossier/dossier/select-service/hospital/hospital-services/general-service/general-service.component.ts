@@ -4,6 +4,7 @@ import { SearchServiceResult } from 'src/app/dossier/models/service.models';
 import { DossierCoreDataService } from 'src/app/dossier/services/dossier-core-data.service';
 import { DossierSubsService } from '../../../services/dossier-subs.service';
 import { ExpandCardComponent } from 'src/app/shared/components/expand-card/expand-card.component';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-general-service',
@@ -17,6 +18,8 @@ export class GeneralServiceComponent {
   @ViewChild("generalCard") generalCard!: ExpandCardComponent;
   @ViewChild("level3Card") level3Card!: ExpandCardComponent;
 
+  loading = false;
+
   constructor(
     private subService: DossierSubsService
   ) {};
@@ -29,7 +32,12 @@ export class GeneralServiceComponent {
   }
 
   onAddService(service: any) {
-    this.subService.fetchOmr(service).subscribe(() => {
+    this.loading = true;
+    this.subService.fetchOmr(service).pipe(
+      finalize(() => {
+        this.loading = false;
+      })
+    ).subscribe(() => {
       this.generalCard.toggle(false);
       this.level3Card.toggle(false);
     });

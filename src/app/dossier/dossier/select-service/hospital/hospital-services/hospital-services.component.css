@@ -1,0 +1,8 @@
+.hide {
+    width: 0;
+    height: 0;
+    visibility: hidden;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+}

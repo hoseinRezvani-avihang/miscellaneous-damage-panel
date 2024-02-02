@@ -43,6 +43,7 @@ import { BedItemComponent } from './dossier/select-service/hospital/hospital-ser
 import { GeneralServiceComponent } from './dossier/select-service/hospital/hospital-services/general-service/general-service.component';
 import { AddLevel3ServiceComponent } from './dossier/select-service/hospital/hospital-services/general-service/add-level-3-service/add-level-3-service.component';
 import { AddGeneralServiceComponent } from './dossier/select-service/hospital/hospital-services/general-service/add-general-service/add-general-service.component';
+import { HospitalTotalSharesComponent } from './dossier/select-service/hospital/hospital-total-shares/hospital-total-shares.component';
 
 
 @NgModule({
@@ -87,6 +88,7 @@ import { AddGeneralServiceComponent } from './dossier/select-service/hospital/ho
     GeneralServiceComponent,
     AddLevel3ServiceComponent,
     AddGeneralServiceComponent,
+    HospitalTotalSharesComponent,
   ],
   imports: [
     CommonModule,

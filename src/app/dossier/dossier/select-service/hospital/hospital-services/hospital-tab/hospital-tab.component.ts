@@ -28,12 +28,12 @@ export class HospitalTabComponent implements OnInit {
       let hospitalShare = shareInfo?.[this.tabInfo.symbol];
 
       if (hospitalShare) {
-        shares['totalAmount'] = Object.values(hospitalShare).reduce((prev: number, curr: any) => {
-          return prev + curr['totalAmount']
-        }, 0);
-        shares['outOfCover'] = Object.values(hospitalShare).reduce((prev: number, curr: any) => {
-          return prev + curr['outOfCover']
-        }, 0);
+        ['totalAmount', 'outOfCover', 'paiedAmount', 'deduction', 'payableAmount'].forEach((shareField: string) => {
+          shares[shareField] = Object.values(hospitalShare).reduce((prev: number, curr: any) => {
+            return prev + curr[shareField]
+          }, 0);
+        });
+
         this.tabInfo.shares = shares;
       }
     })
