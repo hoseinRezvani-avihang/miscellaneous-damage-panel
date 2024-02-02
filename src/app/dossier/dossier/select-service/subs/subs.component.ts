@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { SharedForm, SubsUI } from 'src/app/dossier/models/service.models';
-import { DossierCoreDataService } from 'src/app/dossier/services/dossier-core-data.service';
 
 @Component({
   selector: 'app-subs',
@@ -15,7 +14,6 @@ export class SubsComponent {
   @Output() updateShares = new EventEmitter<SharedForm>()
 
   constructor(
-    private dossierService: DossierCoreDataService
   ) {};
 
   onUpdateShares(shares: SharedForm) {

@@ -85,7 +85,10 @@ export class HospitalService {
   ) { }
 }
 
-
+export interface HospitalSubsInfo {
+  subs: HospitalSubs, 
+  hospitalSymbol: HospitalServiceSymbol | null, 
+}
 export interface HospitalSubs {
   [HospitalCategories.doctorServices]: HospitalSubsCategory,
   [HospitalCategories.drugAndEquipServices]: HospitalSubsCategory,

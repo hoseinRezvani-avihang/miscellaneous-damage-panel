@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { HospitalCategoryConfig } from '../../models/hospital.models';
 import { DossierCoreDataService } from 'src/app/dossier/services/dossier-core-data.service';
-import { HospitalService, HospitalSubs, HospitalSubsCategory } from '../../models/Hospital-services.model';
+import { HospitalService, HospitalSubs, HospitalSubsCategory, HospitalSubsInfo } from '../../models/Hospital-services.model';
 import { SharedForm, Subs, SubsUI } from 'src/app/dossier/models/service.models';
 import { parseSubs } from 'src/app/dossier/models/save-dossier-util';
 
@@ -28,15 +28,17 @@ export class HospitalCategoryComponent implements OnInit {
   }
 
   onSubsUpdate() {
-    this.dossierService.hospitalSubs.subscribe((hospitalSubs: HospitalSubs) => {
+    this.dossierService.hospitalSubs.subscribe((hospitalSubs: HospitalSubsInfo) => {
+      let hospitalCategory = this.config.type?.hospitalCategory as keyof HospitalSubs;
+      let hospitalServiceSymbol = this.config.type?.symbol as keyof HospitalSubsCategory;
 
-      if (hospitalSubs) {
-        let hospitalCategory = this.config.type?.hospitalCategory as keyof HospitalSubs;
-        let hospitalServiceSymbol = this.config.type?.symbol as keyof HospitalSubsCategory;
-  
-        if (hospitalCategory && hospitalServiceSymbol) {
-          if (hospitalSubs[hospitalCategory][hospitalServiceSymbol]) {
-            this.subs = parseSubs(hospitalSubs[hospitalCategory][hospitalServiceSymbol]);
+      if (hospitalSubs.hospitalSymbol === hospitalServiceSymbol || hospitalSubs.hospitalSymbol === null) {
+        if (hospitalSubs) {
+    
+          if (hospitalCategory && hospitalServiceSymbol) {
+            if (hospitalSubs.subs[hospitalCategory][hospitalServiceSymbol]) {
+              this.subs = parseSubs(hospitalSubs.subs[hospitalCategory][hospitalServiceSymbol]);
+            }
           }
         }
       }

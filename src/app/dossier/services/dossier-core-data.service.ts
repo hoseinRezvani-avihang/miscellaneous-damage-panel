@@ -9,7 +9,7 @@ import { SharedForm, Subs } from '../models/service.models';
 import { createDrugInfo, prepareCparty, preparePartner } from '../models/save-dossier-util';
 import { calculateBankPart, calculateFinalOrgAmout, calculateTotals } from '../models/dossier.util';
 import { HospitalService } from '../dossier/select-service/hospital/services/hospital.service';
-import { HospitalService as HospitalServiceModel } from '../dossier/select-service/hospital/models/Hospital-services.model';
+import { HospitalService as HospitalServiceModel, HospitalServiceSymbol, HospitalSubsInfo } from '../dossier/select-service/hospital/models/Hospital-services.model';
 import { HospitalSubs, HospitalSubsCategory } from '../dossier/select-service/hospital/models/Hospital-services.model';
 
 @Injectable({
@@ -134,7 +134,10 @@ export class DossierCoreDataService {
   // ================== subs info ===================
 
   subs = new BehaviorSubject<Subs[]>([]);
-  hospitalSubs = new BehaviorSubject<HospitalSubs>(this.hospitalService.hospitalSubs);
+  hospitalSubs = new BehaviorSubject<HospitalSubsInfo>({
+    subs: this.hospitalService.hospitalSubs, 
+    hospitalSymbol: null,
+  });
 
   addSub(sub: Subs) {
 
@@ -143,13 +146,16 @@ export class DossierCoreDataService {
       subs.push(sub);
       this.subs.next(subs);
     } else {
-      let subs = structuredClone(this.hospitalSubs.value) as HospitalSubs;
+      let subs = structuredClone(this.hospitalSubs.value.subs) as HospitalSubs;
       if (subs) {
         if (sub.detail.type) {
           let hospitalType = sub.detail.type.hospitalCategory as keyof HospitalSubs;
           let hospitalServiceSymbol = sub.detail.type.symbol as keyof HospitalSubsCategory;
           subs[hospitalType][hospitalServiceSymbol].push(sub);
-          this.hospitalSubs.next(subs);
+          this.hospitalSubs.next({
+            subs:subs, 
+            hospitalSymbol: hospitalServiceSymbol as HospitalServiceSymbol
+          });
         }
       }
     }
@@ -187,7 +193,7 @@ export class DossierCoreDataService {
     let hospitalServiceSymbol = type?.symbol as keyof HospitalSubsCategory;
     shareInfo[hospitalCategory] = shareInfo[hospitalCategory] ?? {};
     shareInfo[hospitalCategory][hospitalServiceSymbol] = shares;
-    this.hospitalShareInfo.next(shareInfo)
+    this.hospitalShareInfo.next(shareInfo);
   }
 
   // ===================== save dossier ================

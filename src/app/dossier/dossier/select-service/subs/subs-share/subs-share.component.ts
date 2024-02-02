@@ -6,7 +6,6 @@ import {
 } from 'src/app/dossier/models/dossier.util';
 import {
   ShareInfoItems,
-  SharedForm,
   SubShares,
 } from 'src/app/dossier/models/service.models';
 import { PartToWholeDialogComponent } from './part-to-whole-dialog/part-to-whole-dialog.component';
@@ -18,8 +17,10 @@ import { PartToWholeDialogComponent } from './part-to-whole-dialog/part-to-whole
 })
 export class SubsShareComponent implements OnInit {
   @Input() set subsShare(shares: Partial<SubShares>) {
+    
     this.shares = shares;
     this.shareInfoFactors = this.calcuateFactor();
+    
     setTimeout(() => {
       this.paiedAmountControl.patchValue(shares.totalAmount);
       this.shareForm.patchValue({
