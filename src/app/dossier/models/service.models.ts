@@ -42,7 +42,8 @@ export interface SubsDetail {
   description: string | null;
   consumption: string | null;
   numberOfPeriod: number;
-  type?: HospitalService
+  type?: HospitalService,
+  serviceType: ServiceType
 };
 
 export interface Subs {

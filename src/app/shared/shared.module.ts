@@ -48,7 +48,7 @@ import { ThousandSeperatorDirective } from './directives/thousand-seperator.dire
     MatDividerModule,
     MatSelectModule,
     MatCheckboxModule,
-    MatDialogModule
+    MatDialogModule,
   ],
   exports: [
     ExpandCardComponent,

@@ -9,7 +9,7 @@
         </div>
 
         <div class="col">
-          <mat-form-field appearance="outline">
+          <mat-form-field >
             <input limit [minimum]="0" matInput type="number" formControlName="basePart" />
           </mat-form-field>
         </div>
@@ -21,7 +21,7 @@
           {{ shares.orgAmount.supplementaryPart | seperator }}
         </div>
         <div class="col">
-          <mat-form-field appearance="outline">
+          <mat-form-field >
             <input limit [minimum]="0" matInput type="number" formControlName="supplementaryPart" />
           </mat-form-field>
         </div>
@@ -33,7 +33,7 @@
           {{ shares.orgAmount.veteranPart | seperator }}
         </div>
         <div class="col">
-          <mat-form-field appearance="outline">
+          <mat-form-field >
             <input limit [minimum]="0" matInput type="number" formControlName="veteranPart" />
           </mat-form-field>
         </div>
@@ -45,7 +45,7 @@
           {{ shares.orgAmount.otherPart | seperator }}
         </div>
         <div class="col">
-          <mat-form-field appearance="outline">
+          <mat-form-field >
             <input limit [minimum]="0" matInput type="number" formControlName="otherPart" />
           </mat-form-field>
         </div>
@@ -56,7 +56,7 @@
       <div class="col center" iranYekan>سهم بیمه شده</div>
       <div class="col center">{{ shares.insuredPart | seperator }}</div>
       <div class="col">
-        <mat-form-field appearance="outline">
+        <mat-form-field >
           <input limit [minimum]="0" matInput type="number" formControlName="insuredPart" />
         </mat-form-field>
       </div>
@@ -78,9 +78,11 @@
       </div>
     </div>
 
-    <div class="d-flex gap-2">
+    <br>
+
+    <div class="d-flex gap-2 justify-content-end">
         <div><button class="btn btn-outline-primary" type="button" iranYekan>بازگشت</button></div>
-        <div><button class="btn btn-primary" type="submit" iranYekan>محاسبه جزء به کل</button></div>
+        <div><button class="bg-blue-500 rounded text-white px-4 py-2" type="submit" iranYekan>محاسبه جزء به کل</button></div>
     </div>
   </form>
 </div>

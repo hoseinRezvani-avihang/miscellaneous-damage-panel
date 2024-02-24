@@ -3,5 +3,5 @@
 <app-visit-list [visitControls]="selectedVisit(visitForm)"></app-visit-list>
 <br>
 <div class="d-flex justify-content-end" *ngIf="selectedVisit(visitForm).length">
-  <button class="btn btn-primary">افزودن</button>
+  <button class="btn btn-primary" (click)="addVisit()">افزودن</button>
 </div>

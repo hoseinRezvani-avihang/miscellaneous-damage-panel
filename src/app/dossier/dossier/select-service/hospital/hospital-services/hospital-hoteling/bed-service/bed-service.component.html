@@ -3,5 +3,5 @@
 <app-bed-list [bedControls]="selectedBeds(bedForm)"></app-bed-list>
 <br>
 <div class="d-flex justify-content-end" *ngIf="selectedBeds(bedForm).length">
-  <button class="btn btn-primary">افزودن</button>
+  <button class="btn btn-primary" (click)="addBeds()">افزودن</button>
 </div>

@@ -24,7 +24,7 @@ export class HospitalService {
       disabled: new FormControl(true),
       nursingCare: new FormControl(false),
       nursingService: new FormControl(true),
-      payAmount: new FormControl(0),
+      payAmount: new FormControl(null),
       cnt: new FormControl(1),
     })
   });
@@ -40,7 +40,7 @@ export class HospitalService {
       selected: new FormControl(false),
       disabled: new FormControl(false),
       cnt: new FormControl(1),
-      payAmount: new FormControl(0)
+      payAmount: new FormControl(null)
     })
   });
   visitForm = new FormArray([
