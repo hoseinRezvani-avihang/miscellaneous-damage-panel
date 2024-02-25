@@ -22,7 +22,7 @@ export class HospitalDoctorServicesComponent {
 
   consultantConfig: HospitalCategoryConfig = {
     title: "مشاوره در بخش",
-    type: HospitalService.visit
+    type: HospitalService.consulting
   }
 
   hospitalDentalConfig: HospitalCategoryConfig = {

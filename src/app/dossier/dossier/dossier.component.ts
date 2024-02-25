@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { DossierCoreDataService } from '../services/dossier-core-data.service';
 import { DossierSubsService } from './select-service/services/dossier-subs.service';
 import { PartnerType, SelectPartner } from '../models/partner.models';
+import { HospitalService } from './select-service/hospital/services/hospital.service';
 
 @Component({
   selector: 'app-dossier',
@@ -9,7 +10,8 @@ import { PartnerType, SelectPartner } from '../models/partner.models';
   styleUrls: ['./dossier.component.css'],
   providers: [
     DossierCoreDataService,
-    DossierSubsService
+    DossierSubsService,
+    HospitalService
   ],
 })
 export class DossierComponent implements OnInit {

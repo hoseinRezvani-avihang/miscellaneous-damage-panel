@@ -16,6 +16,7 @@ import { DossierCoreDataService } from 'src/app/dossier/services/dossier-core-da
 export class VisitServicesComponent implements OnInit {
 
   visitForm = this.hospitalService.visitForm;
+  loading = false;
 
   constructor(
     private hospitalService: HospitalService,
@@ -40,6 +41,7 @@ export class VisitServicesComponent implements OnInit {
     })
 
     for (let visitControl of selectedVisits) {
+      this.loading = true;
       let visit = visitControl.value;
       let input: Partial<SubsDetail> = {
         claimAmount: visit.payAmount,
@@ -54,7 +56,9 @@ export class VisitServicesComponent implements OnInit {
         }
       }
 
-      await firstValueFrom(this.dossierSubs.fetchOmr(input)).then()
+      await firstValueFrom(this.dossierSubs.fetchOmr(input)).then().catch().finally(() => {
+        this.loading = false;
+      })
     }
   }
 
@@ -69,10 +73,10 @@ export class VisitServicesComponent implements OnInit {
           for (let control of this.visitForm.controls) {
             if (visitNames.includes(control.value.visit?.serviceNN as any)) {
               control.disable();
-              // (control.get("selected") as FormControl).setValue(true);
-            } else {
+              (control.get("selected") as FormControl).setValue(true);
+            } else if (!this.loading) {
               control.enable();
-              // (control.get("selected") as FormControl).setValue(false);
+              (control.get("selected") as FormControl).setValue(false);
             }
           }
         }

@@ -3,5 +3,10 @@
 <app-bed-list [bedControls]="selectedBeds(bedForm)"></app-bed-list>
 <br>
 <div class="d-flex justify-content-end" *ngIf="selectedBeds(bedForm).length">
-  <button class="btn btn-primary" (click)="addBeds()">افزودن</button>
+  <button class="btn btn-primary center gap-2" (click)="!loading ? addBeds() : null">
+    <span>افزودن</span>
+    <span *ngIf="loading">
+      <mat-spinner [diameter]="25"></mat-spinner>
+    </span>
+  </button>
 </div>

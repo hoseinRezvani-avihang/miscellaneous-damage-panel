@@ -5,11 +5,7 @@ import { Visit } from '../models/Visit.models';
 import { HospitalServiceSymbol, HospitalSubs } from '../models/Hospital-services.model';
 import { SharedForm, Subs } from 'src/app/dossier/models/service.models';
 
-@Injectable(
-  {
-    providedIn: "root"
-  }
-)
+@Injectable()
 export class HospitalService {
 
   constructor() { }

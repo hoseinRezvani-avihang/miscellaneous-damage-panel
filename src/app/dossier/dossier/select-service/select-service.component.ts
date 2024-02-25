@@ -7,6 +7,7 @@ import {
   SelectPartner,
 } from '../../models/partner.models';
 import {
+  DeleteSubConfig,
   OutpatientServiceInput,
   SharedForm,
   SubItemUI,
@@ -63,8 +64,8 @@ export class SelectServiceComponent implements OnInit, OnDestroy {
   }
 
   onDeleteSub() {
-    this.serviceEvent.deleteSub.subscribe((recheckCode: string) => {
-      this.dossierService.deleteSub(recheckCode);
+    this.serviceEvent.deleteSub.subscribe((deleteConfig: DeleteSubConfig) => {
+      this.dossierService.deleteSub(deleteConfig.recheckCode);
     });
   }
 

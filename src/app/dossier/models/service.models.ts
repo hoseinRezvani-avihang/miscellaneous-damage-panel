@@ -68,7 +68,8 @@ export interface SubItemUI {
   recheckCode: string,
   totalAmount: number,
   orgAmount: number,
-  insuredAmount: number
+  insuredAmount: number,
+  type?: HospitalService
 }
 
 export interface SubShares {
@@ -121,4 +122,9 @@ export interface DrugInfo {
   shape: string
   isMarkMatchService: boolean,
   omrResult: OmrResult
+}
+
+export interface DeleteSubConfig {
+  recheckCode: string,
+  type?: HospitalService
 }

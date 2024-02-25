@@ -34,10 +34,10 @@ export class HospitalCategoryComponent implements OnInit {
 
       if (hospitalSubs.hospitalSymbol === hospitalServiceSymbol || hospitalSubs.hospitalSymbol === null) {
         if (hospitalSubs) {
-    
+
           if (hospitalCategory && hospitalServiceSymbol) {
             if (hospitalSubs.subs[hospitalCategory][hospitalServiceSymbol]) {
-              this.subs = parseSubs(hospitalSubs.subs[hospitalCategory][hospitalServiceSymbol]);
+              this.subs = parseSubs(hospitalSubs.subs[hospitalCategory][hospitalServiceSymbol], this.config.type);
             }
           }
         }
