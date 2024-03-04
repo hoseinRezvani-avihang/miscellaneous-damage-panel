@@ -230,3 +230,10 @@ export interface ServiceSearchConfig {
   serviceType: ServiceType;
   hospitalType: HospitalType;
 }
+
+
+export interface DossierConfig {
+  regNoId: string,
+  isContracted: boolean,
+  mode: "Save" | "Edit"
+}

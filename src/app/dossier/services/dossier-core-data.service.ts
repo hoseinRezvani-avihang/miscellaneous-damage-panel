@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Injectable } from '@angular/core';
 import { CitizenResult } from '../models/citizen.models';
 import { BehaviorSubject } from 'rxjs';
-import { DossierSave, DossierStep } from '../models/dossier-core.models';
+import { DossierConfig, DossierSave, DossierStep } from '../models/dossier-core.models';
 import { ObjectUtil } from 'src/app/shared/utils/object-util';
 import { PartnerInfo, PartnerTypeEnum, SelectPartner } from '../models/partner.models';
 import { CpartyInfo } from '../models/cparty.models';
@@ -21,6 +21,11 @@ export class DossierCoreDataService {
     private cdr: ChangeDetectorRef,
     private hospitalService: HospitalService
   ) { }
+
+
+  // ============= config ===========
+
+  config = new BehaviorSubject<DossierConfig>({} as DossierConfig);
 
   // ============= save dossier navigation ===========
 

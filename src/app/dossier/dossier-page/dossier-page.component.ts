@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DossierConfig } from '../models/dossier-core.models';
 
 @Component({
   selector: 'app-dossier-page',
@@ -8,6 +9,11 @@ import { Component } from '@angular/core';
 export class DossierPageComponent {
 
   dossierCardStatus = true;
+  dossierConfig: DossierConfig = {
+    regNoId: "a4333cfc228acf3c",
+    isContracted: false,
+    mode: "Save",
+  }
 
   toggle() {
     this.dossierCardStatus = !this.dossierCardStatus;

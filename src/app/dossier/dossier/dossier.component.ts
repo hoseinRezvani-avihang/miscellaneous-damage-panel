@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { DossierCoreDataService } from '../services/dossier-core-data.service';
 import { DossierSubsService } from './select-service/services/dossier-subs.service';
 import { PartnerType, SelectPartner } from '../models/partner.models';
 import { HospitalService } from './select-service/hospital/services/hospital.service';
+import { DossierConfig } from '../models/dossier-core.models';
 
 @Component({
   selector: 'app-dossier',
@@ -20,20 +21,26 @@ export class DossierComponent implements OnInit {
   partnerInfo = this.dossierCoreService.partnerInfo.asObservable();
   hospitalSelected = false;
 
-
+  @Input() config!: DossierConfig;
 
   constructor(
     private dossierCoreService: DossierCoreDataService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-      this.partnerInfo.subscribe((info: SelectPartner | null) => {
-        this.hospitalSelected = info?.partnerType === PartnerType.HOSPITAL.symbol;
-      })
+    this.partnerInfo.subscribe((info: SelectPartner | null) => {
+      this.hospitalSelected = info?.partnerType === PartnerType.HOSPITAL.symbol;
+    });
+
+    this.setDossierConfig();
   }
 
   isActive(stepName: string) {
     return this.dossierCoreService.isActive(stepName);
+  }
+
+  setDossierConfig() {
+    this.dossierCoreService.config.next(this.config);
   }
 
 }
