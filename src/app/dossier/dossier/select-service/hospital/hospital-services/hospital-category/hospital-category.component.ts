@@ -37,6 +37,10 @@ export class HospitalCategoryComponent implements OnInit {
     
           if (hospitalCategory && hospitalServiceSymbol) {
             if (hospitalSubs.subs[hospitalCategory][hospitalServiceSymbol]) {
+              if (!this.dossierService.isSubAdded) {
+                console.log('subs not added yet');
+                
+              }
               this.subs = parseSubs(hospitalSubs.subs[hospitalCategory][hospitalServiceSymbol]);
             }
           }
