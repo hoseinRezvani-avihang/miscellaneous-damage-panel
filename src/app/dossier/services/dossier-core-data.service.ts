@@ -1,16 +1,17 @@
 import { ChangeDetectorRef, Injectable } from '@angular/core';
 import { CitizenResult } from '../models/citizen.models';
 import { BehaviorSubject } from 'rxjs';
-import { DossierSave, DossierStep } from '../models/dossier-core.models';
+import { DossierConfig, DossierSave, DossierStep } from '../models/dossier-core.models';
 import { ObjectUtil } from 'src/app/shared/utils/object-util';
 import { PartnerInfo, PartnerTypeEnum, SelectPartner } from '../models/partner.models';
 import { CpartyInfo } from '../models/cparty.models';
-import { SharedForm, Subs } from '../models/service.models';
+import { DeleteSubConfig, SharedForm, Subs } from '../models/service.models';
 import { createDrugInfo, prepareCparty, preparePartner } from '../models/save-dossier-util';
 import { calculateBankPart, calculateFinalOrgAmout, calculateTotals } from '../models/dossier.util';
 import { HospitalService } from '../dossier/select-service/hospital/services/hospital.service';
 import { HospitalService as HospitalServiceModel, HospitalServiceSymbol, HospitalSubsInfo } from '../dossier/select-service/hospital/models/Hospital-services.model';
 import { HospitalSubs, HospitalSubsCategory } from '../dossier/select-service/hospital/models/Hospital-services.model';
+import { HospitalCategories } from '../dossier/select-service/hospital/models/hospital.models';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +21,11 @@ export class DossierCoreDataService {
     private cdr: ChangeDetectorRef,
     private hospitalService: HospitalService
   ) { }
+
+
+  // ============= config ===========
+
+  config = new BehaviorSubject<DossierConfig>({} as DossierConfig);
 
   // ============= save dossier navigation ===========
 
@@ -136,7 +142,7 @@ export class DossierCoreDataService {
   subs = new BehaviorSubject<Subs[]>([]);
   isSubAdded = false; // در صورتی که خدمتی به صورت دستی اضافه شود 
   hospitalSubs = new BehaviorSubject<HospitalSubsInfo>({
-    subs: this.hospitalService.hospitalSubs, 
+    subs: this.hospitalService.hospitalSubs,
     hospitalSymbol: null,
   });
 
@@ -155,7 +161,7 @@ export class DossierCoreDataService {
           let hospitalServiceSymbol = sub.detail.type.symbol as keyof HospitalSubsCategory;
           subs[hospitalType][hospitalServiceSymbol].push(sub);
           this.hospitalSubs.next({
-            subs:subs, 
+            subs:subs,
             hospitalSymbol: hospitalServiceSymbol as HospitalServiceSymbol
           });
         }
@@ -172,6 +178,23 @@ export class DossierCoreDataService {
     if (foundedSub > -1) {
       subs.splice(foundedSub, 1);
       this.subs.next(subs);
+    }
+  }
+
+  deleteHospitalSubs(deleteConfig: DeleteSubConfig) {
+    let {recheckCode, type} = deleteConfig;
+    let hospitalSubs = structuredClone(this.hospitalSubs.value.subs);
+    let subs = hospitalSubs[(type?.hospitalCategory) as HospitalCategories][(type?.symbol) as HospitalServiceSymbol];
+    let foundedSub = subs.findIndex((sub: Subs) => {
+      return sub.omrResult.reCheckCode === recheckCode;
+    });
+
+    if (foundedSub > -1) {
+      subs.splice(foundedSub, 1);
+    this.hospitalSubs.next({
+      hospitalSymbol: deleteConfig.type?.symbol as HospitalServiceSymbol,
+      subs: hospitalSubs,
+    });
     }
   }
 

@@ -32,7 +32,7 @@
 <form [formGroup]="shareForm" class="mt-4 p-3 border rounded">
   <div class="d-flex gap-5">
     <div>
-      <mat-form-field appearance="outline">
+      <mat-form-field >
         <mat-label>مبلغ پرداخت شده توسط بیمه شده</mat-label>
         <input limit [maximum]="999999999999" [minimum]="0" type="text" matInput formControlName="paiedAmount" />
       </mat-form-field>
@@ -59,7 +59,7 @@
     </div>
 
     <div>
-      <mat-form-field appearance="outline">
+      <mat-form-field >
         <mat-label>خارج از پوشش بیمه</mat-label>
         <input limit [minimum]="0" [maximum]="MaxOutOfCover"  type="text" matInput formControlName="outOfCover" />
       </mat-form-field>

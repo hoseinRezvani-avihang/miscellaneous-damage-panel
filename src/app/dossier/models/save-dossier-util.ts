@@ -1,3 +1,4 @@
+import { HospitalService } from "../dossier/select-service/hospital/models/Hospital-services.model";
 import { CpartyInfo, SaveCpartyInfo } from "./cparty.models";
 import { calculateTotals } from "./dossier.util";
 import { SaveParnterInfo, SelectPartner } from "./partner.models";
@@ -26,7 +27,7 @@ export const createDrugInfo = (subs: Subs[]) => {
   })
 }
 
-export const parseSubs = (subsInfo: Subs[]) => {
+export const parseSubs = (subsInfo: Subs[], type?: HospitalService) => {
   let subs: SubsUI = { subs: [], subShares: {} };
   subs['subs'] = subsInfo.map((subItem: Subs) => {
     let subUI: SubItemUI = {
@@ -36,6 +37,7 @@ export const parseSubs = (subsInfo: Subs[]) => {
       totalAmount: subItem.omrResult.price.totalAmount,
       orgAmount: subItem.omrResult.price.orgAmount,
       insuredAmount: subItem.omrResult.price.insuredAmount,
+      type
     };
 
     return subUI;

@@ -34,14 +34,14 @@ export class HospitalCategoryComponent implements OnInit {
 
       if (hospitalSubs.hospitalSymbol === hospitalServiceSymbol || hospitalSubs.hospitalSymbol === null) {
         if (hospitalSubs) {
-    
+
           if (hospitalCategory && hospitalServiceSymbol) {
             if (hospitalSubs.subs[hospitalCategory][hospitalServiceSymbol]) {
-              if (!this.dossierService.isSubAdded) {
-                console.log('subs not added yet');
+              if (this.dossierService.isSubAdded) {
+                console.log('first added');
                 
               }
-              this.subs = parseSubs(hospitalSubs.subs[hospitalCategory][hospitalServiceSymbol]);
+              this.subs = parseSubs(hospitalSubs.subs[hospitalCategory][hospitalServiceSymbol], this.config.type);
             }
           }
         }

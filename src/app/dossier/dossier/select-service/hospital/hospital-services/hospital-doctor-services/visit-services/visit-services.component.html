@@ -3,5 +3,10 @@
 <app-visit-list [visitControls]="selectedVisit(visitForm)"></app-visit-list>
 <br>
 <div class="d-flex justify-content-end" *ngIf="selectedVisit(visitForm).length">
-  <button class="btn btn-primary">افزودن</button>
+  <button class="btn btn-primary center gap-2" (click)="!loading ? addVisit() : null">
+    <span>افزودن</span>
+    <span *ngIf="loading">
+      <mat-spinner [diameter]="25"></mat-spinner>
+    </span>
+  </button>
 </div>

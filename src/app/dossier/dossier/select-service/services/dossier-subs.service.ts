@@ -9,6 +9,7 @@ import { SubsDetail, SearchServiceInput, Subs } from 'src/app/dossier/models/ser
 import { DossierCoreDataService } from 'src/app/dossier/services/dossier-core-data.service';
 import { HttpDossierService } from 'src/app/dossier/services/http-dossier.service';
 import { DateUtil } from 'src/app/shared/utils/date.util';
+import { HospitalSubsCategory } from '../hospital/models/Hospital-services.model';
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +24,7 @@ export class DossierSubsService {
     cpartyInfo = this.dossierService.cpartyInfo as BehaviorSubject<CpartyInfo>;
     memberInfo = this.dossierService.citizenInfo as BehaviorSubject<CitizenResult>;
     subs = this.dossierService.subs as BehaviorSubject<Subs[]>;
+    hospitalSubs = this.dossierService.hospitalSubs;
 
   searchService(input: SearchServiceInput) {
     return this.dossierHttpService.searchService(input);
@@ -61,8 +63,24 @@ export class DossierSubsService {
   }
 
   getRecheckCodes() {
-    return this.subs.value.map((sub: Subs) => {
-      return sub.omrResult.reCheckCode;
-    })
+    if (this.isOutPatient) {
+      return this.subs.value.map((sub: Subs) => {
+        return sub.omrResult.reCheckCode;
+      })
+    } else {
+      let recheckCodes: string[] = [];
+      Object.values(this.hospitalSubs.value.subs).forEach((category: HospitalSubsCategory) => {
+        Object.values(category).forEach((subs: Subs[]) => {
+          let recheckCode = subs.map((sub: Subs) => sub.omrResult.reCheckCode);
+          recheckCodes.push(...recheckCode);
+        })
+      });
+
+      return recheckCodes;
+    }
+  }
+
+  get isOutPatient() {
+    return this.dossierService.isOutPatient;
   }
 }

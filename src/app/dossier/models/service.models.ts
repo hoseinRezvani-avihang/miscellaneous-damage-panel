@@ -42,7 +42,8 @@ export interface SubsDetail {
   description: string | null;
   consumption: string | null;
   numberOfPeriod: number;
-  type?: HospitalService
+  type?: HospitalService,
+  serviceType: ServiceType
 };
 
 export interface Subs {
@@ -67,7 +68,8 @@ export interface SubItemUI {
   recheckCode: string,
   totalAmount: number,
   orgAmount: number,
-  insuredAmount: number
+  insuredAmount: number,
+  type?: HospitalService
 }
 
 export interface SubShares {
@@ -120,4 +122,9 @@ export interface DrugInfo {
   shape: string
   isMarkMatchService: boolean,
   omrResult: OmrResult
+}
+
+export interface DeleteSubConfig {
+  recheckCode: string,
+  type?: HospitalService
 }
