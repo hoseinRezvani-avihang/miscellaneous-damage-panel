@@ -37,7 +37,7 @@ export class HospitalCategoryComponent implements OnInit {
 
           if (hospitalCategory && hospitalServiceSymbol) {
             if (hospitalSubs.subs[hospitalCategory][hospitalServiceSymbol]) {
-              if (this.dossierService.isSubAdded) {
+              if (!this.dossierService.isSubAdded) {
                 console.log('first added');
                 
               }
