@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { CpartyInfo, CpartyInfoUI } from '../../models/cparty.models';
 import { DossierCoreDataService } from '../../services/dossier-core-data.service';
 import { Subscription } from 'rxjs';
+import { StepperService } from '../../services/stepper.service';
 
 @Component({
   selector: 'app-select-cparty',
@@ -16,7 +17,8 @@ export class SelectCpartyComponent implements OnInit, OnDestroy {
   @Input() editting = true;
 
   constructor(
-    private dossierService: DossierCoreDataService
+    private dossierService: DossierCoreDataService,
+    private stepperService: StepperService
   ) {}
 
   ngOnInit(): void {
@@ -40,7 +42,7 @@ export class SelectCpartyComponent implements OnInit, OnDestroy {
   selectCparty(cparty: CpartyInfo) {
     this.dossierService.setCpartyInfo(cparty);
     this.editting = false;
-    this.dossierService.break("selectCparty");
+    this.stepperService.break("selectCparty");
   }
 
   ngOnDestroy(): void {

@@ -61,58 +61,6 @@ export class DossierCoreDataService {
 
   $dossierSteps = new BehaviorSubject<DossierStep[]>(this.dossierSteps);
 
-  passStep(stepName: string, breakStep = false) {
-    let steps = ObjectUtil.flatten(this.$dossierSteps.value, 'subStep');
-    let activeStepIndex = steps.findIndex((step: DossierStep) => {
-      return step.name === stepName;
-    });
-    if (steps[activeStepIndex + 1]) {
-      steps[activeStepIndex + 1].isActive = !breakStep;
-      if (steps[activeStepIndex + 1].subStep && steps[activeStepIndex + 2]) {
-        steps[activeStepIndex + 2].isActive = !breakStep;
-      }
-      this.$dossierSteps.next(this.dossierSteps);
-    }
-  }
-
-  break(stepName: string) {
-    let steps = ObjectUtil.flatten(this.$dossierSteps.value, 'subStep');
-    let activeStepIndex = steps.findIndex((step: DossierStep) => {
-      return step.name === stepName;
-    });
-
-    for (let i = activeStepIndex + 2; i < steps.length; i++) {
-      steps[i].isActive = false;
-    }
-
-    steps[activeStepIndex + 1].isActive = false;
-    this.$dossierSteps.next(this.dossierSteps);
-    setTimeout(() => {
-      steps[activeStepIndex + 1].isActive = true;
-      this.$dossierSteps.next(this.dossierSteps);
-      this.cdr.markForCheck();
-    });
-  }
-
-  resetStep(stepName: string) {
-    let steps = ObjectUtil.flatten(this.dossierSteps, 'subStep');
-    let activeStepIndex = steps.findIndex((step: DossierStep) => {
-      return step.name === stepName;
-    });
-
-    steps[activeStepIndex + 1].isActive = false;
-    this.$dossierSteps.next(this.dossierSteps);
-    setTimeout(() => {
-      steps[activeStepIndex + 1].isActive = true;
-      this.$dossierSteps.next(this.dossierSteps);
-    });
-  }
-
-  isActive(stepName: string) {
-    let steps = ObjectUtil.flatten(this.$dossierSteps.value, 'subStep');
-    return steps.find((step) => step.name === stepName)?.isActive;
-  }
-
   // ================== member info ================
 
   citizenInfo = new BehaviorSubject<CitizenResult | null>(null);
@@ -140,7 +88,7 @@ export class DossierCoreDataService {
   // ================== subs info ===================
 
   subs = new BehaviorSubject<Subs[]>([]);
-  isSubAdded = false; // در صورتی که خدمتی به صورت دستی اضافه شود 
+  isSubAdded = false; // در صورتی که خدمتی به صورت دستی اضافه شود
   hospitalSubs = new BehaviorSubject<HospitalSubsInfo>({
     subs: this.hospitalService.hospitalSubs,
     hospitalSymbol: null,
@@ -226,6 +174,24 @@ export class DossierCoreDataService {
   saveDossier() {
     let totals = calculateTotals(this.subs.value);
     let dossierInfo: DossierSave = {
+      paymentRequestId: this.config.value.regNoId,
+      category: "damage",
+      bankPaymentType: "S",
+      clinincService: [],
+      dentalService: [],
+      equipInfo: [],
+      imagingService: [],
+      labService: [],
+      hospitalServices: [],
+      notes: [],
+      otherServices: [],
+      physioService: [],
+      servicesCount: this.subs.value.length,
+      deductionDescription: null,
+      deductionReason: null,
+      hasInsuredMark: false,
+      status: "initialized",
+      submitStatus: null,
       memberInfo: this.citizenInfo.value as CitizenResult,
       orderInfo: prepareCparty(this.cpartyInfo.value as CpartyInfo),
       deliverInfo: preparePartner(this.partnerInfo.value as SelectPartner),

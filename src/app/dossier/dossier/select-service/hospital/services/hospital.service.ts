@@ -20,7 +20,7 @@ export class HospitalService {
       disabled: new FormControl(true),
       nursingCare: new FormControl(false),
       nursingService: new FormControl(true),
-      payAmount: new FormControl(null),
+      payAmount: new FormControl<number | null>(null),
       cnt: new FormControl(1),
     })
   });

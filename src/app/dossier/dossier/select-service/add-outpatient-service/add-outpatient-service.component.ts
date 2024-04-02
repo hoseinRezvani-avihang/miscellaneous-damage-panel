@@ -43,7 +43,7 @@ export class AddOutpatientServiceComponent implements OnInit {
       numberOfPeriod: new FormControl(1),
       serviceType: new FormControl(this.config.serviceType)
     });
-  }
+  };
 
   onSelectService(service: SearchServiceResult) {
     (this.form.get("service") as FormControl).setValue(service);
@@ -52,7 +52,7 @@ export class AddOutpatientServiceComponent implements OnInit {
 
   addService() {
     this.loading = true;
-    this.dossierSubService.fetchOmr(this.form.value as any)
+    this.dossierSubService.fetchOmr(this.form.value as SubsDetail)
       .subscribe({
         next: () => {
           this.close();

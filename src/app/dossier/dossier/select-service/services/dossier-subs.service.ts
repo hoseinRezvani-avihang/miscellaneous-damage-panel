@@ -30,22 +30,22 @@ export class DossierSubsService {
     return this.dossierHttpService.searchService(input);
   };
 
-  fetchOmr(input: any) {
+  fetchOmr<U extends SubsDetail | Partial<SubsDetail>>(input: U) {
     let omrInput: OMRInput = {
       partnerId: this.partnerInfo.value.partner.partnerInfo.id,
       cpartyId: this.dossierService.partnerInfo.value?.partner.cPartiesInfo[0].id as string,
       orderedPartnerId: this.cpartyInfo.value.cparty.partnerInfo.id as string,
       orderedCpartyId: this.cpartyInfo.value.cparty.contractPartyId,
       membernn: this.memberInfo.value.nationalNumber,
-      serviceNN: input.service.nationalNumber as string,
-      cnt: input.cnt,
-      ISGlobal: input.ISGlobal,
-      type: input.serviceType,
+      serviceNN: input.service?.nationalNumber as string,
+      cnt: input.cnt as number,
+      ISGlobal: input.ISGlobal as boolean,
+      type: input.serviceType as string,
       deliveredDate: DateUtil.noSlashShamsi(this.partnerInfo.value.serviceDate),
       orderedDate: DateUtil.noSlashShamsi(this.cpartyInfo.value.serviceDate),
-      claimAmount: price(input.claimAmount),
+      claimAmount: price(input.claimAmount ?? null),
       subs: this.getRecheckCodes(),
-      isMarkMatchService: input.isMarkMatchService,
+      isMarkMatchService: input.isMarkMatchService as boolean,
       reviewType: "notContract"
     };
 
@@ -53,7 +53,7 @@ export class DossierSubsService {
       tap((omrResult: OmrResult) => {
         if (omrResult.isAllowed) {
           let sub: Subs = {
-            detail: input,
+            detail: input as SubsDetail,
             omrResult: omrResult
           }
           this.dossierService.addSub(sub);

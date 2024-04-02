@@ -2,6 +2,7 @@ import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { PartnerInfo, PartnerInfoUI, PartnerType, SearchPartnerConfig, SelectPartner } from '../../models/partner.models';
 import { DossierCoreDataService } from '../../services/dossier-core-data.service';
 import { Subscription } from 'rxjs';
+import { StepperService } from '../../services/stepper.service';
 
 @Component({
   selector: 'app-select-partner',
@@ -12,6 +13,7 @@ export class SelectPartnerComponent implements OnInit, OnDestroy {
 
   constructor(
     private dossierDataService: DossierCoreDataService,
+    private stepperService: StepperService
   ) {};
 
   @Input() editing = true;
@@ -43,7 +45,7 @@ export class SelectPartnerComponent implements OnInit, OnDestroy {
   onSelectPartner(partner: SelectPartner) {
     this.editing = false;
     this.dossierDataService.setPartnerInfo(partner);
-    this.dossierDataService.break("selectPartner");
+    this.stepperService.break("selectPartner");
   }
 
   ngOnDestroy(): void {
