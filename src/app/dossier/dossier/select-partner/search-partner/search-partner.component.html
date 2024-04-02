@@ -15,6 +15,7 @@
         [partnerType]="partnerTypeControl.value"
         [partner]="partner?.partner?.partnerInfo ?? null"
         [control]="partnerSearchControl"
+        [hasContract]="config.isContracted"
         (onSelectPartner)="onSelectPartner($event)"
       ></app-quick-search-partner>
     </div>

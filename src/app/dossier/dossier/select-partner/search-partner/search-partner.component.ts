@@ -5,6 +5,7 @@ import {
   PartnerInfoResult,
   PartnerSearchResult,
   PartnerType,
+  SearchPartnerConfig,
   SelectPartner,
 } from 'src/app/dossier/models/partner.models';
 import { DossierCoreDataService } from 'src/app/dossier/services/dossier-core-data.service';
@@ -18,6 +19,7 @@ import { finalize } from 'rxjs';
 })
 export class SearchPartnerComponent implements OnInit {
   @Input() partner!: SelectPartner | null;
+  @Input() config!: SearchPartnerConfig;
   @Output() selectPartner = new EventEmitter<SelectPartner>();
 
   parnterTypes = PartnerType.getTypes;

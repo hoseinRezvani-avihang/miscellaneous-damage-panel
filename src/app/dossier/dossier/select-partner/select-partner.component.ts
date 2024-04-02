@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { PartnerInfo, PartnerInfoUI, PartnerType, SelectPartner } from '../../models/partner.models';
+import { PartnerInfo, PartnerInfoUI, PartnerType, SearchPartnerConfig, SelectPartner } from '../../models/partner.models';
 import { DossierCoreDataService } from '../../services/dossier-core-data.service';
 import { Subscription } from 'rxjs';
 
@@ -43,15 +43,17 @@ export class SelectPartnerComponent implements OnInit, OnDestroy {
   onSelectPartner(partner: SelectPartner) {
     this.editing = false;
     this.dossierDataService.setPartnerInfo(partner);
-    // this.dossierDataService.break("selectPartner");
-    setTimeout(() => {
-      // this.dossierDataService.resetStep("selectPartner")
-    })
     this.dossierDataService.break("selectPartner");
   }
 
   ngOnDestroy(): void {
     this.partnerInfoSubscription.unsubscribe();
     this.dossierDataService.setPartnerInfo(null);
+  }
+
+  get parnterSearchConfig() {
+    return {
+      isContracted: this.dossierDataService.config.value.isContracted,
+    } as SearchPartnerConfig;
   }
 }

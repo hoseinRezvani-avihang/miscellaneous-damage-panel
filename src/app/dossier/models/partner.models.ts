@@ -153,3 +153,7 @@ export interface SaveParnterInfo extends PartnerInfo {
   contractPartyId: string,
   isSimpleRegistration: boolean
 }
+
+export interface SearchPartnerConfig {
+  isContracted: boolean
+}

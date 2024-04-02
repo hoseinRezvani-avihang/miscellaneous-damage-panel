@@ -11,6 +11,7 @@
   <app-search-partner
     *ngIf="editing"
     (selectPartner)="onSelectPartner($event)"
+    [config]="parnterSearchConfig"
     [partner]="partnerInfo | async"
   ></app-search-partner>
   <ng-container *ngIf="partner">
