@@ -59,6 +59,10 @@ export class SelectServiceComponent implements OnInit, OnDestroy {
 
   onSubsUpdate() {
     this.subsInfo.subscribe((subs: Subs[]) => {
+      if (!this.dossierService.isSubAdded) {
+        console.log('this is first time');
+        
+      }
       this.subs = parseSubs(subs);
     });
   }

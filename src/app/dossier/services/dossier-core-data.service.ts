@@ -140,7 +140,7 @@ export class DossierCoreDataService {
   // ================== subs info ===================
 
   subs = new BehaviorSubject<Subs[]>([]);
-
+  isSubAdded = false; // در صورتی که خدمتی به صورت دستی اضافه شود 
   hospitalSubs = new BehaviorSubject<HospitalSubsInfo>({
     subs: this.hospitalService.hospitalSubs,
     hospitalSymbol: null,
@@ -148,6 +148,7 @@ export class DossierCoreDataService {
 
   addSub(sub: Subs) {
 
+    this.isSubAdded = true;
     if (this.isOutPatient) {
       let subs = structuredClone(this.subs.value);
       subs.push(sub);
