@@ -4,6 +4,7 @@ import { HospitalCategories } from "../models/hospital.models"
 import { ServiceEventService } from 'src/app/dossier/services/service-event.service';
 import { DeleteSubConfig } from 'src/app/dossier/models/service.models';
 import { DossierCoreDataService } from 'src/app/dossier/services/dossier-core-data.service';
+import { SubscriptionService } from 'src/app/dossier/services/subscription.service';
 
 @Component({
   selector: 'app-hospital-services',
@@ -36,7 +37,8 @@ export class HospitalServicesComponent implements OnInit {
 
   constructor(
     private eventService: ServiceEventService,
-    private data: DossierCoreDataService
+    private data: DossierCoreDataService,
+    private subscriptionService: SubscriptionService
   ) {}
 
   ngOnInit(): void {
@@ -49,7 +51,7 @@ export class HospitalServicesComponent implements OnInit {
 
   onDeleteSub() {
     this.eventService.deleteSub.subscribe((config: DeleteSubConfig) => {
-      this.data.deleteHospitalSubs(config);
+      this.subscriptionService.deleteHospitalSubs(config);
     })
   }
 

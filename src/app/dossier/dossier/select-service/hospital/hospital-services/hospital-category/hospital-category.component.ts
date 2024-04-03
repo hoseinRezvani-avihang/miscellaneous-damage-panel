@@ -4,6 +4,7 @@ import { DossierCoreDataService } from 'src/app/dossier/services/dossier-core-da
 import { HospitalService, HospitalSubs, HospitalSubsCategory, HospitalSubsInfo } from '../../models/Hospital-services.model';
 import { SharedForm, Subs, SubsUI } from 'src/app/dossier/models/service.models';
 import { parseSubs } from 'src/app/dossier/models/save-dossier-util';
+import { SubscriptionService } from 'src/app/dossier/services/subscription.service';
 
 @Component({
   selector: 'app-hospital-category',
@@ -20,6 +21,7 @@ export class HospitalCategoryComponent implements OnInit {
 
   constructor(
     private dossierService: DossierCoreDataService,
+    private subscriptionService: SubscriptionService
   ) {}
 
   ngOnInit(): void {
@@ -37,9 +39,9 @@ export class HospitalCategoryComponent implements OnInit {
 
           if (hospitalCategory && hospitalServiceSymbol) {
             if (hospitalSubs.subs[hospitalCategory][hospitalServiceSymbol]) {
-              if (!this.dossierService.isSubAdded) {
+              if (!this.dossierService.isSubManuallyChanged.value) {
                 console.log('first added');
-                
+
               }
               this.subs = parseSubs(hospitalSubs.subs[hospitalCategory][hospitalServiceSymbol], this.config.type);
             }
@@ -60,7 +62,7 @@ export class HospitalCategoryComponent implements OnInit {
   }
 
   onUpdateShares(shares: SharedForm) {
-    this.dossierService.updateHospitalShares(shares, this.config.type as HospitalService)
+    this.subscriptionService.updateHospitalShares(shares, this.config.type as HospitalService)
   }
 
 }

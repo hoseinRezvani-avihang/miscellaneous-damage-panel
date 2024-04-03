@@ -1,25 +1,22 @@
-import { ChangeDetectorRef, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { CitizenResult } from '../models/citizen.models';
 import { BehaviorSubject } from 'rxjs';
 import { DossierConfig, DossierSave, DossierStep } from '../models/dossier-core.models';
-import { ObjectUtil } from 'src/app/shared/utils/object-util';
-import { PartnerInfo, PartnerTypeEnum, SelectPartner } from '../models/partner.models';
+import { PartnerTypeEnum, SelectPartner } from '../models/partner.models';
 import { CpartyInfo } from '../models/cparty.models';
-import { DeleteSubConfig, SharedForm, Subs } from '../models/service.models';
+import { SharedForm, Subs } from '../models/service.models';
 import { createDrugInfo, prepareCparty, preparePartner } from '../models/save-dossier-util';
 import { calculateBankPart, calculateFinalOrgAmout, calculateTotals } from '../models/dossier.util';
 import { HospitalService } from '../dossier/select-service/hospital/services/hospital.service';
-import { HospitalService as HospitalServiceModel, HospitalServiceSymbol, HospitalSubsInfo } from '../dossier/select-service/hospital/models/Hospital-services.model';
+import { HospitalService as HospitalServiceModel, HospitalSubsInfo } from '../dossier/select-service/hospital/models/Hospital-services.model';
 import { HospitalSubs, HospitalSubsCategory } from '../dossier/select-service/hospital/models/Hospital-services.model';
-import { HospitalCategories } from '../dossier/select-service/hospital/models/hospital.models';
+import { HttpDossierService } from './http-dossier.service';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class DossierCoreDataService {
   constructor(
-    private cdr: ChangeDetectorRef,
-    private hospitalService: HospitalService
+    private hospitalService: HospitalService,
+    private httpDossierService: HttpDossierService
   ) { }
 
 
@@ -88,14 +85,11 @@ export class DossierCoreDataService {
   // ================== subs info ===================
 
   subs = new BehaviorSubject<Subs[]>([]);
-  isSubAdded = false; // در صورتی که خدمتی به صورت دستی اضافه شود
+  isSubManuallyChanged = new BehaviorSubject<boolean>(false); // در صورتی که خدمتی به صورت دستی اضافه شود
   hospitalSubs = new BehaviorSubject<HospitalSubsInfo>({
     subs: this.hospitalService.hospitalSubs,
     hospitalSymbol: null,
   });
-
-
-
 
   // =================== share Info =====================
 
@@ -106,18 +100,9 @@ export class DossierCoreDataService {
     this.shareInfo.next(shareInfo);
   }
 
-  updateHospitalShares(shares: SharedForm, type: HospitalServiceModel) {
-    let shareInfo = structuredClone(this.hospitalShareInfo.value);
-    let hospitalCategory = type?.hospitalCategory as keyof HospitalSubs;
-    let hospitalServiceSymbol = type?.symbol as keyof HospitalSubsCategory;
-    shareInfo[hospitalCategory] = shareInfo[hospitalCategory] ?? {};
-    shareInfo[hospitalCategory][hospitalServiceSymbol] = shares;
-    this.hospitalShareInfo.next(shareInfo);
-  }
-
   // ===================== save dossier ================
 
-  saveDossier() {
+  savePrescription() {
     let totals = calculateTotals(this.subs.value);
     let dossierInfo: DossierSave = {
       paymentRequestId: this.config.value.regNoId,
@@ -156,10 +141,13 @@ export class DossierCoreDataService {
       sumOfClaimDeduction: (this.shareInfo.value?.deduction ?? 0),
       sumOfClaimOutOfCover: (this.shareInfo.value?.outOfCover ?? 0),
       sumOfClaimPayAmount: (this.shareInfo.value?.payableAmount ?? 0),
-      sumOfInsuredPayedAmount: totals.insuredAmount
+      sumOfInsuredPayedAmount: totals.insuredAmount,
+      prePaymentAmount: null,
+      prepaymentShareAmount: null,
     }
 
     console.log(dossierInfo);
+    return this.httpDossierService.savePrescription(dossierInfo);
 
   }
 

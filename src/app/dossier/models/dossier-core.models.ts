@@ -234,7 +234,9 @@ export interface DossierSave {
   status: string,
   deductionReason: null | string,
   deductionDescription: null | string,
-  hasInsuredMark: boolean
+  hasInsuredMark: boolean,
+  prePaymentAmount: number | null,
+  prepaymentShareAmount: number | null,
 }
 
 export interface ServiceSearchConfig {

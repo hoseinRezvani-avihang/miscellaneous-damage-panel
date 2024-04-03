@@ -15,8 +15,8 @@ import {
   SubsUI,
 } from '../../models/service.models';
 import { ServiceEventService } from '../../services/service-event.service';
-import { calculateTotals } from '../../models/dossier.util';
 import { parseSubs } from '../../models/save-dossier-util';
+import { SubscriptionService } from '../../services/subscription.service';
 
 @Component({
   selector: 'app-select-service',
@@ -34,7 +34,8 @@ export class SelectServiceComponent implements OnInit, OnDestroy {
 
   constructor(
     private dossierService: DossierCoreDataService,
-    private serviceEvent: ServiceEventService
+    private serviceEvent: ServiceEventService,
+    private subscriptionService: SubscriptionService
   ) { }
 
   ngOnInit(): void {
@@ -59,9 +60,9 @@ export class SelectServiceComponent implements OnInit, OnDestroy {
 
   onSubsUpdate() {
     this.subsInfo.subscribe((subs: Subs[]) => {
-      if (!this.dossierService.isSubAdded) {
+      if (!this.dossierService.isSubManuallyChanged.value) {
         console.log('this is first time');
-        
+
       }
       this.subs = parseSubs(subs);
     });
@@ -69,7 +70,7 @@ export class SelectServiceComponent implements OnInit, OnDestroy {
 
   onDeleteSub() {
     this.serviceEvent.deleteSub.subscribe((deleteConfig: DeleteSubConfig) => {
-      this.dossierService.deleteSub(deleteConfig.recheckCode);
+      this.subscriptionService.deleteSub(deleteConfig.recheckCode);
     });
   }
 
@@ -82,6 +83,6 @@ export class SelectServiceComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-      this.dossierService.resetSubs();
+      this.subscriptionService.resetSubs();
   }
 }

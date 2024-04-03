@@ -13,13 +13,14 @@ import {
   SearchServiceInput,
   SearchServiceResult,
 } from '../models/service.models';
-import { OMRInput, OmrResult } from '../models/dossier-core.models';
+import { DossierSave, OMRInput, OmrResult } from '../models/dossier-core.models';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HttpDossierService {
   basePath = '/hitsa-mdp';
+  newStaticPath = '/mdp';
   domain = window.location.origin;
   staticPath = this.domain + this.basePath;
 
@@ -32,6 +33,8 @@ export class HttpDossierService {
   searchServiceUrl = this.staticPath + '/v1/services/service/search/fetch/list';
 
   fetchOMRUrl = this.staticPath + "/v1/services/service/inquiry/omr/fetch";
+
+  savePrescriptionUrl = this.newStaticPath + '/v1/services/prescription/save';
 
   constructor(private http: HttpClient) {}
 
@@ -93,5 +96,9 @@ export class HttpDossierService {
         return result.info;
       })
     );
+  }
+
+  savePrescription(input: DossierSave): Observable<Result<void>> {
+    return this.http.post<Result<void>>(this.savePrescriptionUrl, input);
   }
 }

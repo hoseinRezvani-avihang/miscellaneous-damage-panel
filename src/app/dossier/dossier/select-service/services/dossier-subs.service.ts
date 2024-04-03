@@ -10,6 +10,7 @@ import { DossierCoreDataService } from 'src/app/dossier/services/dossier-core-da
 import { HttpDossierService } from 'src/app/dossier/services/http-dossier.service';
 import { DateUtil } from 'src/app/shared/utils/date.util';
 import { HospitalSubsCategory } from '../hospital/models/Hospital-services.model';
+import { SubscriptionService } from 'src/app/dossier/services/subscription.service';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,8 @@ import { HospitalSubsCategory } from '../hospital/models/Hospital-services.model
 export class DossierSubsService {
   constructor(
     private dossierHttpService: HttpDossierService,
-    private dossierService: DossierCoreDataService
+    private dossierService: DossierCoreDataService,
+    private subscriptionService: SubscriptionService
     ) {}
 
     partnerInfo = this.dossierService.partnerInfo as BehaviorSubject<SelectPartner>;
@@ -56,7 +58,7 @@ export class DossierSubsService {
             detail: input as SubsDetail,
             omrResult: omrResult
           }
-          this.dossierService.addSub(sub);
+          this.subscriptionService.addSub(sub);
         }
       })
     )

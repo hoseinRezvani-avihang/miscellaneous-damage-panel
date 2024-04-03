@@ -5,6 +5,7 @@ import { PartnerType, SelectPartner } from '../models/partner.models';
 import { HospitalService } from './select-service/hospital/services/hospital.service';
 import { DossierConfig } from '../models/dossier-core.models';
 import { StepperService } from '../services/stepper.service';
+import { SubscriptionService } from '../services/subscription.service';
 
 @Component({
   selector: 'app-dossier',
@@ -14,7 +15,8 @@ import { StepperService } from '../services/stepper.service';
     DossierCoreDataService,
     DossierSubsService,
     HospitalService,
-    StepperService
+    StepperService,
+    SubscriptionService
   ],
 })
 export class DossierComponent implements OnInit {
